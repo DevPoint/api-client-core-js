@@ -109,7 +109,7 @@ function createViewFactory() {
 			},
 
 			loadingMetaTotalCount: function() {
-				return _data.totalCount;
+				return _loadingMeta.totalCount;
 			},
 
 			hash: function() {
