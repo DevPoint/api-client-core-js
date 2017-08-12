@@ -1,7 +1,7 @@
 
 function createViewFactory() {
 
-    const _createView = function(viewId, itemType, loadingHandler, builder) {
+    const _createView = function(viewId, itemType, builder, loadingHandler) {
 
         let _ready = false;
 
