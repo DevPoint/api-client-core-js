@@ -26,6 +26,10 @@ function createViewFactory() {
 
         const _handleLoadingReady = function(items, meta) {
             _items = items;
+            _ready = true;
+            _outdated = false;
+            _loading = false;
+            _loadingFailed = false;
             _loadingMeta = {
                 eagerType: meta.eagerType,
                 offset: meta.offset,
@@ -34,10 +38,6 @@ function createViewFactory() {
                 totalCount: meta.totalCount,
                 errors: []
             },
-            _loading = false;
-            _loadingFailed = false;
-            _outdated = false;
-            _ready = true;
         },
 
         const _handleLoadingCanceled = function() {
@@ -46,12 +46,12 @@ function createViewFactory() {
         },
 
         const _handleLoadingFailed = function(errors) {
+            _loading = false;
+            _loadingFailed = true;
             _loadingMeta = {
                 totalCount: 0,
                 errors: errors.slice(0)
             },
-            _loading = false;
-            _loadingFailed = true;
         },
 
         return {
