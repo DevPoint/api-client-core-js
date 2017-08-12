@@ -24,7 +24,7 @@ function createViewFactory() {
 
         let _items = [];
 
-        let _handleLoadingReady = function(items, meta) {
+        const _handleLoadingReady = function(items, meta) {
             _items = items;
             _loadingMeta = {
                 eagerType: meta.eagerType,
@@ -40,12 +40,12 @@ function createViewFactory() {
             _ready = true;
         },
 
-        let _handleLoadingCanceled = function() {
+        const _handleLoadingCanceled = function() {
             _loading = false;
             _loadingFailed = false;
         },
 
-        let _handleLoadingFailed = function(errors) {
+        const _handleLoadingFailed = function(errors) {
             _loadingMeta = {
                 totalCount: 0,
                 errors: errors.slice(0)
