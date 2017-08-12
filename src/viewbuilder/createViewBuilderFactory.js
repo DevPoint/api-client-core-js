@@ -126,7 +126,7 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
 			},
 
 			load: function() {
-				return view().load();
+				view().load();
 			},
 
 			loading: function() {
