@@ -56,7 +56,7 @@ function createTransactionFactory() {
                     _ready = false;
                     _processing = true;
                     _errors = [];
-                    _fieldErrors = {};
+                    _validationErrors = {};
                     transactionHandler.start({
                         onReady: _handleTransactionReady,
                         onFailed: _handleTransactionFailed
