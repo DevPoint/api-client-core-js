@@ -1,5 +1,5 @@
 
-function createFactory(filterFactory, sortFactory) {
+function createViewBuilderFactory(filterFactory, sortFactory) {
 
 	const _createBuilder = function(viewInstancer, asyncLoader) {
 
@@ -166,4 +166,4 @@ function createFactory(filterFactory, sortFactory) {
 	};
  }
 
-export default createFactory; 
+export default createViewBuilderFactory; 
