@@ -16,6 +16,7 @@ function createViewFactory() {
 			offset: builder.getOffset(),
 			count: builder.getCount(),
 			pageSize: builder.getPageSize(),
+			totalCount: 0,
 			errors: []
 		};
 
@@ -30,6 +31,7 @@ function createViewFactory() {
 				offset: meta.offset,
 				count: meta.count,
 				pageSize: meta.pageSize,
+				totalCount: meta.totalCount,
 				errors: []
 			},
 			_loading = false;
@@ -45,7 +47,8 @@ function createViewFactory() {
 
 		let _handleLoadingFailed = function(meta) {
 			_loadingMeta = {
-				errors: meta.errors
+				totalCount: 0,
+				errors: meta.errors.slice(0)
 			},
 			_loading = false;
 			_loadingFailed = true;
