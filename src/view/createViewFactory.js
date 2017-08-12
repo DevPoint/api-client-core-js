@@ -1,7 +1,7 @@
 
 function createViewFactory() {
 
-	const _createView = function(viewId, itemType, asyncLoader, builderProps) {
+	const _createView = function(viewId, itemType, asyncLoader, builder) {
 
 		let _ready = false;
 
@@ -12,10 +12,10 @@ function createViewFactory() {
 		let _loadingFailed = false;
 
 		let _loadingMeta = {
-			eagerType: builderProps.getEagerType(),
-			offset: builderProps.getOffset(),
-			count: builderProps.getCount(),
-			pageSize: builderProps.getPageSize(),
+			eagerType: builder.getEagerType(),
+			offset: builder.getOffset(),
+			count: builder.getCount(),
+			pageSize: builder.getPageSize(),
 			errors: []
 		};
 
@@ -72,10 +72,12 @@ function createViewFactory() {
 			load: function() {
 				_loading = true;
 				asyncLoader.load({
-					eagerType: builderProps.getEagerType(),
-					offset: builderProps.getOffset(),
-					count: builderProps.getCount(),
-					pageSize: builderProps.getPageSize(),
+					eagerType: builder.getEagerType(),
+					offset: builder.getOffset(),
+					count: builder.getCount(),
+					pageSize: builder.getPageSize(),
+					filters: builder.getFilters(),
+					sorts: builder.getSorts(),
 					onLoaded: _handleLoadingReady,
 					onCanceled: _handleLoadingCanceled,
 					onFailed: _handleLoadingFailed

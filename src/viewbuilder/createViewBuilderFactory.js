@@ -17,10 +17,6 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
 
 		const _sorts = [];
 
-		const _getFilters = function() { return _filters; },
-		
-		const _getSorts = function() { return _sorts; },
-
 		const _getEagerType = function() { return _eagerType; },
 
 		const _getOffset = function() {	return _offset;	},
@@ -28,6 +24,10 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
 		const _getCount = function() { return _count; },
 
 		const _getPageSize = function() { return _pageSize;	}
+
+		const _getFilters = function() { return _filters; },
+		
+		const _getSorts = function() { return _sorts; },
 
 		return {
 
