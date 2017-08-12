@@ -32,7 +32,7 @@ function createTransactionFactory() {
             _ready = true;
             _processing = false;
             _failed = true;
-            _errors = meta.errors.slice(0);
+            _errors = errors.slice(0);
             _validationErrors = {};
             if (meta.hasOwnProperty('validationErrors')) {
                 for (var key in meta.validationErrors) {
