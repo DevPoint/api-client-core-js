@@ -1,7 +1,7 @@
 
 function createViewBuilderFactory(filterFactory, sortFactory) {
 
-	const _createBuilder = function(itemType, viewInstancer, asyncLoader) {
+	const _createBuilder = function(viewInstancer, asyncLoader) {
 
 		let _view = null;
 
@@ -38,7 +38,7 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
 			view: function() {
 				if (!this.hasView())
 				{
-					_view = viewInstancer.createView(itemType, asyncLoader, {
+					_view = viewInstancer.createView(asyncLoader, {
 						getEagerType: _getEagerType,
 						getOffset: _getOffset,
 						getCount: _getCount,
@@ -122,7 +122,7 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
 			},
 
 			itemType: function() {
-				return view().itemType();
+				return viewInstancer.itemType();
 			},
 
 			load: function() {
