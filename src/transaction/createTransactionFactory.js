@@ -14,6 +14,7 @@ function createTransactionFactory() {
         let _validationErrors = null;
 
         const _handleTransactionReady = function() {
+            _ready = true;
             _processing = false;
             _failed = false;
             _errors = [];
@@ -22,11 +23,13 @@ function createTransactionFactory() {
         },
 
         const _handleTransactionCanceled = function() {
+            _ready = false;
             _processing = false;
             _failed = false;
         },
 
         const _handleTransactionFailed = function(errors, meta) {
+            _ready = true;
             _processing = false;
             _failed = true;
             _errors = meta.errors.slice(0);
@@ -50,10 +53,14 @@ function createTransactionFactory() {
 
             start: function() {
                 if (!this.processing()) {
+                    _ready = false;
+                    _processing = true;
+                    _errors = [];
+                    _fieldErrors = {};
                     transactionHandler.start({
                         onReady: _handleTransactionReady,
                         onFailed: _handleTransactionFailed
-                    })
+                    });
                 }
             },
 
@@ -61,7 +68,7 @@ function createTransactionFactory() {
                 if (this.processing()) {
                     transactionHandler.cancel({
                         onCanceled: _handleTransactionCanceled
-                    })
+                    });
                 }
             },
 
