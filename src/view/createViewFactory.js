@@ -1,5 +1,5 @@
 
-function createFactory() {
+function createViewFactory() {
 
 	const _createView = function(viewId, itemType, asyncLoader) {
 
