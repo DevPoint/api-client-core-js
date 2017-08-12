@@ -1,7 +1,7 @@
 
 function createViewFactory() {
 
-	const _createView = function(viewId, itemType, asyncLoader) {
+	const _createView = function(viewId, itemType, asyncLoader, builderProps) {
 
 		let _ready = false;
 
@@ -12,9 +12,10 @@ function createViewFactory() {
 		let _loadingFailed = false;
 
 		let _loadingMeta = {
-			offset: 0,
-			count: 0,
-			pageSize: 0,
+			eagerType: builderProps.getEagerType(),
+			offset: builderProps.getOffset(),
+			count: builderProps.getCount(),
+			pageSize: builderProps.getPageSize(),
 			errors: []
 		};
 
@@ -24,7 +25,13 @@ function createViewFactory() {
 
 		let _handleLoadingReady = function(items, meta) {
 			_items = items;
-			_loadingMeta = meta;
+			_loadingMeta = {
+				eagerType: meta.eagerType,
+				offset: meta.offset,
+				count: meta.count,
+				pageSize: meta.pageSize,
+				errors: []
+			},
 			_loading = false;
 			_loadingFailed = false;
 			_outdated = false;
@@ -37,7 +44,9 @@ function createViewFactory() {
 		},
 
 		let _handleLoadingFailed = function(meta) {
-			_loadingMeta = meta;
+			_loadingMeta = {
+				errors: meta.errors
+			},
 			_loading = false;
 			_loadingFailed = true;
 		},
@@ -63,6 +72,10 @@ function createViewFactory() {
 			load: function() {
 				_loading = true;
 				asyncLoader.load({
+					eagerType: builderProps.getEagerType(),
+					offset: builderProps.getOffset(),
+					count: builderProps.getCount(),
+					pageSize: builderProps.getPageSize(),
 					onLoaded: _handleLoadingReady,
 					onCanceled: _handleLoadingCanceled,
 					onFailed: _handleLoadingFailed

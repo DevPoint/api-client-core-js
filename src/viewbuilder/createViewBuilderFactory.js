@@ -1,7 +1,7 @@
 
 function createViewBuilderFactory(filterFactory, sortFactory) {
 
-	const _createBuilder = function(viewInstancer, asyncLoader) {
+	const _createBuilder = function(itemType, viewInstancer, asyncLoader) {
 
 		let _view = null;
 
@@ -13,11 +13,21 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
 
 		let _pageSize = 0;
 
-		let _page = 0;
-
 		const _filters = [];
 
 		const _sorts = [];
+
+		const _getFilters = function() { return _filters; },
+		
+		const _getSorts = function() { return _sorts; },
+
+		const _getEagerType = function() { return _eagerType; },
+
+		const _getOffset = function() {	return _offset;	},
+
+		const _getCount = function() { return _count; },
+
+		const _getPageSize = function() { return _pageSize;	}
 
 		return {
 
@@ -28,7 +38,14 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
 			view: function() {
 				if (!this.hasView())
 				{
-					_view = viewInstancer.createView(this, asyncLoader);
+					_view = viewInstancer.createView(itemType, asyncLoader, {
+						getEagerType: _getEagerType,
+						getOffset: _getOffset,
+						getCount: _getCount,
+						getPageSize: _getPageSize,
+						getFilters: _getFilters,
+						getSorts: _getSorts
+					});
 				}
 				return _view;
 			},
