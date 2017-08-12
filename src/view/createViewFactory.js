@@ -45,10 +45,10 @@ function createViewFactory() {
             _loadingFailed = false;
         },
 
-        let _handleLoadingFailed = function(meta) {
+        let _handleLoadingFailed = function(errors) {
             _loadingMeta = {
                 totalCount: 0,
-                errors: meta.errors.slice(0)
+                errors: errors.slice(0)
             },
             _loading = false;
             _loadingFailed = true;
