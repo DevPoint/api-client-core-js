@@ -60,11 +60,11 @@ function createFactory() {
 			},
 
 			first: function() {
-				return _data.first;
+				return _data.items && _data.items.length ? _data.items[0] : null;
 			},
 
 			last: function() {
-				return _data.last;
+				return _data.items && _data.items.length ? _data.items[_data.items.length-1] : null;
 			},
 
 		}
