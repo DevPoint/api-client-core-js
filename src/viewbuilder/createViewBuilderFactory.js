@@ -93,7 +93,7 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
 
             paginate: function(page, pageSize) {
                 if (!this.hasView()) {
-                    _offset = 0;
+                    _offset = (page * pageSize) - pageSize;
                     _count = pageSize;
                     _pageSize = pageSize;
                 }
