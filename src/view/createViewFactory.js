@@ -123,4 +123,4 @@ function createViewFactory() {
 
  }
 
-export default createFactory; 
+export default createViewFactory; 
