@@ -1,7 +1,7 @@
 
 function createFactory(filterFactory, sortFactory) {
 
-	const _createBuilder = function(viewInstancer) {
+	const _createBuilder = function(viewInstancer, asyncLoader) {
 
 		let _view = null;
 
@@ -28,7 +28,7 @@ function createFactory(filterFactory, sortFactory) {
 			view: function() {
 				if (!this.hasView())
 				{
-					_view = viewInstancer.createView(this);
+					_view = viewInstancer.createView(this, asyncLoader);
 				}
 				return _view;
 			},
@@ -100,44 +100,48 @@ function createFactory(filterFactory, sortFactory) {
 				return view().ready();
 			},
 
-			loading: function() {
-				return view().loading();
-			},
-
 			outdated: function() {
 				return view().outdated();
-			},
-
-			hash: function() {
-				return view().hash();
 			},
 
 			itemType: function() {
 				return view().itemType();
 			},
 
-			itemOffset: function() {
-				return view().itemOffset();
-			},
-
-			itemCount: function() {
-				return view().itemCount();
-			},
-
-			page: function() {
-				return view().page();
-			},
-
-			pageSize: function() {
-				return view().pageSize();
-			},
-
-			totalCount: function() {
-				return view().totalCount();
-			},
-
 			load: function() {
 				return view().load();
+			},
+
+			loading: function() {
+				return _loading;
+			},
+
+			loadingFailed: function() {
+				return _loadingFailed;
+			},
+
+			loadingMetaOffset: function() {
+				return view().loadingMetaOffset();
+			},
+
+			loadingMetaCount: function() {
+				return view().loadingMetaCount();
+			},
+
+			loadingMetaPage: function() {
+				return view().loadingMetaPage();
+			},
+
+			loadingMetaPageSize: function() {
+				return view().loadingMetaPageSize();
+			},
+
+			loadingMetaTotalCount: function() {
+				return view().loadingMetaTotalCount();
+			},
+
+			hash: function() {
+				return view().hash();
 			},
 
 			items: function() {
@@ -155,13 +159,11 @@ function createFactory(filterFactory, sortFactory) {
 		}
 	}
 
-	const factory = {
+	return {
 
 		createBuilder: _createBuilder,
 
 	};
-
-	return factory;
  }
 
 export default createFactory; 
