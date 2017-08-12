@@ -74,6 +74,9 @@ function createViewFactory() {
 
             load: function() {
                 _loading = true;
+                _loadingFailed = false;
+                _loadingMeta.totalCount = 0;
+                _loadingMeta.errors = [];
                 loadingHandler.load({
                     eagerType: builder.getEagerType(),
                     offset: builder.getOffset(),
