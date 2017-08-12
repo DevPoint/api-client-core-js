@@ -1,7 +1,7 @@
 
 function createViewFactory() {
 
-	const _createView = function(viewId, itemType, asyncLoader, builder) {
+	const _createView = function(viewId, itemType, loadingHandler, builder) {
 
 		let _ready = false;
 
@@ -74,7 +74,7 @@ function createViewFactory() {
 
 			load: function() {
 				_loading = true;
-				asyncLoader.load({
+				loadingHandler.load({
 					eagerType: builder.getEagerType(),
 					offset: builder.getOffset(),
 					count: builder.getCount(),
