@@ -19,7 +19,6 @@ function createTransactionFactory() {
             _failed = false;
             _errors = [];
             _validationErrors = null;
-            _ready = true;
         },
 
         const _handleTransactionCanceled = function() {
