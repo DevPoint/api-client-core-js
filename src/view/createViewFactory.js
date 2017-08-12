@@ -38,12 +38,12 @@ function createViewFactory() {
                 totalCount: meta.totalCount,
                 errors: []
             },
-        },
+        };
 
         const _handleLoadingCanceled = function() {
             _loading = false;
             _loadingFailed = false;
-        },
+        };
 
         const _handleLoadingFailed = function(errors) {
             _loading = false;
@@ -52,7 +52,11 @@ function createViewFactory() {
                 totalCount: 0,
                 errors: errors.slice(0)
             },
-        },
+        };
+
+        const _handleMarkAsOutdated = function() {
+            _outdated = true;
+        };
 
         return {
 
@@ -67,6 +71,12 @@ function createViewFactory() {
             ready: function() {
                 return _ready;
             },
+
+            markAsOutdated: function() {
+                loadingHandler.markAsOutdated({
+                    onMarkAsOutdated: _handleMarkAsOutdated
+                });
+            } 
 
             outdated: function() {
                 return _outdated;

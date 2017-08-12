@@ -19,13 +19,13 @@ function createTransactionFactory() {
             _failed = false;
             _errors = [];
             _validationErrors = null;
-        },
+        };
 
         const _handleTransactionCanceled = function() {
             _ready = false;
             _processing = false;
             _failed = false;
-        },
+        };
 
         const _handleTransactionFailed = function(errors, meta) {
             _ready = true;
@@ -38,7 +38,7 @@ function createTransactionFactory() {
                     _validationErrors[key] = meta.validationErrors[key];
                 }
             }
-        },
+        };
 
         return {
 
