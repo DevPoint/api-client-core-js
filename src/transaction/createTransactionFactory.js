@@ -1,7 +1,15 @@
 
 function createTransactionFactory() {
 
-    const _createTransaction = function(transactionId, type, transactionHandler) {
+    const _cloneData = function(data) {
+        const cloned = {};
+        for (let dataPropkey in data) {
+            cloned[dataPropkey] = data[_dataPropKey];
+        }
+        return cloned;
+    };
+
+    const _createBaseTransaction = function(transactionId, itemType, type, transactionHandler) {
 
         let _ready = false;
 
@@ -13,64 +21,16 @@ function createTransactionFactory() {
 
         let _validationErrors = null;
 
-        const _setReady = function(ready) {
-            _ready = ready;
-            transactionHandler.markAsChanged(transactionId, 'ready');
-        };
-
-        const _setProcessing = function(processing) {
-            _processing = processing;
-            transactionHandler.markAsChanged(transactionId, 'processing');
-        };
-
-        const _setFailed = function(failed) {
-            _failed = failed;
-            transactionHandler.markAsChanged(transactionId, 'failed');
-        };
-
-        const _setErrors = function(errors) {
-            _errors = errors;
-            transactionHandler.markAsChanged(transactionId, 'errors');
-        };
-
-        const _setValidationErrors = function(validationErrors) {
-            _validationErrors = validationErrors;
-            transactionHandler.markAsChanged(transactionId, 'validationErrors');
-        };
-
-        const _handleTransactionReady = function() {
-            _setReady(true);
-            _setProcessing(false);
-            _setFailed(false);
-            _setErrors([]);
-            _setValidationErrors(null);
-        };
-
-        const _handleTransactionCanceled = function() {
-            _setReady(false);
-            _setProcessing(false);
-            _setFailed(false);
-        };
-
-        const _handleTransactionFailed = function(errors, meta) {
-            _setReady(true);
-            _setProcessing(false);
-            _setFailed(true);
-            _setErrors(errors.slice(0));
-            if (meta.hasOwnProperty('validationErrors')) {
-                const validationErrors = {};
-                for (var key in meta.validationErrors) {
-                    validationErrors[key] = meta.validationErrors[key];
-                }
-                _setValidationErrors(validationErrors);
-            }
-        };
-
         return {
 
             get transactionId() {
                 transactionHandler.markAsRead(transactionId, 'transactionId');
                 return transactionId;
+            },
+
+            get itemType() {
+                transactionHandler.markAsRead(transactionId, 'itemType');
+                return itemType;
             },
 
             get type() {
@@ -113,17 +73,71 @@ function createTransactionFactory() {
                 return _validationErrors;
             },
 
-            start: function() {
+            get transactionProxy() { 
+                return {};
+            },
+
+            set ready(ready) {
+                _ready = ready;
+                transactionHandler.markAsChanged(transactionId, 'ready');
+            },
+
+            setProcessing(processing) {
+                _processing = processing;
+                transactionHandler.markAsChanged(transactionId, 'processing');
+            },
+
+            setFailed(failed) {
+                _failed = failed;
+                transactionHandler.markAsChanged(transactionId, 'failed');
+            },
+
+            setErrors(errors) {
+                _errors = errors;
+                transactionHandler.markAsChanged(transactionId, 'errors');
+            },
+
+            setValidationErrors(errors) {
+                _validationErrors = validationErrors;
+                transactionHandler.markAsChanged(transactionId, 'validationErrors');
+            },
+
+            handleTransactionReady() {
+                this.setReady(true);
+                this.setProcessing(false);
+                this.setFailed(false);
+                this.setErrors([]);
+                this.setValidationErrors(null);
+            };
+
+            handleTransactionCanceled() {
+                this.setReady(false);
+                this.setProcessing(false);
+                this.setFailed(false);
+            };
+
+            handleTransactionFailed(errors, meta) {
+                this.setReady(true);
+                this.setProcessing(false);
+                this.setFailed(true);
+                this.setErrors(errors.slice(0));
+                if (meta.hasOwnProperty('validationErrors')) {
+                    const validationErrors = {};
+                    for (var key in meta.validationErrors) {
+                        validationErrors[key] = meta.validationErrors[key];
+                    }
+                    this.setValidationErrors(validationErrors);
+                }
+            };
+
+            start() {
                 if (!this.processing) {
-                    _setReady(false);
-                    _setProcessing(true);
-                    _setFailed(false);
-                    _setErrors([]);
-                    _setValidationErrors(null);
-                    transactionHandler.start({
-                        onReady: _handleTransactionReady,
-                        onFailed: _handleTransactionFailed
-                    });
+                    this.setReady(false);
+                    this.setProcessing(true);
+                    this.setFailed(false);
+                    this.setErrors([]);
+                    this.setValidationErrors(null);
+                    transactionHandler.start(this.transactionProxy);
                 }
                 return this;
             },
@@ -136,12 +150,107 @@ function createTransactionFactory() {
                 }
                 return this;
             }
+        };
+    };
+
+    _createUpdateTransaction: function(transactionId, itemType, data, transactionHandler) {
+
+        const _data = _cloneData(data);
+        
+        const transaction = _createBaseTransaction(
+            transactionId, itemType, 'update', 
+            transactionHandler);
+
+        const expand = {
+
+            get transactionProxy() {
+                transactionHandler.markAsRead(transactionId, 'transactionProxy');
+                return {
+                    onReady: this.handleTransactionReady,
+                    onFailed: this.handleTransactionFailed
+                };
+            },
+
+            get data() {
+                transactionHandler.markAsRead(transactionId, 'data');
+                return data;
+            }
+        };
+
+        for (let expandPropKey in expand) {
+            transaction[expandPropKey] = expand[expandPropKey];
         }
-    }
+        
+        return transaction;
+    };
+
+    _createInsertTransaction: function(transactionId, itemType, data, transactionHandler) {
+        
+        const _data = _cloneData(data);
+
+        const transaction = _createBaseTransaction(
+            transactionId, itemType, 'insert', 
+            transactionHandler);
+
+        const expand = {
+
+            get transactionProxy() {
+                transactionHandler.markAsRead(transactionId, 'transactionProxy');
+                return {
+                    onReady: this.handleTransactionReady,
+                    onFailed: this.handleTransactionFailed
+                };
+            },
+
+            get data() {
+                transactionHandler.markAsRead(transactionId, 'data');
+                return data;
+            }
+        };
+
+        for (let expandPropKey in expand) {
+            transaction[expandPropKey] = expand[expandPropKey];
+        }
+       
+        return transaction;
+    };
+
+    _createDeleteTransaction: function(transactionId, itemType, dataId, transactionHandler) {
+        
+        const transaction = _createBaseTransaction(
+            transactionId, itemType, 'delete', 
+            transactionHandler);
+
+        const expand = {
+
+            get transactionProxy() {
+                transactionHandler.markAsRead(transactionId, 'transactionProxy');
+                return {
+                    onReady: this.handleTransactionReady,
+                    onFailed: this.handleTransactionFailed
+                };
+            },
+
+            get dataId() {
+                transactionHandler.markAsRead(transactionId, 'dataId');
+                return dataId;
+            }
+        };
+        
+        for (let expandPropKey in expand) {
+            transaction[expandPropKey] = expand[expandPropKey];
+        }
+       
+        return transaction;
+    };
 
     return {
 
-        createTransaction: _createTransaction,
+        createUpdateTransaction: _createUpdateTransaction,
+
+        createInsertTransaction: _createInsertTransaction,
+
+        createDeleteTransaction: _createDeleteTransaction
 
     };
 
