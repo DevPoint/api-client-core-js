@@ -73,8 +73,19 @@ function createTransactionFactory() {
                 return _validationErrors;
             },
 
-            get transactionProxy() { 
-                return {};
+            get transactionStartProxy() { 
+                transactionHandler.markAsRead(transactionId, 'transactionStartProxy');
+                return {
+                    onReady: this.handleTransactionReady,
+                    onFailed: this.handleTransactionFailed
+                };
+            },
+
+            get transactionCancelProxy() { 
+                transactionHandler.markAsRead(transactionId, 'transactionCancelProxy');
+                return {
+                    onCanceled: this.handleTransactionCanceled
+                };
             },
 
             setReady(ready) {
@@ -137,16 +148,14 @@ function createTransactionFactory() {
                     this.setFailed(false);
                     this.setErrors([]);
                     this.setValidationErrors(null);
-                    transactionHandler.start(this.transactionProxy);
+                    transactionHandler.start(this.transactionStartProxy);
                 }
                 return this;
             },
 
             cancel: function() {
                 if (this.processing) {
-                    transactionHandler.cancel({
-                        onCanceled: _handleTransactionCanceled
-                    });
+                    transactionHandler.cancel(this.transactionCancelProxy);
                 }
                 return this;
             }
@@ -163,17 +172,9 @@ function createTransactionFactory() {
 
         const expand = {
 
-            get transactionProxy() {
-                transactionHandler.markAsRead(transactionId, 'transactionProxy');
-                return {
-                    onReady: this.handleTransactionReady,
-                    onFailed: this.handleTransactionFailed
-                };
-            },
-
             get data() {
                 transactionHandler.markAsRead(transactionId, 'data');
-                return data;
+                return _data;
             }
         };
 
@@ -194,17 +195,9 @@ function createTransactionFactory() {
 
         const expand = {
 
-            get transactionProxy() {
-                transactionHandler.markAsRead(transactionId, 'transactionProxy');
-                return {
-                    onReady: this.handleTransactionReady,
-                    onFailed: this.handleTransactionFailed
-                };
-            },
-
             get data() {
                 transactionHandler.markAsRead(transactionId, 'data');
-                return data;
+                return _data;
             }
         };
 
@@ -222,14 +215,6 @@ function createTransactionFactory() {
             transactionHandler);
 
         const expand = {
-
-            get transactionProxy() {
-                transactionHandler.markAsRead(transactionId, 'transactionProxy');
-                return {
-                    onReady: this.handleTransactionReady,
-                    onFailed: this.handleTransactionFailed
-                };
-            },
 
             get dataId() {
                 transactionHandler.markAsRead(transactionId, 'dataId');
