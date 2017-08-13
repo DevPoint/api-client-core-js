@@ -153,7 +153,7 @@ function createTransactionFactory() {
                 return this;
             },
 
-            cancel: function() {
+            cancel() {
                 if (this.processing) {
                     transactionHandler.cancel(this.transactionCancelProxy);
                 }
