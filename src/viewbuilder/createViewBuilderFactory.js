@@ -17,18 +17,6 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
 
         const _sorts = [];
 
-        const _getEagerType = function() { return _eagerType; };
-
-        const _getOffset = function() { return _offset; };
-
-        const _getCount = function() { return _count; };
-
-        const _getPageSize = function() { return _pageSize; };
-
-        const _getFilters = function() { return _filters; };
-        
-        const _getSorts = function() { return _sorts; };
-
         const _buildEagerHash = function() {
             return _getEagerType() ? 'eager=' + _getEagerType() : '';
         };
@@ -77,21 +65,103 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
                 if (!this.hasView())
                 {
                     _view = viewHandler.createView(itemType, {
-                        getEagerType: _getEagerType,
-                        getOffset: _getOffset,
-                        getCount: _getCount,
-                        getPageSize: _getPageSize,
-                        getFilters: _getFilters,
-                        getSorts: _getSorts,
-                        hash: _buildHash,
+                        get eagerType() { return this.eagerType; },
+                        get offset() { return this.offset; },
+                        get count() { return this.count; },
+                        get pageSize() { return this.pageSize; },
+                        get filters() { return this.filters; },
+                        get forts() { return this.sorts; },
+                        buildHash: function() { 
+                            return this.buildHash(); 
+                        }
                     });
                 }
                 return _view;
             },
 
-            hash: function() {
-                return _buildHash();
-            };
+            get viewId() {
+                return view().viewId();
+            },
+
+            get ready() {
+                return view().ready();
+            },
+
+            get outdated() {
+                return view().outdated();
+            },
+
+            get itemType() {
+                return viewHandler.itemType();
+            },
+
+            get loading() {
+                return _loading;
+            },
+
+            get loadingFailed() {
+                return _loadingFailed;
+            },
+
+            get loadingMetaOffset() {
+                return view().loadingMetaOffset();
+            },
+
+            get loadingMetaCount() {
+                return view().loadingMetaCount();
+            },
+
+            get loadingMetaPage() {
+                return view().loadingMetaPage();
+            },
+
+            get loadingMetaPageSize() {
+                return view().loadingMetaPageSize();
+            },
+
+            get loadingMetaTotalCount() {
+                return view().loadingMetaTotalCount();
+            },
+
+            get hash() {
+                return view().hash();
+            },
+
+            get items() {
+                return view().items();
+            },
+
+            get first() {
+                return view().first();
+            },
+
+            get last() {
+                return view().last();
+            },
+
+            get eagerType() { 
+                return _eagerType; 
+            },
+
+            get offset() { 
+                return _offset; 
+            },
+
+            get count() { 
+                return _count; 
+            },
+
+            get pageSize() { 
+                return _pageSize; 
+            },
+
+            get filters() { 
+                return _filters; 
+            },
+            
+            get sorts() { 
+                return _sorts; 
+            },
 
             addFilter: function(filter) {
                 if (!this.hasView()) {
@@ -127,14 +197,14 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
                 return this.addSort(sortFactory.createSort(key, order));
             },
 
-            eagerType: function(eagerType) {
+            setEagerType: function(eagerType) {
                 if (!this.hasView()) {
                     _eagerType = eagerType;
                 }
                 return this;
             },
 
-            paginate: function(page, pageSize) {
+            setPagination: function(page, pageSize) {
                 if (!this.hasView()) {
                     _offset = (page * pageSize) - pageSize;
                     _count = pageSize;
@@ -143,7 +213,7 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
                 return this;
             },
 
-            limit: function(offset, count) {
+            setLimit: function(offset, count) {
                 if (!this.hasView()) {
                     _offset = offset;
                     _count = count;
@@ -152,70 +222,13 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
                 return this;
             },
 
-            viewId: function() {
-                return view().viewId();
-            },
-
-            ready: function() {
-                return view().ready();
-            },
-
-            outdated: function() {
-                return view().outdated();
-            },
-
-            itemType: function() {
-                return viewHandler.itemType();
+            buildHash: function() {
+                return _buildHash();
             },
 
             load: function() {
                 view().load();
             },
-
-            loading: function() {
-                return _loading;
-            },
-
-            loadingFailed: function() {
-                return _loadingFailed;
-            },
-
-            loadingMetaOffset: function() {
-                return view().loadingMetaOffset();
-            },
-
-            loadingMetaCount: function() {
-                return view().loadingMetaCount();
-            },
-
-            loadingMetaPage: function() {
-                return view().loadingMetaPage();
-            },
-
-            loadingMetaPageSize: function() {
-                return view().loadingMetaPageSize();
-            },
-
-            loadingMetaTotalCount: function() {
-                return view().loadingMetaTotalCount();
-            },
-
-            hash: function() {
-                return view().hash();
-            },
-
-            items: function() {
-                return view().items();
-            },
-
-            first: function() {
-                return view().first();
-            },
-
-            last: function() {
-                return view().last();
-            },
-
         }
     }
 
