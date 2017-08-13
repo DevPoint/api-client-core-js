@@ -27,10 +27,6 @@ function createObserverFactory() {
             return changedPropCount;
         };
 
-        const _clearChangedViewProps = function(view) {
-            view.changedProps = {};
-        };
-
         const _transaction = function(transactionId) {
             if (!_transactions.hasOwnProperty(transactionId)) {
                 _transactions[transactionId] = {
@@ -47,10 +43,6 @@ function createObserverFactory() {
                 changedPropCount += transaction.readProps.hasOwnProperty(propKey) ? 1 : 0;
             }
             return changedPropCount;
-        };
-
-        const _clearChangedTransactionProps = function(transaction) {
-            transaction.changedProps = {};
         };
 
         const _listenerIndex = function(listener) {
@@ -103,10 +95,10 @@ function createObserverFactory() {
                 }
                 if (changedPropCount > 0) {
                     for (let view in _views) {
-                        _clearChangedViewProps(view);
+                        view.changedProps = {};
                     }
                     for (let transaction in _transactions) {
-                        _clearChangedTransactionProps(transaction);
+                        transaction.changedProps = {};
                     }
                     for (let i = 0; i < _listeners.length; i++) {
                         _listeners[i]();
