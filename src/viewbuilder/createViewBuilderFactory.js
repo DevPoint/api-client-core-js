@@ -32,15 +32,15 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
             },
 
             get viewId() {
-                return view().viewId;
+                return this.view().viewId;
             },
 
             get ready() {
-                return view().ready;
+                return this.view().ready;
             },
 
             get outdated() {
-                return view().outdated;
+                return this.view().outdated;
             },
 
             get itemType() {
@@ -48,47 +48,107 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
             },
 
             get loading() {
-                return view().loading;
+                return this.view().loading;
             },
 
             get loadingFailed() {
-                return view().loadingFailed;
+                return this.view().loadingFailed;
             },
 
             get loadingMetaOffset() {
-                return view().loadingMetaOffset;
+                return this.view().loadingMetaOffset;
             },
 
             get loadingMetaCount() {
-                return view().loadingMetaCount;
+                return this.view().loadingMetaCount;
             },
 
             get loadingMetaPage() {
-                return view().loadingMetaPage;
+                return this.view().loadingMetaPage;
             },
 
             get loadingMetaPageSize() {
-                return view().loadingMetaPageSize;
+                return this.view().loadingMetaPageSize;
             },
 
             get loadingMetaTotalCount() {
-                return view().loadingMetaTotalCount;
+                return this.view().loadingMetaTotalCount;
             },
 
             get itemsHash() {
-                return view().itemsHash;
+                return this.view().itemsHash;
             },
 
             get items() {
-                return view().items;
+                return this.view().items;
             },
 
             get first() {
-                return view().first;
+                return this.view().first;
             },
 
             get last() {
-                return view().last;
+                return this.view().last;
+            },
+
+            setReady: function(ready) {
+                this.view().setReady(ready);
+                return this;
+            },
+
+            setOutdated: function(outdated) {
+                this.view().setOutdated(outdated);
+                return this;
+            },
+
+            setLoading: function(loading) {
+                this.view().setLoading(loading);
+                return this;
+            },
+
+            setLoadingFailed: function(loadingFailed) {
+                this.view().setLoadingFailed(loadingFailed);
+                return this;
+            },
+
+            updateLoadingMeta: function(loadingMeta) {
+                this.view().updateLoadingMeta(loadingMeta);
+                return this;
+            },
+
+            setItemsHash: function(itemsHash) {
+                this.view().setItemsHash(itemsHash);
+                return this;
+            },
+
+            setItems: function(items) {
+                this.view().setItems(items);
+                return this;
+            },
+
+            handleLoadingReady: function(items, itemsHash, meta) {
+                this.view().handleLoadingReady(items, itemsHash, meta);
+                return this;
+            },
+
+            handleLoadingCanceled: function() {
+                this.view().handleLoadingReady();
+                return this;
+            },
+
+            handleLoadingFailed: function(errors) {
+                this.view().handleLoadingFailed(errors);
+                return this;
+            },
+
+            load: function() {
+                this.view().load();
+                return this;
+            },
+
+            markAsOutdated: function() {
+                this.view().setOutdated(true);
+                return this;
             },
 
             get eagerType() { 
