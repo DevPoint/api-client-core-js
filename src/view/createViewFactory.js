@@ -130,7 +130,7 @@ function createViewFactory() {
                 _updateLoadingMeta({
                     totalCount: 0,
                     errors: []
-                })
+                });
                 loadingHandler.load({
                     eagerType: builder.getEagerType(),
                     offset: builder.getOffset(),
@@ -186,6 +186,12 @@ function createViewFactory() {
             items: function() {
                 viewHandler.markAsRead(viewId, 'items');
                 return _items;
+            },
+
+            item: function() {
+                viewHandler.markAsRead(viewId, 'items');
+                viewHandler.markAsRead(viewId, 'item');
+                return _items && _items.length == 1 ? _items[0] : null;
             },
 
             first: function() {
