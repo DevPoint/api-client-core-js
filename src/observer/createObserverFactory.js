@@ -140,7 +140,7 @@ function createObserverFactory() {
                     transaction.changedProps = {};
                     if (changedTransactionPropCount) {
                         for (let i = 0; i < transaction.listeners.length; i++) {
-                            listenersToDispatch.push(transaction.listeners);
+                            listenersToDispatch.push(transaction.listeners[i]);
                         }
                     }
                 }
