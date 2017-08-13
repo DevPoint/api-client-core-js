@@ -20,7 +20,7 @@ function createViewFactory() {
             errors: []
         };
 
-        let _hash = '';
+        let _hash = viewBuilder.buildHash();
 
         let _items = [];
 
