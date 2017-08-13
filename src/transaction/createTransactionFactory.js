@@ -57,13 +57,13 @@ function createTransactionFactory() {
             _setProcessing(false);
             _setFailed(true);
             _setErrors(errors.slice(0));
-            const validationErrors = {};
             if (meta.hasOwnProperty('validationErrors')) {
+                const validationErrors = {};
                 for (var key in meta.validationErrors) {
                     validationErrors[key] = meta.validationErrors[key];
                 }
+                _setValidationErrors(validationErrors);
             }
-            _setValidationErrors(validationErrors);
         };
 
         return {
