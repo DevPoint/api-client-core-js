@@ -3,17 +3,18 @@ function createObserverFactory() {
 
     const _createObserver = function() {
 
-        const _listeners = [];
-
         const _views = {};
 
         const _transactions = {};
+
+        const _listeners = [];
 
         const _view = function(viewId) {
             if (!_views.hasOwnProperty(viewId)) {
                 _views[viewId] = {
                     readProps: {},
-                    changedProps: {}
+                    changedProps: {},
+                    listeners: []
                 };
             }
             return _views[viewId];
@@ -35,7 +36,8 @@ function createObserverFactory() {
             if (!_transactions.hasOwnProperty(transactionId)) {
                 _transactions[transactionId] = {
                     readProps: {},
-                    changedProps: {}
+                    changedProps: {},
+                    listeners: []
                 };
             }
             return _transactions[transactionId];
