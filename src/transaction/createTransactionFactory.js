@@ -84,7 +84,7 @@ function createTransactionFactory() {
                     _setProcessing(true);
                     _setFailed(false);
                     _setErrors([]);
-                    _setValidationErrors({});
+                    _setValidationErrors(null);
                     transactionHandler.start({
                         onReady: _handleTransactionReady,
                         onFailed: _handleTransactionFailed
@@ -116,8 +116,8 @@ function createTransactionFactory() {
             },
 
             hasErrors: function() {
-                transactionHandler.markAsRead(transactionId, 'errors');
-                return (_errors.length > 0);
+                transactionHandler.markAsRead(transactionId, 'hasErrors');
+                return (this.errors().length > 0);
             },
 
             errors: function() {
@@ -126,12 +126,12 @@ function createTransactionFactory() {
             },
 
             hasValidationErrors: function() {
-                transactionHandler.markAsRead(transactionId, '_validationErrors');
-                return (Object.keys(_validationErrors).length > 0);
+                transactionHandler.markAsRead(transactionId, 'hasValidationErrors');
+                return (Object.keys(this.validationErrors()).length > 0);
             },
 
             validationErrors: function() {
-                transactionHandler.markAsRead(transactionId, '_validationErrors');
+                transactionHandler.markAsRead(transactionId, 'validationErrors');
                 return _validationErrors;
             }
         }
