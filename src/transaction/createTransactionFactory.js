@@ -214,6 +214,52 @@ function createTransactionFactory() {
         return transaction;
     };
 
+    _createLoginTransaction: function(transactionId, itemType, credentials, transactionHandler) {
+        
+        const _credentials = _cloneData(credentials);
+
+        const transaction = _createBaseTransaction(
+            transactionId, itemType, 'login', 
+            transactionHandler);
+
+        const expand = {
+
+            get credentials() {
+                transactionHandler.markAsRead(transactionId, 'credentials');
+                return _credentials;
+            }
+        };
+
+        for (let expandPropKey in expand) {
+            transaction[expandPropKey] = expand[expandPropKey].bind(transaction);
+        }
+       
+        return transaction;
+    };
+
+    _createRegisterTransaction: function(transactionId, itemType, credentials, transactionHandler) {
+        
+        const _credentials = _cloneData(credentials);
+
+        const transaction = _createBaseTransaction(
+            transactionId, itemType, 'register', 
+            transactionHandler);
+
+        const expand = {
+
+            get credentials() {
+                transactionHandler.markAsRead(transactionId, 'credentials');
+                return _credentials;
+            }
+        };
+
+        for (let expandPropKey in expand) {
+            transaction[expandPropKey] = expand[expandPropKey].bind(transaction);
+        }
+       
+        return transaction;
+    };
+
     return {
 
         createBaseTransaction: _createBaseTransaction,
@@ -222,7 +268,11 @@ function createTransactionFactory() {
 
         createInsertTransaction: _createInsertTransaction,
 
-        createDeleteTransaction: _createDeleteTransaction
+        createDeleteTransaction: _createDeleteTransaction,
+
+        createLoginTransaction: _createLoginTransaction,
+
+        createRegisterTransaction: _createRegisterTransaction
 
     };
 
