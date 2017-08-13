@@ -1,7 +1,7 @@
 
 function createViewFactory() {
 
-    const _createView = function(viewId, itemType, builder, viewHandler, loadingHandler) {
+    const _createView = function(viewId, itemType, builderProxy, viewHandler) {
 
         let _ready = false;
 
@@ -12,10 +12,10 @@ function createViewFactory() {
         let _loadingFailed = false;
 
         let _loadingMeta = {
-            eagerType: builder.getEagerType(),
-            offset: builder.getOffset(),
-            count: builder.getCount(),
-            pageSize: builder.getPageSize(),
+            eagerType: builderProxy.getEagerType(),
+            offset: builderProxy.getOffset(),
+            count: builderProxy.getCount(),
+            pageSize: builderProxy.getPageSize(),
             totalCount: 0,
             errors: []
         };
@@ -92,10 +92,6 @@ function createViewFactory() {
             });
         };
 
-        const _handleMarkAsOutdated = function() {
-            _setOutdated(true);
-        };
-
         return {
 
             viewId: function() {
@@ -113,35 +109,9 @@ function createViewFactory() {
                 return _ready;
             },
 
-            markAsOutdated: function() {
-                loadingHandler.markAsOutdated({
-                    onMarkAsOutdated: _handleMarkAsOutdated
-                });
-            } 
-
             outdated: function() {
                 viewHandler.markAsRead(viewId, 'outdated');
                 return _outdated;
-            },
-
-            load: function() {
-                _setLoading(true);
-                _setLoadingFailed(false);
-                _updateLoadingMeta({
-                    totalCount: 0,
-                    errors: []
-                });
-                loadingHandler.load({
-                    eagerType: builder.getEagerType(),
-                    offset: builder.getOffset(),
-                    count: builder.getCount(),
-                    pageSize: builder.getPageSize(),
-                    filters: builder.getFilters(),
-                    sorts: builder.getSorts(),
-                    onLoaded: _handleLoadingReady,
-                    onCanceled: _handleLoadingCanceled,
-                    onFailed: _handleLoadingFailed
-                });
             },
 
             loading: function() {
@@ -204,6 +174,30 @@ function createViewFactory() {
                 viewHandler.markAsRead(viewId, 'items');
                 viewHandler.markAsRead(viewId, 'last');
                 return _items && _items.length ? _items[_items.length-1] : null;
+            },
+
+            load: function() {
+                _setLoading(true);
+                _setLoadingFailed(false);
+                _updateLoadingMeta({
+                    totalCount: 0,
+                    errors: []
+                });
+                viewHandler.load({
+                    eagerType: builderProxy.getEagerType(),
+                    offset: builderProxy.getOffset(),
+                    count: builderProxy.getCount(),
+                    pageSize: builderProxy.getPageSize(),
+                    filters: builderProxy.getFilters(),
+                    sorts: builderProxy.getSorts(),
+                    onLoaded: _handleLoadingReady,
+                    onCanceled: _handleLoadingCanceled,
+                    onFailed: _handleLoadingFailed
+                });
+            },
+
+            markAsOutdated: function() {
+                _setOutdated(true);
             }
         }
     }

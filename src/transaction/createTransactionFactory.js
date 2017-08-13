@@ -78,28 +78,6 @@ function createTransactionFactory() {
                 return type;
             },
 
-            start: function() {
-                if (!this.processing()) {
-                    _setReady(false);
-                    _setProcessing(true);
-                    _setFailed(false);
-                    _setErrors([]);
-                    _setValidationErrors(null);
-                    transactionHandler.start({
-                        onReady: _handleTransactionReady,
-                        onFailed: _handleTransactionFailed
-                    });
-                }
-            },
-
-            cancel: function() {
-                if (this.processing()) {
-                    transactionHandler.cancel({
-                        onCanceled: _handleTransactionCanceled
-                    });
-                }
-            },
-
             ready: function() {
                 transactionHandler.markAsRead(transactionId, 'ready');
                 return _ready;
@@ -133,6 +111,28 @@ function createTransactionFactory() {
             validationErrors: function() {
                 transactionHandler.markAsRead(transactionId, 'validationErrors');
                 return _validationErrors;
+            },
+
+            start: function() {
+                if (!this.processing()) {
+                    _setReady(false);
+                    _setProcessing(true);
+                    _setFailed(false);
+                    _setErrors([]);
+                    _setValidationErrors(null);
+                    transactionHandler.start({
+                        onReady: _handleTransactionReady,
+                        onFailed: _handleTransactionFailed
+                    });
+                }
+            },
+
+            cancel: function() {
+                if (this.processing()) {
+                    transactionHandler.cancel({
+                        onCanceled: _handleTransactionCanceled
+                    });
+                }
             }
         }
     }
