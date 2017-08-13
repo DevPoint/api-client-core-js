@@ -1,7 +1,7 @@
 
 function createViewFactory() {
 
-    const _createView = function(viewId, itemType, builderProxy, viewHandler) {
+    const _createView: function(viewId, itemType, viewBuilderProxy, viewHandler) {
 
         let _ready = false;
 
@@ -12,10 +12,10 @@ function createViewFactory() {
         let _loadingFailed = false;
 
         let _loadingMeta = {
-            eagerType: builderProxy.getEagerType(),
-            offset: builderProxy.getOffset(),
-            count: builderProxy.getCount(),
-            pageSize: builderProxy.getPageSize(),
+            eagerType: viewBuilderProxy.getEagerType(),
+            offset: viewBuilderProxy.getOffset(),
+            count: viewBuilderProxy.getCount(),
+            pageSize: viewBuilderProxy.getPageSize(),
             totalCount: 0,
             errors: []
         };
@@ -23,74 +23,6 @@ function createViewFactory() {
         let _hash = '';
 
         let _items = [];
-
-        const _setReady = function(ready) {
-            _ready = ready;
-            viewHandler.markAsChanged(viewId, 'ready');
-        };
-
-        const _setOutdated = function(outdated) {
-            _outdated = outdated;
-            viewHandler.markAsChanged(viewId, 'outdated');
-        };
-
-        const _setLoading = function(loading) {
-            _loading = loading;
-            viewHandler.markAsChanged(viewId, 'loading');
-        };
-
-        const _setLoadingFailed = function(loadingFailed) {
-            _loadingFailed = loadingFailed;
-            viewHandler.markAsChanged(viewId, 'loadingFailed');
-        };
-
-        const _updateLoadingMeta = function(loadingMeta) {
-            for (let propKey in loadingMeta) {
-                const viewHandlerPropKey = 'loadingMeta' + propKey.charAt(0).toUpperCase() + propKey.slice(1);
-                _loadingMeta[propKey] = loadingMeta[propKey];
-                viewHandler.markAsChanged(viewId, viewHandlerPropKey);
-            }
-        };
-
-        const _setItems = function(items) {
-            _items = items;
-            viewHandler.markAsChanged(viewId, 'items');
-        };
-
-        const _setHash = function(hash) {
-            _hash = hash;
-            viewHandler.markAsChanged(viewId, 'hash');
-        };
-
-        const _handleLoadingReady = function(items, meta) {
-            _setItems(items);
-            _setReady(true);
-            _setOutdated(false);
-            _setLoading(false);
-            _setLoadingFailed(false);
-            _updateLoadingMeta({
-                eagerType: meta.eagerType,
-                offset: meta.offset,
-                count: meta.count,
-                pageSize: meta.pageSize,
-                totalCount: meta.totalCount,
-                errors: []
-            });
-        };
-
-        const _handleLoadingCanceled = function() {
-            _setLoading(false);
-            _setLoadingFailed(false);
-        };
-
-        const _handleLoadingFailed = function(errors) {
-            _setLoading(false);
-            _setLoadingFailed(true);
-            _updateLoadingMeta({
-                totalCount: 0,
-                errors: errors.slice(0)
-            });
-        };
 
         return {
 
@@ -176,29 +108,87 @@ function createViewFactory() {
                 return _items && _items.length ? _items[_items.length-1] : null;
             },
 
+            setReady(ready) {
+                _ready = ready;
+                viewHandler.markAsChanged(viewId, 'ready');
+            };
+
+            setOutdated(outdated) {
+                _outdated = outdated;
+                viewHandler.markAsChanged(viewId, 'outdated');
+            };
+
+            setLoading(loading) {
+                _loading = loading;
+                viewHandler.markAsChanged(viewId, 'loading');
+            };
+
+            setLoadingFailed(loadingFailed) {
+                _loadingFailed = loadingFailed;
+                viewHandler.markAsChanged(viewId, 'loadingFailed');
+            };
+
+            updateLoadingMeta(loadingMeta) {
+                for (let propKey in loadingMeta) {
+                    const viewHandlerPropKey = 'loadingMeta' + propKey.charAt(0).toUpperCase() + propKey.slice(1);
+                    _loadingMeta[propKey] = loadingMeta[propKey];
+                    viewHandler.markAsChanged(viewId, viewHandlerPropKey);
+                }
+            };
+
+            setItems(items) {
+                _items = items;
+                viewHandler.markAsChanged(viewId, 'items');
+            };
+
+            setHash(hash) {
+                _hash = hash;
+                viewHandler.markAsChanged(viewId, 'hash');
+            };
+
+            handleLoadingReady(items, meta) {
+                this.setItems(items);
+                this.setReady(true);
+                this.setOutdated(false);
+                this.setLoading(false);
+                this.setLoadingFailed(false);
+                this.updateLoadingMeta({
+                    eagerType: meta.eagerType,
+                    offset: meta.offset,
+                    count: meta.count,
+                    pageSize: meta.pageSize,
+                    totalCount: meta.totalCount,
+                    errors: []
+                });
+            };
+
+            handleLoadingCanceled() {
+                this.setLoading(false);
+                this.setLoadingFailed(false);
+            };
+
+            handleLoadingFailed(errors) {
+                this.setLoading(false);
+                this.setLoadingFailed(true);
+                this.updateLoadingMeta({
+                    totalCount: 0,
+                    errors: errors.slice(0)
+                });
+            };
+
             load() {
-                _setLoading(true);
-                _setLoadingFailed(false);
-                _updateLoadingMeta({
+                this.setLoading(true);
+                this.setLoadingFailed(false);
+                this.updateLoadingMeta({
                     totalCount: 0,
                     errors: []
                 });
-                viewHandler.load({
-                    eagerType: builderProxy.getEagerType(),
-                    offset: builderProxy.getOffset(),
-                    count: builderProxy.getCount(),
-                    pageSize: builderProxy.getPageSize(),
-                    filters: builderProxy.getFilters(),
-                    sorts: builderProxy.getSorts(),
-                    onLoaded: _handleLoadingReady,
-                    onCanceled: _handleLoadingCanceled,
-                    onFailed: _handleLoadingFailed
-                });
+                viewHandler.load(viewBuilderProxy, this);
                 return this;
             },
 
             markAsOutdated() {
-                _setOutdated(true);
+                this.setOutdated(true);
                 return this;
             }
         }

@@ -19,10 +19,8 @@ function createViewHandlerFactory() {
                 return _views[viewId];
             },
 
-            load: function(viewId, viewProxy) {
-                if (_hasView(viewId)) {
-                    loadingClient.load(_views[viedId], viewProxy);
-                }
+            load: function(viewBuilderProxy, view) {
+                loadingClient.load(viewBuilderProxy, view);
                 return this;
             },
 

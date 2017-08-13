@@ -73,21 +73,6 @@ function createTransactionFactory() {
                 return _validationErrors;
             },
 
-            get transactionStartProxy() { 
-                transactionHandler.markAsRead(transactionId, 'transactionStartProxy');
-                return {
-                    onReady: this.handleTransactionReady,
-                    onFailed: this.handleTransactionFailed
-                };
-            },
-
-            get transactionCancelProxy() { 
-                transactionHandler.markAsRead(transactionId, 'transactionCancelProxy');
-                return {
-                    onCanceled: this.handleTransactionCanceled
-                };
-            },
-
             setReady(ready) {
                 _ready = ready;
                 transactionHandler.markAsChanged(transactionId, 'ready');
@@ -148,14 +133,14 @@ function createTransactionFactory() {
                     this.setFailed(false);
                     this.setErrors([]);
                     this.setValidationErrors(null);
-                    transactionHandler.start(this.transactionStartProxy);
+                    transactionHandler.start(this);
                 }
                 return this;
             },
 
             cancel() {
                 if (this.processing) {
-                    transactionHandler.cancel(this.transactionCancelProxy);
+                    transactionHandler.cancel(this);
                 }
                 return this;
             }

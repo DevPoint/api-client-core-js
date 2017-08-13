@@ -46,19 +46,13 @@ function createTransactionHandlerFactory() {
                 return _transactions[transactionId];
             },
 
-            start: function(transactionId, transactionProxy) {
-                if (_hasTransaction(transactionId)) {
-                    const transaction = _transactions[transactionId]
-                    transactionClient.start(transaction, transactionProxy);
-                }
+            start: function(transaction) {
+                transactionClient.start(transaction);
                 return this;
             },
 
-            cancel: function(transactionId, transactionProxy) {
-                if (_hasTransaction(transactionId)) {
-                    const transaction = _transactions[transactionId]
-                    transactionClient.cancel(transaction, transactionProxy);
-                }
+            cancel: function(transaction) {
+                transactionClient.cancel(transaction);
                 return this;
             },
 
