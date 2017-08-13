@@ -19,7 +19,7 @@ function createObserverFactory() {
             return _views[viewId];
         };
 
-        const _changedViewPropCount = function(view) {
+        const _viewChangedPropCount = function(view) {
             let changedPropCount = 0;
             for (let propKey in view.changedProps) {
                 changedPropCount += view.readProps.hasOwnProperty(propKey) ? 1 : 0;
@@ -41,7 +41,7 @@ function createObserverFactory() {
             return _transactions[transactionId];
         };
 
-        const _changedTransactionPropCount = function(transaction) {
+        const _transactionChangedPropCount = function(transaction) {
             let changedPropCount = 0;
             for (let propKey in transaction.changedProps) {
                 changedPropCount += transaction.readProps.hasOwnProperty(propKey) ? 1 : 0;
@@ -125,20 +125,20 @@ function createObserverFactory() {
                 let changedPropCount = 0;
                 const listenersToDispatch = []
                 for (let view in _views) {
-                    const changedViewPropCount = _changedViewPropCount(view);
-                    changedPropCount += changedViewPropCount;
+                    const viewChangedPropCount = _viewChangedPropCount(view);
+                    changedPropCount += viewChangedPropCount;
                     view.changedProps = {};
-                    if (changedViewPropCount) {
+                    if (viewChangedPropCount) {
                         for (let i = 0; i < view.listeners.length; i++) {
                             listenersToDispatch.push(view.listeners[i]);
                         }
                     }
                 }
                 for (let transaction in _transactions) {
-                    const changedTransactionPropCount = _changedTransactionPropCount(transaction);
-                    changedPropCount += changedTransactionPropCount;
+                    const transactionChangedPropCount = _transactionChangedPropCount(transaction);
+                    changedPropCount += transactionChangedPropCount;
                     transaction.changedProps = {};
-                    if (changedTransactionPropCount) {
+                    if (transactionChangedPropCount) {
                         for (let i = 0; i < transaction.listeners.length; i++) {
                             listenersToDispatch.push(transaction.listeners[i]);
                         }
