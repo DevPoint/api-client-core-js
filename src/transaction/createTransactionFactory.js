@@ -178,7 +178,7 @@ function createTransactionFactory() {
         };
 
         for (let expandPropKey in expand) {
-            transaction[expandPropKey] = expand[expandPropKey];
+            transaction[expandPropKey] = expand[expandPropKey].bind(transaction);
         }
         
         return transaction;
@@ -209,7 +209,7 @@ function createTransactionFactory() {
         };
 
         for (let expandPropKey in expand) {
-            transaction[expandPropKey] = expand[expandPropKey];
+            transaction[expandPropKey] = expand[expandPropKey].bind(transaction);
         }
        
         return transaction;
@@ -238,7 +238,7 @@ function createTransactionFactory() {
         };
         
         for (let expandPropKey in expand) {
-            transaction[expandPropKey] = expand[expandPropKey];
+            transaction[expandPropKey] = expand[expandPropKey].bind(transaction);
         }
        
         return transaction;
