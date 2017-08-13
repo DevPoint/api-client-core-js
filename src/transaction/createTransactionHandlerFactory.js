@@ -5,7 +5,7 @@ function createTransactionHandlerFactory() {
 
         const _transactions = {};
 
-        const _transactionNumber = 1;
+        let _transactionNumber = 1;
 
         const _hasTransaction = function(transactionId) {
             return _transactions.hasOwnProperty(transactionId);
