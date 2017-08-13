@@ -12,7 +12,7 @@ function createViewHandlerFactory() {
         return {
 
             create: function(itemType, viewBuilder) {
-                const viewId = viewBuilder->buildViewHash() + '@view';
+                const viewId = viewBuilder->buildHash() + '@view';
                 if (!_hasView(viewId)) {
                     _views[viewId] = viewFactory.createView(viewId, itemType, viewBuilder, this);
                 }

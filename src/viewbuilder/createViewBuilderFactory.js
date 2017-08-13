@@ -200,7 +200,7 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
                 return sortHashes.length ? 'sorts=' + sortHashes.join(',') : '';
             },
 
-            buildViewHash = function() {
+            buildHash = function() {
                 const hashes = [
                     this.buildEagerHash(),
                     this.buildOffsetHash(),
