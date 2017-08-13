@@ -216,6 +216,8 @@ function createTransactionFactory() {
 
     return {
 
+        createBaseTransaction: _createBaseTransaction,
+
         createUpdateTransaction: _createUpdateTransaction,
 
         createInsertTransaction: _createInsertTransaction,
