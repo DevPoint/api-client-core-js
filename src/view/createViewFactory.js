@@ -159,20 +159,20 @@ function createViewFactory() {
             },
 
             get item() {
-                viewHandler.markAsRead(viewId, 'items');
                 viewHandler.markAsRead(viewId, 'item');
+                viewHandler.markAsRead(viewId, 'items');
                 return _items && _items.length == 1 ? _items[0] : null;
             },
 
             get first() {
-                viewHandler.markAsRead(viewId, 'items');
                 viewHandler.markAsRead(viewId, 'first');
+                viewHandler.markAsRead(viewId, 'items');
                 return _items && _items.length ? _items[0] : null;
             },
 
             get last() {
-                viewHandler.markAsRead(viewId, 'items');
                 viewHandler.markAsRead(viewId, 'last');
+                viewHandler.markAsRead(viewId, 'items');
                 return _items && _items.length ? _items[_items.length-1] : null;
             },
 
