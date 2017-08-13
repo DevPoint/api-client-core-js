@@ -77,7 +77,7 @@ function createTransactionFactory() {
                 return {};
             },
 
-            set ready(ready) {
+            setReady(ready) {
                 _ready = ready;
                 transactionHandler.markAsChanged(transactionId, 'ready');
             },
