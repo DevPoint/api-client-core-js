@@ -71,7 +71,7 @@ function createObserverFactory() {
                 const view = _view(viewId);
                 const listenerIndex = _viewListenerIndex(view, listener);
                 if (listenerIndex >= 0) {
-                    _view(viewId).listeners.splice(listenerIndex, 1);
+                    view.listeners.splice(listenerIndex, 1);
                 }
             },
 
@@ -95,7 +95,7 @@ function createObserverFactory() {
                 const transaction = _transaction(transactionId);
                 const listenerIndex = _transactionListenerIndex(transaction, listener);
                 if (listenerIndex >= 0) {
-                    _transaction(transactionId).listeners.splice(listenerIndex, 1);
+                    transaction.listeners.splice(listenerIndex, 1);
                 }
             },
 
