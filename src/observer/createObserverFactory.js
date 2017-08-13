@@ -28,14 +28,7 @@ function createObserverFactory() {
         };
 
         const _viewListenerIndex = function(view) {
-            let listenerIndex = -1;
-            for (let i = 0; i < view.listeners.length; i++) {
-                if (view.listeners[i] === listener) {
-                    listenerIndex = i;
-                    break;
-                }
-            }
-            return listenerIndex;
+            return view.listeners.indexOf(listener);
         };
 
         const _transaction = function(transactionId) {
@@ -57,25 +50,11 @@ function createObserverFactory() {
         };
 
         const _transactionListenerIndex = function(transaction) {
-            let listenerIndex = -1;
-            for (let i = 0; i < transaction.listeners.length; i++) {
-                if (transaction.listeners[i] === listener) {
-                    listenerIndex = i;
-                    break;
-                }
-            }
-            return listenerIndex;
+            return transaction.listeners.indexOf(listener);
         };
 
         const _listenerIndex = function(listener) {
-            let listenerIndex = -1;
-            for (let i = 0; i < _listeners.length; i++) {
-                if (_listeners[i] === listener) {
-                    listenerIndex = i;
-                    break;
-                }
-            }
-            return listenerIndex;
+            return _listeners.indexOf(listener);
         };
 
         return {
