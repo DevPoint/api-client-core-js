@@ -11,16 +11,16 @@ function createViewHandlerFactory() {
 
         return {
 
-            create: function(itemType, viewBuilderProxy) {
-                const viewId = viewBuilderProxy->hash() + '@view';
+            create: function(itemType, viewBuilder) {
+                const viewId = viewBuilder->hash() + '@view';
                 if (!_hasView(viewId)) {
-                    _views[viewId] = viewFactory.createView(viewId, itemType, viewBuilderProxy, this);
+                    _views[viewId] = viewFactory.createView(viewId, itemType, viewBuilder, this);
                 }
                 return _views[viewId];
             },
 
-            load: function(viewBuilderProxy, view) {
-                loadingClient.load(viewBuilderProxy, view);
+            load: function(viewBuilder, view) {
+                loadingClient.load(viewBuilder, view);
                 return this;
             },
 

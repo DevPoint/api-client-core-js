@@ -1,7 +1,7 @@
 
 function createViewFactory() {
 
-    const _createView: function(viewId, itemType, viewBuilderProxy, viewHandler) {
+    const _createView: function(viewId, itemType, viewBuilder, viewHandler) {
 
         let _ready = false;
 
@@ -12,10 +12,10 @@ function createViewFactory() {
         let _loadingFailed = false;
 
         let _loadingMeta = {
-            eagerType: viewBuilderProxy.getEagerType(),
-            offset: viewBuilderProxy.getOffset(),
-            count: viewBuilderProxy.getCount(),
-            pageSize: viewBuilderProxy.getPageSize(),
+            eagerType: viewBuilder.eagerType,
+            offset: viewBuilder.offset,
+            count: viewBuilder.count,
+            pageSize: viewBuilder.pageSize,
             totalCount: 0,
             errors: []
         };
@@ -184,7 +184,7 @@ function createViewFactory() {
                     totalCount: 0,
                     errors: []
                 });
-                viewHandler.load(viewBuilderProxy, this);
+                viewHandler.load(viewBuilder, this);
                 return this;
             },
 

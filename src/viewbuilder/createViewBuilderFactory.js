@@ -26,17 +26,7 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
             view: function() {
                 if (!this.hasView())
                 {
-                    _view = viewHandler.createView(itemType, {
-                        get eagerType() { return this.eagerType; },
-                        get offset() { return this.offset; },
-                        get count() { return this.count; },
-                        get pageSize() { return this.pageSize; },
-                        get filters() { return this.filters; },
-                        get forts() { return this.sorts; },
-                        buildHash: function() { 
-                            return this.buildHash(); 
-                        }
-                    });
+                    _view = viewHandler.createView(itemType, this);
                 }
                 return _view;
             },
@@ -185,28 +175,28 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
             },
 
             buildEagerHash: function() {
-                return _getEagerType() ? 'eager=' + _getEagerType() : '';
+                return this.eagerType ? 'eager=' + this.eagerType : '';
             },
 
             buildOffsetHash: function() {
-                return _getOffset() ? 'offs=' + _getOffset() : '';
+                return this.offset ? 'offs=' + this.offset : '';
             },
 
             buildCountHash: function() {
-                return _getCount() ? 'cnt=' + _getCount() : '';
+                return this.count ? 'cnt=' + this.count : '';
             },
 
             buildPageSizeHash: function() {
-                return _getPageSize() ? 'psz=' + _getPageSize() : '';
+                return this.pageSize ? 'psz=' + this.pageSize : '';
             },
 
             buildFiltersHash: function() {
-                const filterHashes: _getFilters().map(filter:> filter.hash());
+                const filterHashes = this.filters.map(filter => filter.hash());
                 return filterHashes.length ? 'filters=' + filterHashes.join(',') : '';
             },
 
             buildSortsHash: function() {
-                const sortHashes: _getSorts().map(sort:> sort.hash());
+                const sortHashes = this.sorts.map(sort => sort.hash());
                 return sortHashes.length ? 'sorts=' + sortHashes.join(',') : '';
             },
 
@@ -221,10 +211,6 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
                 ];
                 return hashes.join('&');
             };
-
-            buildHash: function() {
-                return _buildHash();
-            },
 
             load: function() {
                 view().load();
