@@ -95,7 +95,7 @@ function createObserverFactory() {
                 _view(viewId).changedProps[propsKey] = true;
             },
 
-            getViewChangedPropCount(viewId) {
+            getViewChangedPropCount: function(viewId) {
                 return _hasView(viewId)
                     ? _viewChangedPropCount(_view(viewId)) : 0;
             },
@@ -126,7 +126,7 @@ function createObserverFactory() {
                _transaction(transactionId).changedProps[propsKey] = true;
             },
 
-            getTransactionChangedPropCount(transactionId) {
+            getTransactionChangedPropCount: function(transactionId) {
                 return _hasTransaction(transactionId)
                     ? _transactionChangedPropCount(_transaction(transactionId)) : 0;
             },

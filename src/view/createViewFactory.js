@@ -72,7 +72,7 @@ function createViewFactory() {
 
             get loadingMetaPage() {
                 viewHandler.markAsRead(viewId, 'loadingMetaPage');
-                return this.loadingMetaPageSize ? (this.loadingMetaCount / this.loadingMetaPageSize + 1 : 0;
+                return this.loadingMetaPageSize ? (this.loadingMetaCount / this.loadingMetaPageSize + 1) : 0;
             },
 
             get loadingMetaTotalCount() {
@@ -108,45 +108,46 @@ function createViewFactory() {
                 return _items && _items.length ? _items[_items.length-1] : null;
             },
 
-            setReady(ready) {
+            setReady: function(ready) {
                 _ready = ready;
                 viewHandler.markAsChanged(viewId, 'ready');
-            };
 
-            setOutdated(outdated) {
+            },
+
+            setOutdated: function(outdated) {
                 _outdated = outdated;
                 viewHandler.markAsChanged(viewId, 'outdated');
-            };
+            },
 
-            setLoading(loading) {
+            setLoading: function(loading) {
                 _loading = loading;
                 viewHandler.markAsChanged(viewId, 'loading');
-            };
+            },
 
-            setLoadingFailed(loadingFailed) {
+            setLoadingFailed: function(loadingFailed) {
                 _loadingFailed = loadingFailed;
                 viewHandler.markAsChanged(viewId, 'loadingFailed');
-            };
+            },
 
-            updateLoadingMeta(loadingMeta) {
+            updateLoadingMeta: function(loadingMeta) {
                 for (let propKey in loadingMeta) {
                     const viewHandlerPropKey = 'loadingMeta' + propKey.charAt(0).toUpperCase() + propKey.slice(1);
                     _loadingMeta[propKey] = loadingMeta[propKey];
                     viewHandler.markAsChanged(viewId, viewHandlerPropKey);
                 }
-            };
+            },
 
-            setItems(items) {
+            setItems: function(items) {
                 _items = items;
                 viewHandler.markAsChanged(viewId, 'items');
-            };
+            },
 
-            setHash(hash) {
+            setHash: function(hash) {
                 _hash = hash;
                 viewHandler.markAsChanged(viewId, 'hash');
-            };
+            },
 
-            handleLoadingReady(items, meta) {
+            handleLoadingReady: function(items, meta) {
                 this.setItems(items);
                 this.setReady(true);
                 this.setOutdated(false);
@@ -160,23 +161,23 @@ function createViewFactory() {
                     totalCount: meta.totalCount,
                     errors: []
                 });
-            };
+            },
 
-            handleLoadingCanceled() {
+            handleLoadingCanceled: function() {
                 this.setLoading(false);
                 this.setLoadingFailed(false);
-            };
+            },
 
-            handleLoadingFailed(errors) {
+            handleLoadingFailed: function(errors) {
                 this.setLoading(false);
                 this.setLoadingFailed(true);
                 this.updateLoadingMeta({
                     totalCount: 0,
                     errors: errors.slice(0)
                 });
-            };
+            },
 
-            load() {
+            load: function() {
                 this.setLoading(true);
                 this.setLoadingFailed(false);
                 this.updateLoadingMeta({
@@ -187,7 +188,7 @@ function createViewFactory() {
                 return this;
             },
 
-            markAsOutdated() {
+            markAsOutdated: function() {
                 this.setOutdated(true);
                 return this;
             }

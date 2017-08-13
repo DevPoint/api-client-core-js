@@ -73,46 +73,46 @@ function createTransactionFactory() {
                 return _validationErrors;
             },
 
-            setReady(ready) {
+            setReady: function(ready) {
                 _ready = ready;
                 transactionHandler.markAsChanged(transactionId, 'ready');
             },
 
-            setProcessing(processing) {
+            setProcessing: function(processing) {
                 _processing = processing;
                 transactionHandler.markAsChanged(transactionId, 'processing');
             },
 
-            setFailed(failed) {
+            setFailed: function(failed) {
                 _failed = failed;
                 transactionHandler.markAsChanged(transactionId, 'failed');
             },
 
-            setErrors(errors) {
+            setErrors: function(errors) {
                 _errors = errors;
                 transactionHandler.markAsChanged(transactionId, 'errors');
             },
 
-            setValidationErrors(errors) {
+            setValidationErrors: function(errors) {
                 _validationErrors = validationErrors;
                 transactionHandler.markAsChanged(transactionId, 'validationErrors');
             },
 
-            handleTransactionReady() {
+            handleTransactionReady: function() {
                 this.setReady(true);
                 this.setProcessing(false);
                 this.setFailed(false);
                 this.setErrors([]);
                 this.setValidationErrors(null);
-            };
+            },
 
-            handleTransactionCanceled() {
+            handleTransactionCanceled: function() {
                 this.setReady(false);
                 this.setProcessing(false);
                 this.setFailed(false);
-            };
+            },
 
-            handleTransactionFailed(errors, meta) {
+            handleTransactionFailed: function(errors, meta) {
                 this.setReady(true);
                 this.setProcessing(false);
                 this.setFailed(true);
@@ -124,9 +124,9 @@ function createTransactionFactory() {
                     }
                     this.setValidationErrors(validationErrors);
                 }
-            };
+            },
 
-            start() {
+            start: function() {
                 if (!this.processing) {
                     this.setReady(false);
                     this.setProcessing(true);
@@ -138,7 +138,7 @@ function createTransactionFactory() {
                 return this;
             },
 
-            cancel() {
+            cancel: function() {
                 if (this.processing) {
                     transactionHandler.cancel(this);
                 }
