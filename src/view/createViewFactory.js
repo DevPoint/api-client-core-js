@@ -94,89 +94,89 @@ function createViewFactory() {
 
         return {
 
-            viewId: function() {
+            get viewId() {
                 viewHandler.markAsRead(viewId, 'viewId');
                 return viewId;
             },
 
-            itemType: function() {
+            get itemType() {
                 viewHandler.markAsRead(viewId, 'itemType');
                 return itemType;
             },
 
-            ready: function() {
+            get ready() {
                 viewHandler.markAsRead(viewId, 'ready');
                 return _ready;
             },
 
-            outdated: function() {
+            get outdated() {
                 viewHandler.markAsRead(viewId, 'outdated');
                 return _outdated;
             },
 
-            loading: function() {
+            get loading() {
                 viewHandler.markAsRead(viewId, 'loading');
                 return _loading;
             },
 
-            loadingFailed: function() {
+            get loadingFailed() {
                 viewHandler.markAsRead(viewId, 'loadingFailed');
                 return _loadingFailed;
             },
 
-            loadingMetaOffset: function() {
+            get loadingMetaOffset() {
                 viewHandler.markAsRead(viewId, 'loadingMetaOffset');
                 return _loadingMeta.offset;
             },
 
-            loadingMetaCount: function() {
+            get loadingMetaCount() {
                 viewHandler.markAsRead(viewId, 'loadingMetaCount');
                 return _loadingMeta.count;
             },
 
-            loadingMetaPageSize: function() {
+            get loadingMetaPageSize() {
                 return _loadingMeta.pageSize;
             },
 
-            loadingMetaPage: function() {
+            get loadingMetaPage() {
                 viewHandler.markAsRead(viewId, 'loadingMetaPage');
-                return this.loadingMetaPageSize() ? (this.loadingMetaCount() / this.loadingMetaPageSize()) + 1 : 0;
+                return this.loadingMetaPageSize ? (this.loadingMetaCount / this.loadingMetaPageSize + 1 : 0;
             },
 
-            loadingMetaTotalCount: function() {
+            get loadingMetaTotalCount() {
                 viewHandler.markAsRead(viewId, 'loadingMetaTotalCount');
                 return _loadingMeta.totalCount;
             },
 
-            hash: function() {
+            get hash() {
                 viewHandler.markAsRead(viewId, 'hash');
                 return _hash;
             },
 
-            items: function() {
+            get items() {
                 viewHandler.markAsRead(viewId, 'items');
                 return _items;
             },
 
-            item: function() {
+            get item() {
                 viewHandler.markAsRead(viewId, 'items');
                 viewHandler.markAsRead(viewId, 'item');
                 return _items && _items.length == 1 ? _items[0] : null;
             },
 
-            first: function() {
+            get first() {
                 viewHandler.markAsRead(viewId, 'items');
                 viewHandler.markAsRead(viewId, 'first');
                 return _items && _items.length ? _items[0] : null;
             },
 
-            last: function() {
+            get last() {
                 viewHandler.markAsRead(viewId, 'items');
                 viewHandler.markAsRead(viewId, 'last');
                 return _items && _items.length ? _items[_items.length-1] : null;
             },
 
-            load: function() {
+            load() {
                 _setLoading(true);
                 _setLoadingFailed(false);
                 _updateLoadingMeta({
@@ -194,10 +194,12 @@ function createViewFactory() {
                     onCanceled: _handleLoadingCanceled,
                     onFailed: _handleLoadingFailed
                 });
+                return this;
             },
 
-            markAsOutdated: function() {
+            markAsOutdated() {
                 _setOutdated(true);
+                return this;
             }
         }
     }

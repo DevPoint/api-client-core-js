@@ -68,53 +68,53 @@ function createTransactionFactory() {
 
         return {
 
-            transactionId: function() {
+            get transactionId() {
                 transactionHandler.markAsRead(transactionId, 'transactionId');
                 return transactionId;
             },
 
-            type: function() {
+            get type() {
                 transactionHandler.markAsRead(transactionId, 'type');
                 return type;
             },
 
-            ready: function() {
+            get ready() {
                 transactionHandler.markAsRead(transactionId, 'ready');
                 return _ready;
             },
 
-            processing: function() {
+            get processing() {
                 transactionHandler.markAsRead(transactionId, 'processing');
                 return _processing;
             },
 
-            failed: function() {
+            get failed() {
                 transactionHandler.markAsRead(transactionId, 'failed');
                 return _failed;
             },
 
-            hasErrors: function() {
+            get hasErrors() {
                 transactionHandler.markAsRead(transactionId, 'hasErrors');
-                return (this.errors().length > 0);
+                return (this.errors.length > 0);
             },
 
-            errors: function() {
+            get errors() {
                 transactionHandler.markAsRead(transactionId, 'errors');
                 return _errors;
             },
 
-            hasValidationErrors: function() {
+            get hasValidationErrors() {
                 transactionHandler.markAsRead(transactionId, 'hasValidationErrors');
-                return (Object.keys(this.validationErrors()).length > 0);
+                return (Object.keys(this.validationErrors).length > 0);
             },
 
-            validationErrors: function() {
+            get validationErrors() {
                 transactionHandler.markAsRead(transactionId, 'validationErrors');
                 return _validationErrors;
             },
 
             start: function() {
-                if (!this.processing()) {
+                if (!this.processing) {
                     _setReady(false);
                     _setProcessing(true);
                     _setFailed(false);
@@ -125,14 +125,16 @@ function createTransactionFactory() {
                         onFailed: _handleTransactionFailed
                     });
                 }
+                return this;
             },
 
             cancel: function() {
-                if (this.processing()) {
+                if (this.processing) {
                     transactionHandler.cancel({
                         onCanceled: _handleTransactionCanceled
                     });
                 }
+                return this;
             }
         }
     }
