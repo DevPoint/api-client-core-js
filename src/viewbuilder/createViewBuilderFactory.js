@@ -146,11 +146,6 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
                 return this;
             },
 
-            markAsOutdated: function() {
-                this.view().setOutdated(true);
-                return this;
-            },
-
             get eagerType() { 
                 return _eagerType; 
             },

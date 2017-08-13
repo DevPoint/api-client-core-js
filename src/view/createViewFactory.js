@@ -187,11 +187,6 @@ function createViewFactory() {
                 });
                 viewHandler.load(viewBuilder, this);
                 return this;
-            },
-
-            markAsOutdated: function() {
-                this.setOutdated(true);
-                return this;
             }
         }
     }
