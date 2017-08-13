@@ -1,7 +1,7 @@
 
 function createViewHandlerFactory() {
 
-    const _createViewHandler = function(viewFactory, observerHandler, loadingHandler) {
+    const _createViewHandler = function(viewFactory, observerHandler, loadingClient) {
 
         const _views = {};
 
@@ -14,14 +14,14 @@ function createViewHandlerFactory() {
             create: function(itemType, builderProxy) {
                 const viewId = builderProxy->hash() + '@view';
                 if (!_hasView(viewId)) {
-                    _views[viewId] = viewFactory.creatView(viewId, itemType, builderProxy, this);
+                    _views[viewId] = viewFactory.createView(viewId, itemType, builderProxy, this);
                 }
                 return _views[viewId];
             },
 
             load: function(viewId, viewProxy) {
                 if (_hasView(viewId)) {
-                    loadingHandler.load(_views[viedId], viewProxy);
+                    loadingClient.load(_views[viedId], viewProxy);
                 }
                 return this;
             },
