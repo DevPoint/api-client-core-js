@@ -4,8 +4,8 @@ function createViewHandlerFactory() {
     const _createViewHandler = function(viewFactory, loadingHandler, observerHandler) {
 
         return {
-            create: function(observerHandler) {
-                return viewFactory.creatView(observerHandler);
+            create: function(builderProxy) {
+                return viewFactory.creatView(viewId, itemType, builderProxy, this);
             },
 
             load: function(viewId, viewProxy) {
