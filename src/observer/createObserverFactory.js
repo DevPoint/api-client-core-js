@@ -144,13 +144,14 @@ function createObserverFactory() {
 
             dispatchChanges: function() {
                 let changedPropCount = 0;
+                const listenersToDispatch = []
                 for (let view in _views) {
                     const changedViewPropCount = _changedViewPropCount(view);
                     changedPropCount += changedViewPropCount;
                     view.changedProps = {};
                     if (changedViewPropCount) {
                         for (let i = 0; i < view.listeners.length; i++) {
-                            view.listeners[i]();
+                            listenersToDispatch.push(view.listeners[i]);
                         }
                     }
                 }
@@ -160,14 +161,18 @@ function createObserverFactory() {
                     transaction.changedProps = {};
                     if (changedTransactionPropCount) {
                         for (let i = 0; i < transaction.listeners.length; i++) {
-                            transaction.listeners[i]();
+                            listenersToDispatch.push(transaction.listeners);
                         }
                     }
                 }
                 if (changedPropCount > 0) {
                     for (let i = 0; i < _listeners.length; i++) {
-                        _listeners[i]();
+                        listenersToDispatch.push(_listeners[i]);
                     }
+                }
+                const uniqueListeners = listenersToDispatch.filter((v, i, a) => a.indexOf(v) === i);
+                for (let i = 0; i < uniqueListeners.length; i++) {
+                    uniqueListeners[i]();
                 }
             }
         }
