@@ -1,7 +1,7 @@
 
 function createObserverFactory() {
 
-    const _createObserver = function(observerHandler) {
+    const _createObserver = function() {
 
         const _listeners = [];
 
@@ -58,19 +58,19 @@ function createObserverFactory() {
 
         return {
 
-            markViewAsRead: function(viewId,propKey) {
+            markViewAsRead: function(viewId, propKey) {
                 _view(viewId).readProps[propsKey] = true;
             },
 
-            markViewAsChanged: function(viewId,propKey) {
+            markViewAsChanged: function(viewId, propKey) {
                 _view(viewId).changedProps[propsKey] = true;
             },
 
-            markTransactionAsRead: function(transactionId,propKey) {
+            markTransactionAsRead: function(transactionId, propKey) {
                 _transaction(transactionId).readProps[propsKey] = true;
             },
 
-            markTransactionAsChanged: function(transactionId,propKey) {
+            markTransactionAsChanged: function(transactionId, propKey) {
                _transaction(transactionId).changedProps[propsKey] = true;
             },
 
