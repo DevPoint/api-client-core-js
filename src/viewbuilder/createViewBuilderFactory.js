@@ -75,8 +75,8 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
                 return view().loadingMetaTotalCount();
             },
 
-            get hash() {
-                return view().hash();
+            get itemsHash() {
+                return view().itemsHash();
             },
 
             get items() {
@@ -200,7 +200,7 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
                 return sortHashes.length ? 'sorts=' + sortHashes.join(',') : '';
             },
 
-            buildHash = function() {
+            buildViewHash = function() {
                 const hashes = [
                     this.buildEagerHash(),
                     this.buildOffsetHash(),

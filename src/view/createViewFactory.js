@@ -20,9 +20,9 @@ function createViewFactory() {
             errors: []
         };
 
-        let _hash = viewBuilder.buildHash();
-
         let _items = [];
+
+        let _itemsHash = '';
 
         return {
 
@@ -80,9 +80,9 @@ function createViewFactory() {
                 return _loadingMeta.totalCount;
             },
 
-            get hash() {
-                viewHandler.markAsRead(viewId, 'hash');
-                return _hash;
+            get itemsHash() {
+                viewHandler.markAsRead(viewId, 'itemsHash');
+                return _itemsHash;
             },
 
             get items() {
@@ -137,17 +137,18 @@ function createViewFactory() {
                 }
             },
 
+            setItemsHash: function(itemsHash) {
+                _itemsHash = itemsHash;
+                viewHandler.markAsChanged(viewId, 'itemsHash');
+            },
+
             setItems: function(items) {
                 _items = items;
                 viewHandler.markAsChanged(viewId, 'items');
             },
 
-            setHash: function(hash) {
-                _hash = hash;
-                viewHandler.markAsChanged(viewId, 'hash');
-            },
-
-            handleLoadingReady: function(items, meta) {
+            handleLoadingReady: function(items, itemsHash, meta) {
+                this.setItemsHash(itemsHash);
                 this.setItems(items);
                 this.setReady(true);
                 this.setOutdated(false);
