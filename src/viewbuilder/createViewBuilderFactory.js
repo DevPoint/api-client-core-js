@@ -1,7 +1,7 @@
 
 function createViewBuilderFactory(filterFactory, sortFactory) {
 
-    const _createBuilder = function(viewHandler, loadingHandler) {
+    const _createBuilder = function(itemType, viewHandler) {
 
         let _view = null;
 
@@ -29,6 +29,44 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
         
         const _getSorts = function() { return _sorts; };
 
+        const _buildEagerHash = function() {
+            return _getEagerType() ? 'eager=' + _getEagerType() : '';
+        };
+
+        const _buildOffsetHash = function() {
+            return _getOffset() ? 'offs=' + _getOffset() : '';
+        };
+
+        const _buildCountHash = function() {
+            return _getCount() ? 'cnt=' + _getCount() : '';
+        };
+
+        const _buildPageSizeHash = function() {
+            return _getPageSize() ? 'psz=' + _getPageSize() : '';
+        };
+
+        const _buildFiltersHash = function() {
+            const filterHashes = _getFilters().map(filter => filter.hash());
+            return filterHashes.length ? 'filters=' + filterHashes.join(',') : '';
+        };
+
+        const _buildSortsHash = function() {
+            const sortHashes = _getSorts().map(sort => sort.hash());
+            return sortHashes.length ? 'sorts=' + sortHashes.join(',') : '';
+        };
+
+        const _buildHash = function() {
+            const hashes = [
+                _buildEagerHash(),
+                _buildOffsetHash(),
+                _buildCountHash(),
+                _buildPageSizeHash(),
+                _buildFiltersHash(),
+                _buildSortsHash()
+            ];
+            return hashes.join('&');
+        };
+
         return {
 
             hasView: function() {
@@ -38,17 +76,22 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
             view: function() {
                 if (!this.hasView())
                 {
-                    _view = viewHandler.createView(loadingHandler, {
+                    _view = viewHandler.createView(itemType, {
                         getEagerType: _getEagerType,
                         getOffset: _getOffset,
                         getCount: _getCount,
                         getPageSize: _getPageSize,
                         getFilters: _getFilters,
-                        getSorts: _getSorts
+                        getSorts: _getSorts,
+                        hash: _buildHash,
                     });
                 }
                 return _view;
             },
+
+            hash: function() {
+                return _buildHash();
+            };
 
             addFilter: function(filter) {
                 if (!this.hasView()) {
