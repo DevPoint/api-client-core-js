@@ -146,9 +146,9 @@ function createObserverFactory() {
                 let changedPropCount = 0;
                 for (let view in _views) {
                     const changedViewPropCount = _changedViewPropCount(view);
+                    changedPropCount += changedViewPropCount;
+                    view.changedProps = {};
                     if (changedViewPropCount) {
-                        view.changedProps = {};
-                        changedPropCount += changedViewPropCount;
                         for (let i = 0; i < view.listeners.length; i++) {
                             view.listeners[i]();
                         }
@@ -156,9 +156,9 @@ function createObserverFactory() {
                 }
                 for (let transaction in _transactions) {
                     const changedTransactionPropCount = _changedTransactionPropCount(transaction);
+                    changedPropCount += changedTransactionPropCount;
+                    transaction.changedProps = {};
                     if (changedTransactionPropCount) {
-                        transaction.changedProps = {};
-                        changedPropCount += changedTransactionPropCount;
                         for (let i = 0; i < transaction.listeners.length; i++) {
                             transaction.listeners[i]();
                         }
