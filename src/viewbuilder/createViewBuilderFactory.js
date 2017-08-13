@@ -32,63 +32,63 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
             },
 
             get viewId() {
-                return view().viewId();
+                return view().viewId;
             },
 
             get ready() {
-                return view().ready();
+                return view().ready;
             },
 
             get outdated() {
-                return view().outdated();
+                return view().outdated;
             },
 
             get itemType() {
-                return viewHandler.itemType();
+                return viewHandler.itemType;
             },
 
             get loading() {
-                return _loading;
+                return view().loading;
             },
 
             get loadingFailed() {
-                return _loadingFailed;
+                return view().loadingFailed;
             },
 
             get loadingMetaOffset() {
-                return view().loadingMetaOffset();
+                return view().loadingMetaOffset;
             },
 
             get loadingMetaCount() {
-                return view().loadingMetaCount();
+                return view().loadingMetaCount;
             },
 
             get loadingMetaPage() {
-                return view().loadingMetaPage();
+                return view().loadingMetaPage;
             },
 
             get loadingMetaPageSize() {
-                return view().loadingMetaPageSize();
+                return view().loadingMetaPageSize;
             },
 
             get loadingMetaTotalCount() {
-                return view().loadingMetaTotalCount();
+                return view().loadingMetaTotalCount;
             },
 
             get itemsHash() {
-                return view().itemsHash();
+                return view().itemsHash;
             },
 
             get items() {
-                return view().items();
+                return view().items;
             },
 
             get first() {
-                return view().first();
+                return view().first;
             },
 
             get last() {
-                return view().last();
+                return view().last;
             },
 
             get eagerType() { 
