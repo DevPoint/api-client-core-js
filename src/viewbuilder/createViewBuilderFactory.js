@@ -15,7 +15,7 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
 
         const _sorts = [];
 
-        let _locked = true;
+        let _locked = false;
 
         return {
 
