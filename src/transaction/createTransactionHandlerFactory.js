@@ -46,6 +46,22 @@ function createTransactionHandlerFactory() {
                 return _transactions[transactionId];
             },
 
+            createLogin: function(itemType, credentials) {
+                const transactionId = _nextTransactionId(itemType, 'login');
+                _transactions[transactionId] = transactionFactory
+                    .createLoginTransaction(
+                        transactionId, itemType, credentials, this);
+                return _transactions[transactionId];
+            },
+
+            createRegister: function(itemType, credentials) {
+                const transactionId = _nextTransactionId(itemType, 'register');
+                _transactions[transactionId] = transactionFactory
+                    .createRegisterTransaction(
+                        transactionId, itemType, credentials, this);
+                return _transactions[transactionId];
+            },
+
             start: function(transaction) {
                 transactionClient.start(transaction);
                 return this;
