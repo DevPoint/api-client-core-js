@@ -15,6 +15,8 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
 
         const _sorts = [];
 
+        let _locked = true;
+
         return {
 
             get itemType() {
@@ -46,7 +48,7 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
             },
 
             addFilter: function(filter) {
-                if (!this.viewExists) {
+                if (!_locked) {
                     _filters[] = filter;
                 }
                 return this;
@@ -69,7 +71,7 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
             },
 
             addSort: function(sort) {
-                if (!this.viewExists) {
+                if (!_locked) {
                     _sorts[] = sort;
                 }
                 return this;
@@ -80,14 +82,14 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
             },
 
             setEagerType: function(eagerType) {
-                if (!this.viewExists) {
+                if (!_locked) {
                     _eagerType = eagerType;
                 }
                 return this;
             },
 
             setPagination: function(page, pageSize) {
-                if (!this.viewExists) {
+                if (!_locked) {
                     _offset = (page * pageSize) - pageSize;
                     _count = pageSize;
                     _pageSize = pageSize;
@@ -96,7 +98,7 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
             },
 
             setLimit: function(offset, count) {
-                if (!this.viewExists) {
+                if (!_locked) {
                     _offset = offset;
                     _count = count;
                     _pageSize = 0;
@@ -142,8 +144,10 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
                 return hashes.join('&');
             },
 
-            build: function() {
-                return viewHandler.createView(this);
+            view: function() {
+                const view = return viewHandler.createView(this);
+                _locked = true;
+                return view;
             }
         }
     }
