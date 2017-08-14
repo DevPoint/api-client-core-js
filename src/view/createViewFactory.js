@@ -34,7 +34,7 @@ function createViewFactory() {
 
         const _markAsChanged = function(propKey) {
             if (_observer !== null) {
-                _observer._markAsChanged(propKey);
+                _observer.markAsChanged(propKey);
             }
         };
 
