@@ -53,7 +53,14 @@ function createObserverFactory() {
             },
 
             changed: function() {
-                return (Object.keys(_changedProps).length > 0);
+                let changed = false;
+                for (let propsKey in _changedProps) {
+                    if (_readProps.hasOwnProperty(propsKey)) {
+                        changed = true;
+                        break;
+                    }
+                }
+                return changed;
             },
 
             clearAllChanges: function() {
