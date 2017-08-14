@@ -216,9 +216,9 @@ function createViewFactory() {
             addObserverListener: function(listener) {
                 if (!this.observed) {
                     _observer = viewHandler.createObserver();
-                    _markAsChanged(transactionId, 'observer');
                 }
                 this.observer.addListener(listener);
+                _markAsChanged('observer');
                 return this;
             },
 
@@ -227,8 +227,8 @@ function createViewFactory() {
                     this.observer.removeListener(listener);
                     if (this.observer.listeners.length == 0) {
                         _observer = null;
-                        _markAsChanged(transactionId, 'observer');
                     }
+                    _markAsChanged('observer');
                 }
                 return this;
             }

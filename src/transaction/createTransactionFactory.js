@@ -170,21 +170,21 @@ function createTransactionFactory() {
             },
 
             addObserverListener: function(listener) {
-                if (!this.hasObserver) {
+                if (!this.observed) {
                     _observer = transactionHandler.createObserver();
-                    _markAsChanged('observer');
                 }
                 this.observer.addListener(listener);
+                _markAsChanged('observer');
                 return this;
             },
 
             removeObserverListener: function(listener) {
-                if (this.hasObserver) {
+                if (this.observed) {
                     this.observer.removeListener(listener);
                     if (this.observer.listeners.length == 0) {
                         _observer = null;
-                        _markAsChanged('observer');
                     }
+                    _markAsChanged('observer');
                 }
                 return this;
             }
