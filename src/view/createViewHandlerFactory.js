@@ -13,7 +13,8 @@ function createViewHandlerFactory() {
 
             getViewByBuilder: function(viewBuilder) {
                 const viewId = viewBuilder.itemType + '-' + viewBuilder->buildHash();
-                if (!_viewExists(viewId)) {
+                if (!_viewExists(viewId))
+                {
                     _views[viewId] = viewFactory.createView(viewId, viewBuilder, this);
                 }
                 return _views[viewId];
@@ -25,7 +26,7 @@ function createViewHandlerFactory() {
 
             loadView: function(viewId) {
                 if (_viewExists(viewId)) {
-                    //_views[viewId].handleLoadingInit(); => should be moved inside loading client
+                    //_views[viewId].handleLoadingStart(); => should be moved inside loading client
                     loadingClient.load(_views[viewId]);
                 }
                 return this;

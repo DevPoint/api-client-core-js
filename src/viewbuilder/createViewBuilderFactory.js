@@ -144,10 +144,9 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
                 return hashes.join('&');
             },
 
-            view: function() {
-                const view = return viewHandler.createView(this);
+            get: function() {
                 _locked = true;
-                return view;
+                return viewHandler.getViewByBuilder(this);
             }
         }
     }
