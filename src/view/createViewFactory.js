@@ -185,43 +185,43 @@ function createViewFactory() {
             },
 
             handleLoadingReady: function(items, itemsHash, meta) {
-                this.setItemsHash(itemsHash);
-                this.setItems(items);
-                this.setReady(true);
-                this.setOutdated(false);
-                this.setLoading(false);
-                this.setLoadingFailed(false);
-                this.updateLoadingMeta({
-                    eagerType: meta.eagerType,
-                    offset: meta.offset,
-                    count: meta.count,
-                    pageSize: meta.pageSize,
-                    totalCount: meta.totalCount,
-                    errors: []
-                });
+                this.setItemsHash(itemsHash)
+                    .setItems(items)
+                    .setReady(true)
+                    .setOutdated(false)
+                    .setLoading(false)
+                    .setLoadingFailed(false)
+                    .updateLoadingMeta({
+                        eagerType: meta.eagerType,
+                        offset: meta.offset,
+                        count: meta.count,
+                        pageSize: meta.pageSize,
+                        totalCount: meta.totalCount,
+                        errors: []
+                    });
             },
 
             handleLoadingCanceled: function() {
-                this.setLoading(false);
-                this.setLoadingFailed(false);
+                this.setLoading(false)
+                    .setLoadingFailed(false);
             },
 
             handleLoadingFailed: function(errors) {
                 this.setLoading(false);
-                this.setLoadingFailed(true);
-                this.updateLoadingMeta({
-                    totalCount: 0,
-                    errors: errors.slice(0)
-                });
+                    .setLoadingFailed(true)
+                    .updateLoadingMeta({
+                        totalCount: 0,
+                        errors: errors.slice(0)
+                    });
             },
 
             load: function() {
-                this.setLoading(true);
-                this.setLoadingFailed(false);
-                this.updateLoadingMeta({
-                    totalCount: 0,
-                    errors: []
-                });
+                this.setLoading(true)
+                    .setLoadingFailed(false)
+                    .updateLoadingMeta({
+                        totalCount: 0,
+                        errors: []
+                    });
                 viewHandler.load(viewBuilder, this);
                 return this;
             },

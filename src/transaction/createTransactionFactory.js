@@ -133,24 +133,24 @@ function createTransactionFactory() {
             },
 
             handleTransactionReady: function() {
-                this.setReady(true);
-                this.setProcessing(false);
-                this.setFailed(false);
-                this.setErrors([]);
-                this.setValidationErrors(null);
+                this.setReady(true)
+                    .setProcessing(false)
+                    .setFailed(false)
+                    .setErrors([])
+                    .setValidationErrors(null);
             },
 
             handleTransactionCanceled: function() {
-                this.setReady(false);
-                this.setProcessing(false);
-                this.setFailed(false);
+                this.setReady(false)
+                    .setProcessing(false)
+                    .setFailed(false);
             },
 
             handleTransactionFailed: function(errors, meta) {
-                this.setReady(true);
-                this.setProcessing(false);
-                this.setFailed(true);
-                this.setErrors(errors.slice(0));
+                this.setReady(true)
+                    .setProcessing(false)
+                    .setFailed(true);
+                    .setErrors(errors.slice(0));
                 if (meta.hasOwnProperty('validationErrors')) {
                     const validationErrors = {};
                     for (var key in meta.validationErrors) {
@@ -162,11 +162,11 @@ function createTransactionFactory() {
 
             start: function() {
                 if (!this.processing) {
-                    this.setReady(false);
-                    this.setProcessing(true);
-                    this.setFailed(false);
-                    this.setErrors([]);
-                    this.setValidationErrors(null);
+                    this.setReady(false)
+                        .setProcessing(true)
+                        .setFailed(false)
+                        .setErrors([])
+                        .setValidationErrors(null);
                     transactionHandler.start(this);
                 }
                 return this;
