@@ -135,7 +135,6 @@ function createViewFactory() {
             setReady: function(ready) {
                 _ready = ready;
                 _markAsChanged('ready');
-
             },
 
             setOutdated: function(outdated) {
@@ -155,9 +154,9 @@ function createViewFactory() {
 
             updateLoadingMeta: function(loadingMeta) {
                 for (let propKey in loadingMeta) {
-                    const viewHandlerPropKey = 'loadingMeta' + propKey.charAt(0).toUpperCase() + propKey.slice(1);
+                    const viewPropKey = 'loadingMeta' + propKey.charAt(0).toUpperCase() + propKey.slice(1);
                     _loadingMeta[propKey] = loadingMeta[propKey];
-                    _markAsChanged(viewId, viewHandlerPropKey);
+                    _markAsChanged(viewPropKey);
                 }
             },
 
