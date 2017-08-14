@@ -132,6 +132,14 @@ function createTransactionFactory() {
                 return this;
             },
 
+            handleTransactionStart: function() {
+                this.setReady(false)
+                    .setProcessing(true)
+                    .setFailed(false)
+                    .setErrors([])
+                    .setValidationErrors(null);
+            },
+
             handleTransactionReady: function() {
                 this.setReady(true)
                     .setProcessing(false)
@@ -162,11 +170,6 @@ function createTransactionFactory() {
 
             start: function() {
                 if (!this.processing) {
-                    this.setReady(false)
-                        .setProcessing(true)
-                        .setFailed(false)
-                        .setErrors([])
-                        .setValidationErrors(null);
                     transactionHandler.start(this);
                 }
                 return this;
