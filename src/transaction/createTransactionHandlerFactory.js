@@ -1,7 +1,7 @@
 
 function createTransactionHandlerFactory() {
 
-    const _createTransactionHandler = function(transactionFactory, observerHandler, transactionClient) {
+    const _createTransactionHandler = function(transactionFactory, observerFactory, transactionClient) {
 
         const _transactions = {};
 
@@ -22,44 +22,77 @@ function createTransactionHandlerFactory() {
 
         return {
 
-            createInsert: function(itemType, data) {
+            get changedObserversListeners() {
+                const chancedListeners = [];
+                for (let itemType in _transactions) {
+                    for (let transactionId in _transactions[itemType]) {
+                        const transaction = _transactions[itemType][transactionId];
+                        if (transaction.observed && transaction.observer.changed()) {
+                            chancedListeners = chancedListeners.concat(
+                                transaction.observer.listeners);
+                        }
+                    }
+                }
+                return chancedListeners;
+            },
+
+            registerTransaction: function(transaction) {
+                const transactionId = transaction.transactionId;
+                const itemType = transaction.itemType;
+                _transactions[itemType][transactionId] = transaction;
+                return this;
+            },
+
+            unregisterTransaction: function(transaction) {
+                const transactionId = transaction.transactionId;
+                const itemType = transaction.itemType;
+                if (_transactions.hasOwnProperty(itemType)) {
+                    delete _transactions[itemType][transactionId];
+                }
+            },
+
+            getRegisteredTransaction: function(itemType, transactionId) {
+                let transaction = undefined;
+                if (_transactions.hasOwnProperty(itemType)) {
+                    if (_transactions[itemType][transactionId].hasOwnProperty(itemType)) {
+                        transaction = _transactions[itemType][transactionId];
+                    }
+                }
+                return transaction;
+            },
+
+            createInsertTransaction: function(itemType, data) {
                 const transactionId = _nextTransactionId(itemType, 'insert');
-                _transactions[transactionId] = transactionFactory
-                    .createInsertTransaction(
+                return transactionFactory.createInsertTransaction(
                         transactionId, itemType, data, this);
-                return _transactions[transactionId];
             },
 
-            createUpdate: function(itemType, data) {
+            createUpdateTransaction: function(itemType, data) {
                 const transactionId = _nextTransactionId(itemType, 'update');
-                _transactions[transactionId] = transactionFactory
-                    .createUpdateTransaction(
+                return transactionFactory.createUpdateTransaction(
                         transactionId, itemType, data, this);
-                return _transactions[transactionId];
             },
 
-            createDelete: function(itemType, dataId) {
+            createDeleteTransaction: function(itemType, dataId) {
                 const transactionId = _nextTransactionId(itemType, 'delete');
-                _transactions[transactionId] = transactionFactory
-                    .createDeleteTransaction(
+                return transactionFactory.createDeleteTransaction(
                         transactionId, itemType, dataId, this);
-                return _transactions[transactionId];
             },
 
-            createLogin: function(itemType, credentials) {
+            createLoginTransaction: function(itemType, credentials) {
                 const transactionId = _nextTransactionId(itemType, 'login');
-                _transactions[transactionId] = transactionFactory
-                    .createLoginTransaction(
+                return transactionFactory.createLoginTransaction(
                         transactionId, itemType, credentials, this);
-                return _transactions[transactionId];
             },
 
             createRegister: function(itemType, credentials) {
                 const transactionId = _nextTransactionId(itemType, 'register');
-                _transactions[transactionId] = transactionFactory
-                    .createRegisterTransaction(
+                return transactionFactory.createRegisterTransaction(
                         transactionId, itemType, credentials, this);
-                return _transactions[transactionId];
+            },
+
+            createObserver: function() {
+                return observerFactory.createTransactionObjserver();
             },
 
             start: function(transaction) {
@@ -72,13 +105,15 @@ function createTransactionHandlerFactory() {
                 return this;
             },
 
-            markAsRead: function(transactionId, propKey) {
-                observerHandler.markTransactionAsRead(transactionId, propKey);
-                return this;
-            },
-
-            markAsChanged: function(transactionId, propKey) {
-                observerHandler.markTransactionAsChanged(transactionId, propKey);
+            clearAllObserverChanges: function() {
+                for (let itemType in _transactions) {
+                    for (let transactionId in _transactions[itemType]) {
+                        const transaction = _transactions[itemType][transactionId];
+                        if (transaction.observed) {
+                            transaction.observer.clearAllChanges();
+                        }
+                    }
+                }
                 return this;
             }
         }

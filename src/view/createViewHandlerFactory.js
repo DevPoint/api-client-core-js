@@ -1,7 +1,7 @@
 
 function createViewHandlerFactory() {
 
-    const _createViewHandler = function(viewFactory, observerHandler, loadingClient) {
+    const _createViewHandler = function(viewFactory, observerFactory, loadingClient) {
 
         const _views = {};
 
@@ -11,6 +11,18 @@ function createViewHandlerFactory() {
 
         return {
 
+            get changedObserversListeners() {
+                const chancedListeners = [];
+                for (let viewId in _views) {
+                    const view = _views[viewId];
+                    if (view.observed && view.observer.changed()) {
+                        chancedListeners = chancedListeners.concat(
+                            view.observer.listeners);
+                    }
+                }
+                return chancedListeners;
+            },
+
             create: function(itemType, viewBuilder) {
                 const viewId = viewBuilder->buildHash() + '@view';
                 if (!_hasView(viewId)) {
@@ -19,18 +31,22 @@ function createViewHandlerFactory() {
                 return _views[viewId];
             },
 
+            createObserver: function() {
+                return observerFactory.createViewObjserver();
+            },
+
+            clearAllObserverChanges: function() {
+                for (let viewId in _views) {
+                    const view = _views[viewId];
+                    if (view.observed) {
+                        view.observer.clearAllChanges();
+                    }
+                }
+                return this;
+            },
+
             load: function(viewBuilder, view) {
                 loadingClient.load(viewBuilder, view);
-                return this;
-            },
-
-            markAsRead: function(viewId, propKey) {
-                observerHandler.markViewAsRead(viewId, propKey);
-                return this;
-            },
-
-            markAsChanged: function(viewId, propKey) {
-                observerHandler.markViewAsChanged(viewId, propKey);
                 return this;
             }
         }

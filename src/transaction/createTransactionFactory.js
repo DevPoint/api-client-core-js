@@ -21,81 +21,105 @@ function createTransactionFactory() {
 
         let _validationErrors = null;
 
+        let _observer = null;
+
+        const _markAsRead = function(propKey) {
+            if (_observer !== null) {
+                _observer.markAsRead(propKey);
+            }
+        };
+
+        const _markAsChanged = function(propKey) {
+            if (_observer !== null) {
+                _observer._markAsChanged(propKey);
+            }
+        };
+
         return {
 
             get transactionId() {
-                transactionHandler.markAsRead(transactionId, 'transactionId');
+                _markAsRead('transactionId');
                 return transactionId;
             },
 
             get itemType() {
-                transactionHandler.markAsRead(transactionId, 'itemType');
+                _markAsRead('itemType');
                 return itemType;
             },
 
             get type() {
-                transactionHandler.markAsRead(transactionId, 'type');
+                _markAsRead('type');
                 return type;
             },
 
             get ready() {
-                transactionHandler.markAsRead(transactionId, 'ready');
+                _markAsRead('ready');
                 return _ready;
             },
 
             get processing() {
-                transactionHandler.markAsRead(transactionId, 'processing');
+                _markAsRead('processing');
                 return _processing;
             },
 
             get failed() {
-                transactionHandler.markAsRead(transactionId, 'failed');
+                _markAsRead('failed');
                 return _failed;
             },
 
             get hasErrors() {
-                transactionHandler.markAsRead(transactionId, 'hasErrors');
+                _markAsRead('hasErrors');
                 return (this.errors.length > 0);
             },
 
             get errors() {
-                transactionHandler.markAsRead(transactionId, 'errors');
+                _markAsRead('errors');
                 return _errors;
             },
 
             get hasValidationErrors() {
-                transactionHandler.markAsRead(transactionId, 'hasValidationErrors');
+                _markAsRead('hasValidationErrors');
                 return (Object.keys(this.validationErrors).length > 0);
             },
 
             get validationErrors() {
-                transactionHandler.markAsRead(transactionId, 'validationErrors');
+                _markAsRead('validationErrors');
                 return _validationErrors;
+            },
+
+            get observed() {
+                _markAsRead('observed');
+                return this.observer !== null;
+            },
+
+            get observer() {
+                _markAsRead('observer');
+                return _observer;
             },
 
             setReady: function(ready) {
                 _ready = ready;
-                transactionHandler.markAsChanged(transactionId, 'ready');
+                _markAsChanged('ready');
             },
 
             setProcessing: function(processing) {
                 _processing = processing;
-                transactionHandler.markAsChanged(transactionId, 'processing');
+                _markAsChanged('processing');
             },
 
             setFailed: function(failed) {
                 _failed = failed;
-                transactionHandler.markAsChanged(transactionId, 'failed');
+                _markAsChanged('failed');
             },
 
             setErrors: function(errors) {
                 _errors = errors;
-                transactionHandler.markAsChanged(transactionId, 'errors');
+                _markAsChanged('errors');
             },
 
             setValidationErrors: function(errors) {
                 _validationErrors = validationErrors;
-                transactionHandler.markAsChanged(transactionId, 'validationErrors');
+                _markAsChanged('validationErrors');
             },
 
             handleTransactionReady: function() {
@@ -143,6 +167,26 @@ function createTransactionFactory() {
                     transactionHandler.cancel(this);
                 }
                 return this;
+            },
+
+            addObserverListener: function(listener) {
+                if (!this.hasObserver) {
+                    _observer = transactionHandler.createObserver();
+                    _markAsChanged('observer');
+                }
+                this.observer.addListener(listener);
+                return this;
+            },
+
+            removeObserverListener: function(listener) {
+                if (this.hasObserver) {
+                    this.observer.removeListener(listener);
+                    if (this.observer.listeners.length == 0) {
+                        _observer = null;
+                        _markAsChanged('observer');
+                    }
+                }
+                return this;
             }
         };
     };
@@ -158,7 +202,7 @@ function createTransactionFactory() {
         const expand = {
 
             get data() {
-                transactionHandler.markAsRead(transactionId, 'data');
+                _markAsRead('data');
                 return _data;
             }
         };
@@ -181,7 +225,7 @@ function createTransactionFactory() {
         const expand = {
 
             get data() {
-                transactionHandler.markAsRead(transactionId, 'data');
+                _markAsRead('data');
                 return _data;
             }
         };
@@ -202,7 +246,7 @@ function createTransactionFactory() {
         const expand = {
 
             get dataId() {
-                transactionHandler.markAsRead(transactionId, 'dataId');
+                _markAsRead('dataId');
                 return dataId;
             }
         };
@@ -225,7 +269,7 @@ function createTransactionFactory() {
         const expand = {
 
             get credentials() {
-                transactionHandler.markAsRead(transactionId, 'credentials');
+                _markAsRead('credentials');
                 return _credentials;
             }
         };
@@ -248,7 +292,7 @@ function createTransactionFactory() {
         const expand = {
 
             get credentials() {
-                transactionHandler.markAsRead(transactionId, 'credentials');
+                _markAsRead('credentials');
                 return _credentials;
             }
         };

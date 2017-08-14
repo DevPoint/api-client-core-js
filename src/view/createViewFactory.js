@@ -24,45 +24,59 @@ function createViewFactory() {
 
         let _itemsHash = '';
 
+        let _observer = null;
+
+        const _markAsRead = function(propKey) {
+            if (_observer !== null) {
+                _observer.markAsRead(propKey);
+            }
+        };
+
+        const _markAsChanged = function(propKey) {
+            if (_observer !== null) {
+                _observer._markAsChanged(propKey);
+            }
+        };
+
         return {
 
             get viewId() {
-                viewHandler.markAsRead(viewId, 'viewId');
+                _markAsRead('viewId');
                 return viewId;
             },
 
             get itemType() {
-                viewHandler.markAsRead(viewId, 'itemType');
+                _markAsRead('itemType');
                 return itemType;
             },
 
             get ready() {
-                viewHandler.markAsRead(viewId, 'ready');
+                _markAsRead('ready');
                 return _ready;
             },
 
             get outdated() {
-                viewHandler.markAsRead(viewId, 'outdated');
+                _markAsRead('outdated');
                 return _outdated;
             },
 
             get loading() {
-                viewHandler.markAsRead(viewId, 'loading');
+                _markAsRead('loading');
                 return _loading;
             },
 
             get loadingFailed() {
-                viewHandler.markAsRead(viewId, 'loadingFailed');
+                _markAsRead('loadingFailed');
                 return _loadingFailed;
             },
 
             get loadingMetaOffset() {
-                viewHandler.markAsRead(viewId, 'loadingMetaOffset');
+                _markAsRead('loadingMetaOffset');
                 return _loadingMeta.offset;
             },
 
             get loadingMetaCount() {
-                viewHandler.markAsRead(viewId, 'loadingMetaCount');
+                _markAsRead('loadingMetaCount');
                 return _loadingMeta.count;
             },
 
@@ -71,80 +85,90 @@ function createViewFactory() {
             },
 
             get loadingMetaPage() {
-                viewHandler.markAsRead(viewId, 'loadingMetaPage');
+                _markAsRead('loadingMetaPage');
                 return this.loadingMetaPageSize ? (this.loadingMetaCount / this.loadingMetaPageSize + 1) : 0;
             },
 
             get loadingMetaTotalCount() {
-                viewHandler.markAsRead(viewId, 'loadingMetaTotalCount');
+                _markAsRead('loadingMetaTotalCount');
                 return _loadingMeta.totalCount;
             },
 
             get itemsHash() {
-                viewHandler.markAsRead(viewId, 'itemsHash');
+                _markAsRead('itemsHash');
                 return _itemsHash;
             },
 
             get items() {
-                viewHandler.markAsRead(viewId, 'items');
+                _markAsRead('items');
                 return _items;
             },
 
             get item() {
-                viewHandler.markAsRead(viewId, 'item');
-                viewHandler.markAsRead(viewId, 'items');
+                _markAsRead('item');
+                _markAsRead('items');
                 return _items && _items.length == 1 ? _items[0] : null;
             },
 
             get first() {
-                viewHandler.markAsRead(viewId, 'first');
-                viewHandler.markAsRead(viewId, 'items');
+                _markAsRead('first');
+                _markAsRead('items');
                 return _items && _items.length ? _items[0] : null;
             },
 
             get last() {
-                viewHandler.markAsRead(viewId, 'last');
-                viewHandler.markAsRead(viewId, 'items');
+                _markAsRead('last');
+                _markAsRead('items');
                 return _items && _items.length ? _items[_items.length-1] : null;
+            },
+
+            get observed() {
+                _markAsRead(transactionId, 'observed');
+                return this.observer !== null;
+            },
+
+            get observer() {
+                _markAsRead(transactionId, 'observer');
+                return _observer;
             },
 
             setReady: function(ready) {
                 _ready = ready;
-                viewHandler.markAsChanged(viewId, 'ready');
+                _markAsChanged('ready');
 
             },
 
             setOutdated: function(outdated) {
                 _outdated = outdated;
-                viewHandler.markAsChanged(viewId, 'outdated');
+                _markAsChanged('outdated');
             },
 
             setLoading: function(loading) {
                 _loading = loading;
-                viewHandler.markAsChanged(viewId, 'loading');
+                _markAsChanged('loading');
             },
 
             setLoadingFailed: function(loadingFailed) {
                 _loadingFailed = loadingFailed;
-                viewHandler.markAsChanged(viewId, 'loadingFailed');
+                _markAsChanged('loadingFailed');
             },
 
             updateLoadingMeta: function(loadingMeta) {
                 for (let propKey in loadingMeta) {
                     const viewHandlerPropKey = 'loadingMeta' + propKey.charAt(0).toUpperCase() + propKey.slice(1);
                     _loadingMeta[propKey] = loadingMeta[propKey];
-                    viewHandler.markAsChanged(viewId, viewHandlerPropKey);
+                    _markAsChanged(viewId, viewHandlerPropKey);
                 }
             },
 
             setItemsHash: function(itemsHash) {
                 _itemsHash = itemsHash;
-                viewHandler.markAsChanged(viewId, 'itemsHash');
+                _markAsChanged('itemsHash');
             },
 
             setItems: function(items) {
                 _items = items;
-                viewHandler.markAsChanged(viewId, 'items');
+                _markAsChanged('items');
             },
 
             handleLoadingReady: function(items, itemsHash, meta) {
@@ -186,6 +210,26 @@ function createViewFactory() {
                     errors: []
                 });
                 viewHandler.load(viewBuilder, this);
+                return this;
+            },
+
+            addObserverListener: function(listener) {
+                if (!this.observed) {
+                    _observer = viewHandler.createObserver();
+                    _markAsChanged(transactionId, 'observer');
+                }
+                this.observer.addListener(listener);
+                return this;
+            },
+
+            removeObserverListener: function(listener) {
+                if (this.observed) {
+                    this.observer.removeListener(listener);
+                    if (this.observer.listeners.length == 0) {
+                        _observer = null;
+                        _markAsChanged(transactionId, 'observer');
+                    }
+                }
                 return this;
             }
         }

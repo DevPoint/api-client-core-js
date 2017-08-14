@@ -42,7 +42,7 @@ function createObserverFactory() {
                 return this;
             },
 
-            clearAllRead: function() {
+            clearAllReads: function() {
                 _readProps = {};
                 return this;
             }
@@ -56,22 +56,19 @@ function createObserverFactory() {
                 return (Object.keys(_changedProps).length > 0);
             },
 
-            clearAllChanged: function() {
+            clearAllChanges: function() {
                 _changedProps = {};
                 return this;
             }
         }
     }
 
-    _createViewObserver: function(viewId) {
+    _createViewObserver: function() {
 
         const self = _createBaseObserver('view');
 
         const expand = {
 
-            get viewId() {
-                return viewId;
-            }
         };
 
         for (let expandPropKey in expand) {
@@ -81,16 +78,9 @@ function createObserverFactory() {
         return self;
     };
 
-    _createTransactionObserver: function(transactionId) {
+    _createTransactionObserver: function() {
 
         const self = _createBaseObserver('transaction');
-
-        const expand = {
-
-            get transactionId() {
-                return transactionId;
-            }
-        };
 
         for (let expandPropKey in expand) {
             self[expandPropKey] = expand[expandPropKey];
