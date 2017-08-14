@@ -145,7 +145,6 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
             },
 
             get: function() {
-                _locked = true;
                 return viewHandler.getViewByBuilder(this);
             }
         }

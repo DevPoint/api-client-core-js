@@ -75,10 +75,6 @@ function createTransactionHandlerFactory() {
                 }
             },
 
-            createObserver: function() {
-                return observerFactory.createTransactionObserver();
-            },
-
             start: function(transaction) {
                 //_transaction.handleTransactionStart(); => should be moved inside transcation client
                 transactionClient.start(transaction);
@@ -88,6 +84,10 @@ function createTransactionHandlerFactory() {
             cancel: function(transaction) {
                 transactionClient.cancel(transaction);
                 return this;
+            },
+
+            createObserver: function() {
+                return observerFactory.createTransactionObserver();
             },
 
             get listenersToDispatchChanged() {
