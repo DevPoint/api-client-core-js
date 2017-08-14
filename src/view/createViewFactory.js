@@ -52,8 +52,8 @@ function createViewFactory() {
                 return viewId;
             },
 
-            get builder() {
-                _markAsRead('builder');
+            get viewBuilder() {
+                _markAsRead('viewBuilder');
                 return viewBuilder;
             }
 
@@ -191,7 +191,7 @@ function createViewFactory() {
                 return this;
             },
 
-            handleLoadingInit: function() {
+            handleLoadingStart: function() {
                 this.setLoading(true)
                     .setLoadingFailed(false)
                     .updateLoadingMeta({
