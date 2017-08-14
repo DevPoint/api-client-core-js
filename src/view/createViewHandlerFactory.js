@@ -16,14 +16,12 @@ function createViewHandlerFactory() {
             },
 
             registerView: function(view) {
-                const viewId = view.viewId;
-                _views[viewId] = view;
+                _views[view.viewId] = view;
                 return this;
             },
 
             unregisterView: function(view) {
-                const viewId = view.viewId;
-                delete _views[viewId];
+                delete _views[view.viewId];
             },
 
             createView: function(itemType, viewBuilder) {

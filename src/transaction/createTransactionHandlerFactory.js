@@ -29,17 +29,18 @@ function createTransactionHandlerFactory() {
             },
 
             registerTransaction: function(transaction) {
-                const transactionId = transaction.transactionId;
                 const itemType = transaction.itemType;
-                _transactions[itemType][transactionId] = transaction;
+                if (!_transactions.hasOwnProperty(itemType))) {
+                    _transactions[itemType] = {};
+                }
+                _transactions[itemType][transaction.transactionId] = transaction;
                 return this;
             },
 
             unregisterTransaction: function(transaction) {
-                const transactionId = transaction.transactionId;
                 const itemType = transaction.itemType;
                 if (_transactions.hasOwnProperty(itemType)) {
-                    delete _transactions[itemType][transactionId];
+                    delete _transactions[itemType][transaction.transactionId];
                 }
             },
 
