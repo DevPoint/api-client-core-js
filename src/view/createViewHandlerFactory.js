@@ -25,7 +25,7 @@ function createViewHandlerFactory() {
             },
 
             createView: function(itemType, viewBuilder) {
-                const viewId = viewBuilder->buildHash() + '@view';
+                const viewId = itemType + '-' + viewBuilder->buildHash();
                 return viewFactory.createView(viewId, itemType, viewBuilder, this);
             },
 
