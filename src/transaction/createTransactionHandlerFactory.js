@@ -35,7 +35,7 @@ function createTransactionHandlerFactory() {
 
             hasRegisteredTransaction: function(itemType, transactionId) {
                 return (_transactions.hasOwnProperty(itemType) &&
-                    _transactions[itemType][transactionId].hasOwnProperty(itemType));
+                    _transactions[itemType].hasOwnProperty(transactionId));
             },
 
             getRegisteredTransaction: function(itemType, transactionId) {
