@@ -23,10 +23,6 @@ function createObserverFactory() {
                 return _listeners;
             },
 
-            get changed() {
-                return (Object.keys(_changedProps).length > 0);
-            },
-
             addListener: function(listener) {
                 const listenerIndex = _listenerIndex(listener);
                 if (listenerIndex < 0) {
@@ -54,6 +50,10 @@ function createObserverFactory() {
             markAsChanged: function(propKey) {
                 _changedProps[propsKey] = true;
                 return this;
+            },
+
+            changed: function() {
+                return (Object.keys(_changedProps).length > 0);
             },
 
             clearAllChanged: function() {
