@@ -7,11 +7,11 @@ function createViewHandlerFactory() {
 
         return {
 
-            hasRegisteredView: function(viewId) {
+            hasView: function(viewId) {
                 return (_views.hasOwnProperty(viewId));
             },
 
-            getRegisteredView: function(viewId) {
+            getView: function(viewId) {
                 return this.hasRegisteredView(viedId) ? _view[viewId] : undefined;
             },
 

@@ -18,12 +18,12 @@ function createTransactionHandlerFactory() {
 
         return {
 
-            hasRegisteredTransaction: function(itemType, transactionId) {
+            hasTransaction: function(itemType, transactionId) {
                 return (_transactions.hasOwnProperty(itemType) &&
                     _transactions[itemType].hasOwnProperty(transactionId));
             },
 
-            getRegisteredTransaction: function(itemType, transactionId) {
+            getTransaction: function(itemType, transactionId) {
                 return this.hasRegisteredTransaction() 
                     ? _transactions[itemType][transactionId] : undefined;
             },
