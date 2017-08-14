@@ -90,18 +90,22 @@ function createTransactionHandlerFactory() {
 
             get listenersToDispatchChanged() {
                 const listeners = [];
-                for (let viewId in _views) {
-                    const view = _views[viewId];
-                    if (view.changed()) {
-                        listeners = listeners.concat(view.listeners);
+                for (let itemType in _transactions) {
+                    for (let transactionId in _transactions[itemType]) {
+                        const transaction = _transactions[itemType][transactionId];
+                        if (transaction.changed()) {
+                            listeners = listeners.concat(transaction.listeners);
+                        }
                     }
                 }
                 return listeners;
             },
 
             clearAllChanges: function() {
-                for (let viewId in _views) {
-                    _views[viewId].clearAllChanges();
+                for (let itemType in _transactions) {
+                    for (let transactionId in _transactions[itemType]) {
+                        _transactions[itemType][transactionId].clearAllChanges();
+                    }
                 }
                 return this;
             }
