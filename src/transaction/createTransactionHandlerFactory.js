@@ -22,20 +22,6 @@ function createTransactionHandlerFactory() {
 
         return {
 
-            get changedObserversListeners() {
-                const chancedListeners = [];
-                for (let itemType in _transactions) {
-                    for (let transactionId in _transactions[itemType]) {
-                        const transaction = _transactions[itemType][transactionId];
-                        if (transaction.observed && transaction.observer.changed()) {
-                            chancedListeners = chancedListeners.concat(
-                                transaction.observer.listeners);
-                        }
-                    }
-                }
-                return chancedListeners;
-            },
-
             registerTransaction: function(transaction) {
                 const transactionId = transaction.transactionId;
                 const itemType = transaction.itemType;
@@ -103,6 +89,19 @@ function createTransactionHandlerFactory() {
             cancel: function(transaction) {
                 transactionClient.cancel(transaction);
                 return this;
+            },
+
+            get changedObserversListeners() {
+                const listeners = [];
+                for (let itemType in _transactions) {
+                    for (let transactionId in _transactions[itemType]) {
+                        const transaction = _transactions[itemType][transactionId];
+                        if (transaction.observed && transaction.observer.changed()) {
+                            listeners = listeners.concat(transaction.observer.listeners);
+                        }
+                    }
+                }
+                return listeners;
             },
 
             clearAllObserverChanges: function() {
