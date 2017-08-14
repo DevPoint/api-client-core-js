@@ -75,7 +75,7 @@ function createTransactionHandlerFactory() {
             },
 
             createObserver: function() {
-                return observerFactory.createTransactionObjserver();
+                return observerFactory.createTransactionObserver();
             },
 
             start: function(transaction) {

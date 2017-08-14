@@ -30,7 +30,7 @@ function createViewHandlerFactory() {
             },
 
             createObserver: function() {
-                return observerFactory.createViewObjserver();
+                return observerFactory.createViewObserver();
             },
 
             load: function(viewBuilder, view) {
