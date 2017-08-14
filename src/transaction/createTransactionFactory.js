@@ -197,7 +197,7 @@ function createTransactionFactory() {
             },
 
             clearAllChances: function() {
-                if (!this.observed) {
+                if (this.observed) {
                     _observer.clearAllChances();
                     _markAsChanged('_changed');
                 }
