@@ -80,6 +80,7 @@ function createTransactionHandlerFactory() {
             },
 
             start: function(transaction) {
+                //_transaction.handleTransactionStart(); => should be moved inside transcation client
                 transactionClient.start(transaction);
                 return this;
             },
