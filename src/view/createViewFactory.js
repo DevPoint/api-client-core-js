@@ -1,7 +1,9 @@
 
 function createViewFactory() {
 
-    const _createView: function(viewId, itemType, viewBuilder, viewHandler) {
+    const _createView: function(viewBuilder, viewHandler) {
+
+        const _itemType = viewBuilder.itemType;
 
         let _ready = false;
 
@@ -40,14 +42,14 @@ function createViewFactory() {
 
         return {
 
+            get itemType() {
+                _markAsRead('itemType');
+                return _itemType;
+            },
+
             get viewId() {
                 _markAsRead('viewId');
                 return viewId;
-            },
-
-            get itemType() {
-                _markAsRead('itemType');
-                return itemType;
             },
 
             get ready() {

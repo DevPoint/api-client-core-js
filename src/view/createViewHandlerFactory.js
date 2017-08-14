@@ -7,7 +7,7 @@ function createViewHandlerFactory() {
 
         return {
 
-            hasView: function(viewId) {
+            viewExists: function(viewId) {
                 return (_views.hasOwnProperty(viewId));
             },
 
@@ -24,9 +24,9 @@ function createViewHandlerFactory() {
                 delete _views[view.viewId];
             },
 
-            createView: function(itemType, viewBuilder) {
-                const viewId = itemType + '-' + viewBuilder->buildHash();
-                return viewFactory.createView(viewId, itemType, viewBuilder, this);
+            view: function(viewBuilder) {
+                const viewId = viewBuilder.itemType + '-' + viewBuilder->buildHash();
+                return viewFactory.createView(viewId, viewBuilder, this);
             },
 
             createObserver: function() {

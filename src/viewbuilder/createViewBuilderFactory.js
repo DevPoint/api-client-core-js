@@ -1,9 +1,7 @@
 
-function createViewBuilderFactory(filterFactory, sortFactory) {
+function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
 
     const _createBuilder = function(itemType, viewHandler) {
-
-        let _view = null;
 
         let _eagerType = 'full';
 
@@ -17,132 +15,12 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
 
         const _sorts = [];
 
+        let _view = null;
+
         return {
 
-            hasView: function() {
-                return !!_view;
-            },
-
-            view: function() {
-                if (!this.hasView()) {
-                    _view = viewHandler.createView(itemType, this);
-                }
-                return _view;
-            },
-
-            get viewId() {
-                return this.view().viewId;
-            },
-
-            get ready() {
-                return this.view().ready;
-            },
-
-            get outdated() {
-                return this.view().outdated;
-            },
-
             get itemType() {
-                return viewHandler.itemType;
-            },
-
-            get loading() {
-                return this.view().loading;
-            },
-
-            get loadingFailed() {
-                return this.view().loadingFailed;
-            },
-
-            get loadingMetaOffset() {
-                return this.view().loadingMetaOffset;
-            },
-
-            get loadingMetaCount() {
-                return this.view().loadingMetaCount;
-            },
-
-            get loadingMetaPage() {
-                return this.view().loadingMetaPage;
-            },
-
-            get loadingMetaPageSize() {
-                return this.view().loadingMetaPageSize;
-            },
-
-            get loadingMetaTotalCount() {
-                return this.view().loadingMetaTotalCount;
-            },
-
-            get itemsHash() {
-                return this.view().itemsHash;
-            },
-
-            get items() {
-                return this.view().items;
-            },
-
-            get first() {
-                return this.view().first;
-            },
-
-            get last() {
-                return this.view().last;
-            },
-
-            setReady: function(ready) {
-                this.view().setReady(ready);
-                return this;
-            },
-
-            setOutdated: function(outdated) {
-                this.view().setOutdated(outdated);
-                return this;
-            },
-
-            setLoading: function(loading) {
-                this.view().setLoading(loading);
-                return this;
-            },
-
-            setLoadingFailed: function(loadingFailed) {
-                this.view().setLoadingFailed(loadingFailed);
-                return this;
-            },
-
-            updateLoadingMeta: function(loadingMeta) {
-                this.view().updateLoadingMeta(loadingMeta);
-                return this;
-            },
-
-            setItemsHash: function(itemsHash) {
-                this.view().setItemsHash(itemsHash);
-                return this;
-            },
-
-            setItems: function(items) {
-                this.view().setItems(items);
-                return this;
-            },
-
-            handleLoadingReady: function(items, itemsHash, meta) {
-                this.view().handleLoadingReady(items, itemsHash, meta);
-                return this;
-            },
-
-            handleLoadingCanceled: function() {
-                this.view().handleLoadingReady();
-                return this;
-            },
-
-            handleLoadingFailed: function(errors) {
-                this.view().handleLoadingFailed(errors);
-                return this;
-            },
-
-            load: function() {
-                this.view().load();
-                return this;
+                return itemType;
             },
 
             get eagerType() { 
@@ -169,8 +47,19 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
                 return _sorts; 
             },
 
+            get viewExists() {
+                return !!_view;
+            },
+
+            get view() {
+                if (!this.viewExists) {
+                    _view = viewHandler.view(this);
+                }
+                return _view;
+            },
+
             addFilter: function(filter) {
-                if (!this.hasView()) {
+                if (!this.viewExists) {
                     _filters[] = filter;
                 }
                 return this;
@@ -193,7 +82,7 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
             },
 
             addSort: function(sort) {
-                if (!this.hasView()) {
+                if (!this.viewExists) {
                     _sorts[] = sort;
                 }
                 return this;
@@ -204,14 +93,14 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
             },
 
             setEagerType: function(eagerType) {
-                if (!this.hasView()) {
+                if (!this.viewExists) {
                     _eagerType = eagerType;
                 }
                 return this;
             },
 
             setPagination: function(page, pageSize) {
-                if (!this.hasView()) {
+                if (!this.viewExists) {
                     _offset = (page * pageSize) - pageSize;
                     _count = pageSize;
                     _pageSize = pageSize;
@@ -220,7 +109,7 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
             },
 
             setLimit: function(offset, count) {
-                if (!this.hasView()) {
+                if (!this.viewExists) {
                     _offset = offset;
                     _count = count;
                     _pageSize = 0;
@@ -264,10 +153,6 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
                     this.buildSortsHash()
                 ];
                 return hashes.join('&');
-            };
-
-            load: function() {
-                view().load();
             },
         }
     }
