@@ -89,12 +89,17 @@ function createTransactionFactory() {
 
             get observed() {
                 _markAsRead('observed');
-                return this.observer !== null;
+                return (_observer !== null);
             },
 
-            get observer() {
-                _markAsRead('observer');
-                return _observer;
+            get listeners() {
+                _markAsRead('listeners');
+                return (this.observed) ? _observer.listeners : [];
+            },
+
+            get changed() {
+                _markAsRead('changed');
+                return (this.observed) ? _observer.changed : false;
             },
 
             setReady: function(ready) {
@@ -169,22 +174,32 @@ function createTransactionFactory() {
                 return this;
             },
 
-            addObserverListener: function(listener) {
+            addListener: function(listener) {
                 if (!this.observed) {
-                    _observer = transactionHandler.createObserver();
+                    _observer = viewHandler.createObserver();
+                    _markAsChanged('_observed');
                 }
-                this.observer.addListener(listener);
-                _markAsChanged('observer');
+                _observer.addListener(listener);
+                _markAsChanged('listeners');
                 return this;
             },
 
-            removeObserverListener: function(listener) {
+            removeListener: function(listener) {
                 if (this.observed) {
-                    this.observer.removeListener(listener);
-                    if (this.observer.listeners.length == 0) {
+                    _observer.removeListener(listener);
+                    _markAsChanged('listeners');
+                    if (_observer.listeners.length == 0) {
                         _observer = null;
+                        _markAsChanged('_observed');
                     }
-                    _markAsChanged('observer');
+                }
+                return this;
+            },
+
+            clearAllChances: function() {
+                if (!this.observed) {
+                    _observer.clearAllChances();
+                    _markAsChanged('_changed');
                 }
                 return this;
             }

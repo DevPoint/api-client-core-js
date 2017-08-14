@@ -23,6 +23,17 @@ function createObserverFactory() {
                 return _listeners;
             },
 
+            get changed() {
+                let changed = false;
+                for (let propsKey in _changedProps) {
+                    if (_readProps.hasOwnProperty(propsKey)) {
+                        changed = true;
+                        break;
+                    }
+                }
+                return changed;
+            },
+
             addListener: function(listener) {
                 const listenerIndex = _listenerIndex(listener);
                 if (listenerIndex < 0) {
@@ -50,17 +61,6 @@ function createObserverFactory() {
             markAsChanged: function(propKey) {
                 _changedProps[propsKey] = true;
                 return this;
-            },
-
-            changed: function() {
-                let changed = false;
-                for (let propsKey in _changedProps) {
-                    if (_readProps.hasOwnProperty(propsKey)) {
-                        changed = true;
-                        break;
-                    }
-                }
-                return changed;
             },
 
             clearAllChanges: function() {

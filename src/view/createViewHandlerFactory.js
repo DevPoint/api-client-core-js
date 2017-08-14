@@ -38,23 +38,20 @@ function createViewHandlerFactory() {
                 return this;
             },
 
-            get changedObserversListeners() {
+            get listenersToDispatchChanged() {
                 const listeners = [];
                 for (let viewId in _views) {
                     const view = _views[viewId];
-                    if (view.observed && view.observer.changed()) {
-                        listeners = listeners.concat(view.observer.listeners);
+                    if (view.changed()) {
+                        listeners = listeners.concat(view.listeners);
                     }
                 }
                 return listeners;
             },
 
-            clearAllObserverChanges: function() {
+            clearAllChanges: function() {
                 for (let viewId in _views) {
-                    const view = _views[viewId];
-                    if (view.observed) {
-                        view.observer.clearAllChanges();
-                    }
+                    _views[viewId].clearAllChanges();
                 }
                 return this;
             }

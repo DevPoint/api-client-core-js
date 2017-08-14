@@ -88,27 +88,20 @@ function createTransactionHandlerFactory() {
                 return this;
             },
 
-            get changedObserversListeners() {
+            get listenersToDispatchChanged() {
                 const listeners = [];
-                for (let itemType in _transactions) {
-                    for (let transactionId in _transactions[itemType]) {
-                        const transaction = _transactions[itemType][transactionId];
-                        if (transaction.observed && transaction.observer.changed()) {
-                            listeners = listeners.concat(transaction.observer.listeners);
-                        }
+                for (let viewId in _views) {
+                    const view = _views[viewId];
+                    if (view.changed()) {
+                        listeners = listeners.concat(view.listeners);
                     }
                 }
                 return listeners;
             },
 
-            clearAllObserverChanges: function() {
-                for (let itemType in _transactions) {
-                    for (let transactionId in _transactions[itemType]) {
-                        const transaction = _transactions[itemType][transactionId];
-                        if (transaction.observed) {
-                            transaction.observer.clearAllChanges();
-                        }
-                    }
+            clearAllChanges: function() {
+                for (let viewId in _views) {
+                    _views[viewId].clearAllChanges();
                 }
                 return this;
             }
