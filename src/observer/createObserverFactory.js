@@ -67,9 +67,7 @@ function createObserverFactory() {
 
         const self = _createBaseObserver('view');
 
-        const expand = {
-
-        };
+        const expand = {};
 
         for (let expandPropKey in expand) {
             self[expandPropKey] = expand[expandPropKey];
@@ -81,6 +79,8 @@ function createObserverFactory() {
     _createTransactionObserver: function() {
 
         const self = _createBaseObserver('transaction');
+
+        const expand = {};
 
         for (let expandPropKey in expand) {
             self[expandPropKey] = expand[expandPropKey];
