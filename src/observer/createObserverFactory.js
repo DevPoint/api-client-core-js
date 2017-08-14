@@ -1,67 +1,13 @@
 
 function createObserverFactory() {
 
-    const _createObserver = function() {
+    const _createBaseObserver = function(type) {
 
-        const _views = {};
+        const _readProps = {};
 
-        const _transactions = {};
+        const _changedProps = {};
 
         const _listeners = [];
-
-        const _hasView = function(viewId) {
-            return (_views.hasOwnProperty(viewId));
-        };
-
-        const _view = function(viewId) {
-            if (!_hasView(viewId)) {
-                _views[viewId] = {
-                    readProps: {},
-                    changedProps: {},
-                    listeners: []
-                };
-            }
-            return _views[viewId];
-        };
-
-        const _viewChangedPropCount = function(view) {
-            let changedPropCount = 0;
-            for (let propKey in view.changedProps) {
-                changedPropCount += view.readProps.hasOwnProperty(propKey) ? 1 : 0;
-            }
-            return changedPropCount;
-        };
-
-        const _viewListenerIndex = function(view) {
-            return view.listeners.indexOf(listener);
-        };
-
-        const _hasTransaction = function(transactionId) {
-            return (_transactions.hasOwnProperty(transactionId));
-        };
-
-        const _transaction = function(transactionId) {
-            if (!_hasTransaction(transactionId)) {
-                _transactions[transactionId] = {
-                    readProps: {},
-                    changedProps: {},
-                    listeners: []
-                };
-            }
-            return _transactions[transactionId];
-        };
-
-        const _transactionChangedPropCount = function(transaction) {
-            let changedPropCount = 0;
-            for (let propKey in transaction.changedProps) {
-                changedPropCount += transaction.readProps.hasOwnProperty(propKey) ? 1 : 0;
-            }
-            return changedPropCount;
-        };
-
-        const _transactionListenerIndex = function(transaction) {
-            return transaction.listeners.indexOf(listener);
-        };
 
         const _listenerIndex = function(listener) {
             return _listeners.indexOf(listener);
@@ -69,66 +15,16 @@ function createObserverFactory() {
 
         return {
 
-            addViewListener: function(viewId, listener) {
-                const view = _view(viewId);
-                const listenerIndex = _viewListenerIndex(view, listener);
-                if (listenerIndex < 0) {
-                    view.listeners.push(listener);
-                }
+            get type() {
+                return type;
             },
 
-            removeViewListener: function(viewId, listener) {
-                if (_hasView(viewId)) {
-                    const view = _view(viewId);
-                    const listenerIndex = _viewListenerIndex(view, listener);
-                    if (listenerIndex >= 0) {
-                        view.listeners.splice(listenerIndex, 1);
-                    }
-                }
+            get listeners() {
+                return _listeners;
             },
 
-            markViewAsRead: function(viewId, propKey) {
-                _view(viewId).readProps[propsKey] = true;
-            },
-
-            markViewAsChanged: function(viewId, propKey) {
-                _view(viewId).changedProps[propsKey] = true;
-            },
-
-            getViewChangedPropCount: function(viewId) {
-                return _hasView(viewId)
-                    ? _viewChangedPropCount(_view(viewId)) : 0;
-            },
-
-            addTransactionListener: function(transactionId, listener) {
-                const transaction = _transaction(transactionId);
-                const listenerIndex = _transactionListenerIndex(transaction, listener);
-                if (listenerIndex < 0) {
-                    transaction.listeners.push(listener);
-                }
-            },
-
-            removeTransactionListener: function(transactionId, listener) {
-                if (_hasTransaction(transactionId)) {
-                    const transaction = _transaction(transactionId);
-                    const listenerIndex = _transactionListenerIndex(transaction, listener);
-                    if (listenerIndex >= 0) {
-                        transaction.listeners.splice(listenerIndex, 1);
-                    }
-                }
-            },
-
-            markTransactionAsRead: function(transactionId, propKey) {
-                _transaction(transactionId).readProps[propsKey] = true;
-            },
-
-            markTransactionAsChanged: function(transactionId, propKey) {
-               _transaction(transactionId).changedProps[propsKey] = true;
-            },
-
-            getTransactionChangedPropCount: function(transactionId) {
-                return _hasTransaction(transactionId)
-                    ? _transactionChangedPropCount(_transaction(transactionId)) : 0;
+            get changed() {
+                return (Object.keys(_changedProps).length > 0);
             },
 
             addListener: function(listener) {
@@ -145,46 +41,71 @@ function createObserverFactory() {
                 }
             },
 
-            dispatchChanges: function() {
-                let changedPropCount = 0;
-                const listenersToDispatch = []
-                for (let view in _views) {
-                    const viewChangedPropCount = _viewChangedPropCount(view);
-                    changedPropCount += viewChangedPropCount;
-                    view.changedProps = {};
-                    if (viewChangedPropCount) {
-                        for (let i = 0; i < view.listeners.length; i++) {
-                            listenersToDispatch.push(view.listeners[i]);
-                        }
-                    }
-                }
-                for (let transaction in _transactions) {
-                    const transactionChangedPropCount = _transactionChangedPropCount(transaction);
-                    changedPropCount += transactionChangedPropCount;
-                    transaction.changedProps = {};
-                    if (transactionChangedPropCount) {
-                        for (let i = 0; i < transaction.listeners.length; i++) {
-                            listenersToDispatch.push(transaction.listeners[i]);
-                        }
-                    }
-                }
-                if (changedPropCount > 0) {
-                    for (let i = 0; i < _listeners.length; i++) {
-                        listenersToDispatch.push(_listeners[i]);
-                    }
-                }
-                const uniqueListeners = listenersToDispatch.filter((v, i, a) => a.indexOf(v) === i);
-                for (let i = 0; i < uniqueListeners.length; i++) {
-                    uniqueListeners[i]();
-                }
+            markAsRead: function(propKey) {
+                _readProps[propsKey] = true;
+                return this;
+            },
+
+            clearAllRead: function() {
+                _readProps = {};
+                return this;
+            }
+
+            markAsChanged: function(propKey) {
+                _changedProps[propsKey] = true;
+                return this;
+            },
+
+            clearAllChanged: function() {
+                _changedProps = {};
+                return this;
             }
         }
     }
 
+    _createViewObserver: function(viewId) {
+
+        const self = _createBaseObserver('view');
+
+        const expand = {
+
+            get viewId() {
+                return viewId;
+            }
+        };
+
+        for (let expandPropKey in expand) {
+            self[expandPropKey] = expand[expandPropKey];
+        }
+        
+        return self;
+    };
+
+    _createTransactionObserver: function(transactionId) {
+
+        const self = _createBaseObserver('transaction');
+
+        const expand = {
+
+            get transactionId() {
+                return transactionId;
+            }
+        };
+
+        for (let expandPropKey in expand) {
+            self[expandPropKey] = expand[expandPropKey];
+        }
+        
+        return self;
+    };
+
     return {
 
-        createObserver: _createObserver,
+        createBaseObserver: _createBaseObserver,
 
+        createViewObserver: _createViewObserver,
+
+        createTransactionObserver: _createTransactionObserver
     };
 
 }
