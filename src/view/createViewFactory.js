@@ -123,12 +123,12 @@ function createViewFactory() {
             },
 
             get observed() {
-                _markAsRead(transactionId, 'observed');
+                _markAsRead('observed');
                 return this.observer !== null;
             },
 
             get observer() {
-                _markAsRead(transactionId, 'observer');
+                _markAsRead('observer');
                 return _observer;
             },
 
