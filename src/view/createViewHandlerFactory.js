@@ -5,18 +5,30 @@ function createViewHandlerFactory() {
 
         const _views = {};
 
-        const _hasView = function(viewId) {
-            return _views.hasOwnProperty(viewId);
-        };
-
         return {
 
-            create: function(itemType, viewBuilder) {
+            hasRegisteredView: function(viewId) {
+                return (_views.hasOwnProperty(viewId));
+            },
+
+            getRegisteredView: function(viewId) {
+                return this.hasRegisteredView(viedId) ? _view[viewId] : undefined;
+            },
+
+            registerView: function(view) {
+                const viewId = view.viewId;
+                _views[viewId] = view;
+                return this;
+            },
+
+            unregisterView: function(view) {
+                const viewId = view.viewId;
+                delete _views[viewId];
+            },
+
+            createView: function(itemType, viewBuilder) {
                 const viewId = viewBuilder->buildHash() + '@view';
-                if (!_hasView(viewId)) {
-                    _views[viewId] = viewFactory.createView(viewId, itemType, viewBuilder, this);
-                }
-                return _views[viewId];
+                return viewFactory.createView(viewId, itemType, viewBuilder, this);
             },
 
             createObserver: function() {

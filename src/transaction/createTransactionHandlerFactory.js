@@ -18,6 +18,16 @@ function createTransactionHandlerFactory() {
 
         return {
 
+            hasRegisteredTransaction: function(itemType, transactionId) {
+                return (_transactions.hasOwnProperty(itemType) &&
+                    _transactions[itemType].hasOwnProperty(transactionId));
+            },
+
+            getRegisteredTransaction: function(itemType, transactionId) {
+                return this.hasRegisteredTransaction() 
+                    ? _transactions[itemType][transactionId] : undefined;
+            },
+
             registerTransaction: function(transaction) {
                 const transactionId = transaction.transactionId;
                 const itemType = transaction.itemType;
@@ -31,16 +41,6 @@ function createTransactionHandlerFactory() {
                 if (_transactions.hasOwnProperty(itemType)) {
                     delete _transactions[itemType][transactionId];
                 }
-            },
-
-            hasRegisteredTransaction: function(itemType, transactionId) {
-                return (_transactions.hasOwnProperty(itemType) &&
-                    _transactions[itemType].hasOwnProperty(transactionId));
-            },
-
-            getRegisteredTransaction: function(itemType, transactionId) {
-                return this.hasRegisteredTransaction() 
-                    ? _transactions[itemType][transactionId] : undefined;
             },
 
             createInsertTransaction: function(itemType, data) {
