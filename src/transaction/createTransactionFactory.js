@@ -151,7 +151,7 @@ function createTransactionFactory() {
 
         const _data = _cloneData(data);
         
-        const transaction = _createBaseTransaction(
+        const self = _createBaseTransaction(
             transactionId, itemType, 'update', 
             transactionHandler);
 
@@ -164,17 +164,17 @@ function createTransactionFactory() {
         };
 
         for (let expandPropKey in expand) {
-            transaction[expandPropKey] = expand[expandPropKey].bind(transaction);
+            self[expandPropKey] = expand[expandPropKey];
         }
         
-        return transaction;
+        return self;
     };
 
     _createInsertTransaction: function(transactionId, itemType, data, transactionHandler) {
         
         const _data = _cloneData(data);
 
-        const transaction = _createBaseTransaction(
+        const self = _createBaseTransaction(
             transactionId, itemType, 'insert', 
             transactionHandler);
 
@@ -187,15 +187,15 @@ function createTransactionFactory() {
         };
 
         for (let expandPropKey in expand) {
-            transaction[expandPropKey] = expand[expandPropKey].bind(transaction);
+            self[expandPropKey] = expand[expandPropKey];
         }
        
-        return transaction;
+        return self;
     };
 
     _createDeleteTransaction: function(transactionId, itemType, dataId, transactionHandler) {
         
-        const transaction = _createBaseTransaction(
+        const self = _createBaseTransaction(
             transactionId, itemType, 'delete', 
             transactionHandler);
 
@@ -208,17 +208,17 @@ function createTransactionFactory() {
         };
         
         for (let expandPropKey in expand) {
-            transaction[expandPropKey] = expand[expandPropKey].bind(transaction);
+            self[expandPropKey] = expand[expandPropKey];
         }
        
-        return transaction;
+        return self;
     };
 
     _createLoginTransaction: function(transactionId, itemType, credentials, transactionHandler) {
         
         const _credentials = _cloneData(credentials);
 
-        const transaction = _createBaseTransaction(
+        const self = _createBaseTransaction(
             transactionId, itemType, 'login', 
             transactionHandler);
 
@@ -231,17 +231,17 @@ function createTransactionFactory() {
         };
 
         for (let expandPropKey in expand) {
-            transaction[expandPropKey] = expand[expandPropKey].bind(transaction);
+            self[expandPropKey] = expand[expandPropKey];
         }
        
-        return transaction;
+        return self;
     };
 
     _createRegisterTransaction: function(transactionId, itemType, credentials, transactionHandler) {
         
         const _credentials = _cloneData(credentials);
 
-        const transaction = _createBaseTransaction(
+        const self = _createBaseTransaction(
             transactionId, itemType, 'register', 
             transactionHandler);
 
@@ -254,10 +254,10 @@ function createTransactionFactory() {
         };
 
         for (let expandPropKey in expand) {
-            transaction[expandPropKey] = expand[expandPropKey].bind(transaction);
+            self[expandPropKey] = expand[expandPropKey];
         }
        
-        return transaction;
+        return self;
     };
 
     return {
