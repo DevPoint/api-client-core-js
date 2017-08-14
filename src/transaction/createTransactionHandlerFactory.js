@@ -47,31 +47,31 @@ function createTransactionHandlerFactory() {
             createInsertTransaction: function(itemType, data) {
                 const transactionId = _nextTransactionId(itemType, 'insert');
                 return transactionFactory.createInsertTransaction(
-                        transactionId, itemType, data, this);
+                    transactionId, itemType, data, this);
             },
 
             createUpdateTransaction: function(itemType, data) {
                 const transactionId = _nextTransactionId(itemType, 'update');
                 return transactionFactory.createUpdateTransaction(
-                        transactionId, itemType, data, this);
+                    transactionId, itemType, data, this);
             },
 
             createDeleteTransaction: function(itemType, dataId) {
                 const transactionId = _nextTransactionId(itemType, 'delete');
                 return transactionFactory.createDeleteTransaction(
-                        transactionId, itemType, dataId, this);
+                    transactionId, itemType, dataId, this);
             },
 
             createLoginTransaction: function(itemType, credentials) {
                 const transactionId = _nextTransactionId(itemType, 'login');
                 return transactionFactory.createLoginTransaction(
-                        transactionId, itemType, credentials, this);
+                    transactionId, itemType, credentials, this);
             },
 
             createRegisterTransaction: function(itemType, credentials) {
                 const transactionId = _nextTransactionId(itemType, 'register');
                 return transactionFactory.createRegisterTransaction(
-                        transactionId, itemType, credentials, this);
+                    transactionId, itemType, credentials, this);
             },
 
             createObserver: function() {
