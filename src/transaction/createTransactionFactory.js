@@ -182,7 +182,7 @@ function createTransactionFactory() {
             addListener: function(listener) {
                 if (!this.observed) {
                     _observer = viewHandler.createObserver();
-                    _markAsChanged('_observed');
+                    _markAsChanged('observed');
                 }
                 _observer.addListener(listener);
                 _markAsChanged('listeners');
@@ -195,7 +195,7 @@ function createTransactionFactory() {
                     _markAsChanged('listeners');
                     if (_observer.listeners.length == 0) {
                         _observer = null;
-                        _markAsChanged('_observed');
+                        _markAsChanged('observed');
                     }
                 }
                 return this;
@@ -204,7 +204,7 @@ function createTransactionFactory() {
             clearAllChances: function() {
                 if (this.observed) {
                     _observer.clearAllChances();
-                    _markAsChanged('_changed');
+                    _markAsChanged('changed');
                 }
                 return this;
             }
