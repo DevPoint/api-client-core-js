@@ -24,8 +24,7 @@ function createViewBuilderFactory(filterFactory, sortFactory) {
             },
 
             view: function() {
-                if (!this.hasView())
-                {
+                if (!this.hasView()) {
                     _view = viewHandler.createView(itemType, this);
                 }
                 return _view;
