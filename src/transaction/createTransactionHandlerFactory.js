@@ -37,7 +37,7 @@ function createTransactionHandlerFactory() {
                 }
             },
 
-            getRegisteredTransaction: function(itemType, transactionId) {
+            findRegisteredTransaction: function(itemType, transactionId) {
                 let transaction = undefined;
                 if (_transactions.hasOwnProperty(itemType)) {
                     if (_transactions[itemType][transactionId].hasOwnProperty(itemType)) {
@@ -71,7 +71,7 @@ function createTransactionHandlerFactory() {
                         transactionId, itemType, credentials, this);
             },
 
-            createRegister: function(itemType, credentials) {
+            createRegisterTransaction: function(itemType, credentials) {
                 const transactionId = _nextTransactionId(itemType, 'register');
                 return transactionFactory.createRegisterTransaction(
                         transactionId, itemType, credentials, this);
