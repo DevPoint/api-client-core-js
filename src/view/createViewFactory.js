@@ -153,10 +153,12 @@ function createViewFactory() {
             },
 
             updateLoadingMeta: function(loadingMeta) {
-                for (let propKey in loadingMeta) {
-                    const viewPropKey = 'loadingMeta' + propKey.charAt(0).toUpperCase() + propKey.slice(1);
-                    _loadingMeta[propKey] = loadingMeta[propKey];
-                    _markAsChanged(viewPropKey);
+                for (let metaPropKey in loadingMeta) {
+                    _loadingMeta[metaPropKey] = loadingMeta[metaPropKey];
+                    _markAsChanged(
+                        'loadingMeta' + 
+                        metaPropKey.charAt(0).toUpperCase() + 
+                        metaPropKey.slice(1));
                 }
             },
 
