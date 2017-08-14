@@ -7,10 +7,6 @@ function createTransactionHandlerFactory() {
 
         const _transactionNumbers = {};
 
-        const _hasTransaction = function(transactionId) {
-            return _transactions.hasOwnProperty(transactionId);
-        };
-
         const _nextTransactionId = function(itemType, type) {
             if (!_transactionNumbers.hasOwnProperty(itemType)) {
                 _transactionNumbers[itemType] = 1;
@@ -37,14 +33,14 @@ function createTransactionHandlerFactory() {
                 }
             },
 
-            findRegisteredTransaction: function(itemType, transactionId) {
-                let transaction = undefined;
-                if (_transactions.hasOwnProperty(itemType)) {
-                    if (_transactions[itemType][transactionId].hasOwnProperty(itemType)) {
-                        transaction = _transactions[itemType][transactionId];
-                    }
-                }
-                return transaction;
+            hasRegisteredTransaction: function(itemType, transactionId) {
+                return (_transactions.hasOwnProperty(itemType) &&
+                    _transactions[itemType][transactionId].hasOwnProperty(itemType));
+            },
+
+            getRegisteredTransaction: function(itemType, transactionId) {
+                return this.hasRegisteredTransaction() 
+                    ? _transactions[itemType][transactionId] : undefined;
             },
 
             createInsertTransaction: function(itemType, data) {
