@@ -16,33 +16,15 @@ function createTransactionHandlerFactory() {
             return transactionId;
         };
 
+        const _registerTransaction = function(transaction) {
+            const itemType = transaction.itemType;
+            if (!_transactions.hasOwnProperty(itemType))) {
+                _transactions[itemType] = {};
+            }
+            _transactions[itemType][transaction.transactionId] = transaction;
+        };
+
         return {
-
-            hasTransaction: function(itemType, transactionId) {
-                return (_transactions.hasOwnProperty(itemType) &&
-                    _transactions[itemType].hasOwnProperty(transactionId));
-            },
-
-            getTransaction: function(itemType, transactionId) {
-                return this.hasRegisteredTransaction() 
-                    ? _transactions[itemType][transactionId] : undefined;
-            },
-
-            registerTransaction: function(transaction) {
-                const itemType = transaction.itemType;
-                if (!_transactions.hasOwnProperty(itemType))) {
-                    _transactions[itemType] = {};
-                }
-                _transactions[itemType][transaction.transactionId] = transaction;
-                return this;
-            },
-
-            unregisterTransaction: function(transaction) {
-                const itemType = transaction.itemType;
-                if (_transactions.hasOwnProperty(itemType)) {
-                    delete _transactions[itemType][transaction.transactionId];
-                }
-            },
 
             createInsertTransaction: function(itemType, data) {
                 const transactionId = _nextTransactionId(itemType, 'insert');
@@ -52,26 +34,45 @@ function createTransactionHandlerFactory() {
 
             createUpdateTransaction: function(itemType, data) {
                 const transactionId = _nextTransactionId(itemType, 'update');
-                return transactionFactory.createUpdateTransaction(
+                const transaction = transactionFactory.createUpdateTransaction(
                     transactionId, itemType, data, this);
+                _registerTransaction(transaction);
+                return transaction;
             },
 
             createDeleteTransaction: function(itemType, dataId) {
                 const transactionId = _nextTransactionId(itemType, 'delete');
-                return transactionFactory.createDeleteTransaction(
+                const transaction = transactionFactory.createDeleteTransaction(
                     transactionId, itemType, dataId, this);
+                _registerTransaction(transaction);
+                return transaction;
             },
 
             createLoginTransaction: function(itemType, credentials) {
                 const transactionId = _nextTransactionId(itemType, 'login');
-                return transactionFactory.createLoginTransaction(
+                const transaction = transactionFactory.createLoginTransaction(
                     transactionId, itemType, credentials, this);
+                _registerTransaction(transaction);
+                return transaction;
             },
 
             createRegisterTransaction: function(itemType, credentials) {
                 const transactionId = _nextTransactionId(itemType, 'register');
-                return transactionFactory.createRegisterTransaction(
+                const transaction = transactionFactory.createRegisterTransaction(
                     transactionId, itemType, credentials, this);
+                _registerTransaction(transaction);
+                return transaction;
+            },
+
+            getTransaction: function(itemType, transactionId) {
+                return this.hasRegisteredTransaction() 
+                    ? _transactions[itemType][transactionId] : undefined;
+            },
+
+            destroyTransaction: function(itemType, transactionId) {
+                if (_transactions.hasOwnProperty(itemType)) {
+                    delete _transactions[itemType][transactionId];
+                }
             },
 
             createObserver: function() {

@@ -15,8 +15,6 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
 
         const _sorts = [];
 
-        let _view = null;
-
         return {
 
             get itemType() {
@@ -45,17 +43,6 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
             
             get sorts() { 
                 return _sorts; 
-            },
-
-            get viewExists() {
-                return !!_view;
-            },
-
-            get view() {
-                if (!this.viewExists) {
-                    _view = viewHandler.view(this);
-                }
-                return _view;
             },
 
             addFilter: function(filter) {
@@ -154,6 +141,10 @@ function createViewBuilderFactory(filterFactory, sortFactory, viewFactory) {
                 ];
                 return hashes.join('&');
             },
+
+            build: function() {
+                return viewHandler.createView(this);
+            }
         }
     }
 

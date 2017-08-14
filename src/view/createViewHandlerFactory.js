@@ -5,37 +5,34 @@ function createViewHandlerFactory() {
 
         const _views = {};
 
+        const _viewExists = function(viewId) {
+            return _views.hasOwnProperty(viewId);
+        };
+
         return {
 
-            viewExists: function(viewId) {
-                return (_views.hasOwnProperty(viewId));
+            getViewByBuilder: function(viewBuilder) {
+                const viewId = viewBuilder.itemType + '-' + viewBuilder->buildHash();
+                if (!_viewExists(viewId)) {
+                    _views[viewId] = viewFactory.createView(viewId, viewBuilder, this);
+                }
+                return _views[viewId];
             },
 
             getView: function(viewId) {
-                return this.hasRegisteredView(viedId) ? _view[viewId] : undefined;
+                return _viewExists(viedId) ? _view[viewId] : undefined;
             },
 
-            registerView: function(view) {
-                _views[view.viewId] = view;
+            loadView: function(viewId) {
+                if (_viewExists(viewId)) {
+                    //_views[viewId].handleLoadingInit(); => should be moved inside loading client
+                    loadingClient.load(_views[viewId]);
+                }
                 return this;
-            },
-
-            unregisterView: function(view) {
-                delete _views[view.viewId];
-            },
-
-            view: function(viewBuilder) {
-                const viewId = viewBuilder.itemType + '-' + viewBuilder->buildHash();
-                return viewFactory.createView(viewId, viewBuilder, this);
             },
 
             createObserver: function() {
                 return observerFactory.createViewObserver();
-            },
-
-            load: function(viewBuilder, view) {
-                loadingClient.load(viewBuilder, view);
-                return this;
             },
 
             get listenersToDispatchChanged() {

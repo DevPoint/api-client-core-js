@@ -52,6 +52,11 @@ function createViewFactory() {
                 return viewId;
             },
 
+            get builder() {
+                _markAsRead('builder');
+                return viewBuilder;
+            }
+
             get ready() {
                 _markAsRead('ready');
                 return _ready;
@@ -186,6 +191,15 @@ function createViewFactory() {
                 return this;
             },
 
+            handleLoadingInit: function() {
+                this.setLoading(true)
+                    .setLoadingFailed(false)
+                    .updateLoadingMeta({
+                        totalCount: 0,
+                        errors: []
+                    });
+            },
+
             handleLoadingReady: function(items, itemsHash, meta) {
                 this.setItemsHash(itemsHash)
                     .setItems(items)
@@ -218,13 +232,7 @@ function createViewFactory() {
             },
 
             load: function() {
-                this.setLoading(true)
-                    .setLoadingFailed(false)
-                    .updateLoadingMeta({
-                        totalCount: 0,
-                        errors: []
-                    });
-                viewHandler.load(viewBuilder, this);
+                viewHandler.loadView(this.viewId);
                 return this;
             },
 
