@@ -5,11 +5,7 @@ function createObserverHandlerFactory() {
 
         const _viewObservers = {};
 
-        const _viewObserverNumber = 1;
-
         const _transactionObservers = {};
-
-        const _transactionObserverNumber = 1;
 
         return {
 
