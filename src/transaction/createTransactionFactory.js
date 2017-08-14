@@ -105,26 +105,31 @@ function createTransactionFactory() {
             setReady: function(ready) {
                 _ready = ready;
                 _markAsChanged('ready');
+                return this;
             },
 
             setProcessing: function(processing) {
                 _processing = processing;
                 _markAsChanged('processing');
+                return this;
             },
 
             setFailed: function(failed) {
                 _failed = failed;
                 _markAsChanged('failed');
+                return this;
             },
 
             setErrors: function(errors) {
                 _errors = errors;
                 _markAsChanged('errors');
+                return this;
             },
 
             setValidationErrors: function(errors) {
                 _validationErrors = validationErrors;
                 _markAsChanged('validationErrors');
+                return this;
             },
 
             handleTransactionReady: function() {

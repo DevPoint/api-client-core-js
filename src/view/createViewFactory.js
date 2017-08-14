@@ -140,21 +140,25 @@ function createViewFactory() {
             setReady: function(ready) {
                 _ready = ready;
                 _markAsChanged('ready');
+                return this;
             },
 
             setOutdated: function(outdated) {
                 _outdated = outdated;
                 _markAsChanged('outdated');
+                return this;
             },
 
             setLoading: function(loading) {
                 _loading = loading;
                 _markAsChanged('loading');
+                return this;
             },
 
             setLoadingFailed: function(loadingFailed) {
                 _loadingFailed = loadingFailed;
                 _markAsChanged('loadingFailed');
+                return this;
             },
 
             updateLoadingMeta: function(loadingMeta) {
@@ -165,16 +169,19 @@ function createViewFactory() {
                         metaPropKey.charAt(0).toUpperCase() + 
                         metaPropKey.slice(1));
                 }
+                return this;
             },
 
             setItemsHash: function(itemsHash) {
                 _itemsHash = itemsHash;
                 _markAsChanged('itemsHash');
+                return this;
             },
 
             setItems: function(items) {
                 _items = items;
                 _markAsChanged('items');
+                return this;
             },
 
             handleLoadingReady: function(items, itemsHash, meta) {
