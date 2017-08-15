@@ -12,7 +12,7 @@ class TransactionHandler extends ObservableHandler {
     constructor(client) {
         this._client = client;
         this._transactions = {};
-        this._transactionNumber = 0;
+        this._transactionNumber = 1;
     }
 
     _nextTransactionId(itemType, type) {
