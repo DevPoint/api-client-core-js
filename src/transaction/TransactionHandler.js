@@ -32,22 +32,18 @@ class TransactionHandler extends ObservableHandler {
 
     get listenersToDispatch() {
         const listeners = [];
-        for (let itemType in this._transactions) {
-            for (let transactionId in this._transactions[itemType]) {
-                const transaction = this._transactions[itemType][transactionId];
-                if (transaction.changed()) {
-                    listeners = listeners.concat(transaction.listeners);
-                }
+        for (let transactionId in this._transactions) {
+            const transaction = this._transactions[transactionId];
+            if (transaction.changed()) {
+                listeners = listeners.concat(transaction.listeners);
             }
         }
         return listeners;
     }
 
     clearAllChanges() {
-        for (let itemType in this._transactions) {
-            for (let transactionId in this._transactions[itemType]) {
-                this._transactions[itemType][transactionId].clearAllChanges();
-            }
+        for (let transactionId in this._transactions) {
+            this._transactions[transactionId].clearAllChanges();
         }
         return this;
     }
@@ -72,25 +68,28 @@ class TransactionHandler extends ObservableHandler {
         return this._register(
             new UpdateTransaction(
                 this._nextTransactionId(itemType, 'update'),
-                transactionId, itemType, data, this));
+                itemType, data, this));
     }
 
     createDelete(itemType, dataId) {
         return this._register(
-            this._nextTransactionId(itemType, 'delete'),
-            new DeleteTransaction(transactionId, itemType, dataId, this));
+            new DeleteTransaction(
+                this._nextTransactionId(itemType, 'delete'),
+                itemType, dataId, this));
     }
 
     createLogin(itemType, credentials) {
         return this._register(
-            this._nextTransactionId(itemType, 'login'),
-            new LoginTransaction(transactionId, itemType, credentials, this));
+            new LoginTransaction(
+                this._nextTransactionId(itemType, 'login'),
+                itemType, credentials, this));
     }
 
     createRegister(itemType, credentials) {
         return this._register(
-            this._nextTransactionId(itemType, 'register'),
-            new RegisterTransaction(transactionId, itemType, credentials, this));
+            new RegisterTransaction(
+                this._nextTransactionId(itemType, 'register'),
+                itemType, credentials, this));
     }
 
     start(transaction) {
