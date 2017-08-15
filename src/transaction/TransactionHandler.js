@@ -12,15 +12,12 @@ class TransactionHandler extends ObservableHandler {
     constructor(client) {
         this._client = client;
         this._transactions = {};
-        this._transactionNumbers = {};
+        this._transactionNumber = 0;
     }
 
     _nextTransactionId(itemType, type) {
-        if (!this._transactionNumbers.hasOwnProperty(itemType)) {
-            this._transactionNumbers[itemType] = 1;
-        }
-        const transactionId = itemType + '-' this._transactionNumbers[itemType] + '@' + type;
-        this._transactionNumbers[itemType] += 1;
+        const transactionId = itemType + '-' this._transactionNumber + '@' + type;
+        this._transactionNumber += 1;
         return transactionId;
     }
 
