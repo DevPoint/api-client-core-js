@@ -9,7 +9,7 @@ class UpdateTransaction extends Transaction {
     }
 
     get data() {
-        _markAsRead('data');
+        this._markAsRead('data');
         return _data;
     }
 }

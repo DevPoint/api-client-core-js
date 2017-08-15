@@ -9,8 +9,8 @@ import RegisterTransaction from './RegisterTransaction';
 
 class TransactionHandler extends ObservableHandler {
 
-    constructor(transactionClient) {
-        this._transactionClient = transactionClient;
+    constructor(client) {
+        this._client = client;
         this._transactions = {};
         this._transactionNumbers = {};
     }
@@ -95,12 +95,12 @@ class TransactionHandler extends ObservableHandler {
     }
 
     start(transaction) {
-        this._transactionClient.start(transaction);
+        this._client.start(transaction);
         return this;
     }
 
     cancel(transaction) {
-        this._transactionClient.cancel(transaction);
+        this._client.cancel(transaction);
         return this;
     }
 }

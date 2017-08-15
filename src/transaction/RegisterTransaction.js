@@ -9,7 +9,7 @@ class RegisterTransaction extends Transaction {
     }
 
     get credentials() {
-        _markAsRead('credentials');
+        this._markAsRead('credentials');
         return _credentials;
     }
 }
