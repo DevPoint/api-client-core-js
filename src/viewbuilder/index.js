@@ -1,3 +1,0 @@
-
-export createViewBuilderFactory from './createViewBuilderFactory';
-

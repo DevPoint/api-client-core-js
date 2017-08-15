@@ -1,4 +1,4 @@
 
-export createViewFactory from './createViewFactory';
-
-export createViewHandlerFactory from './createViewHandlerFactory';
+export ViewHandler from './ViewHandler';
+export ViewBuilder from './ViewBuilder';
+export default View from './View';
