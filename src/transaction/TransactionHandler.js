@@ -25,11 +25,7 @@ class TransactionHandler extends ObservableHandler {
     }
 
     _register(transaction) {
-        const itemType = transaction.itemType;
-        if (!this._transactions.hasOwnProperty(itemType))) {
-            this._transactions[itemType] = {};
-        }
-        this._transactions[itemType][transaction.transactionId] = transaction;
+        this._transactions[transaction.transactionId] = transaction;
         return transaction;
     }
 
@@ -59,9 +55,13 @@ class TransactionHandler extends ObservableHandler {
         return this;
     }
 
-    find(itemType, transactionId) {
-        return this.hasRegisteredTransaction() 
-            ? this._transactions[itemType][transactionId] : undefined;
+    exists(transactionId) {
+        return this._transactions.hasOwnProperty(transactionId);
+    }
+
+    find(transactionId) {
+        return this.exists(transactionId) 
+            ? this._transactions[transactionId] : undefined;
     }
 
     createInsert(itemType, data) {
