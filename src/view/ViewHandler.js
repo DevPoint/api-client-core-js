@@ -19,11 +19,18 @@ class ViewHandler extends ObservableHandler {
             }
         }
         return listeners;
-    },
+    }
 
     createObserver() {
         return new Observer('view');
-    },
+    }
+
+    clearAllChanges() {
+        for (let viewId in this._views) {
+            this._views[viewId].clearAllChanges();
+        }
+        return this;
+    }
 
     exists(viewId) {
         return this._views.hasOwnProperty(viewId);
@@ -31,7 +38,7 @@ class ViewHandler extends ObservableHandler {
 
     find(viewId) {
         return this.exists(viedId) ? this._view[viewId] : undefined;
-    },
+    }
 
     findOrCreateByBuilder(builder) {
         const viewId = builder.itemType + '-' + builder->buildHash();
@@ -39,17 +46,10 @@ class ViewHandler extends ObservableHandler {
             this._views[viewId] = new View(viewId, builder, this);
         }
         return this._views[viewId];
-    },
+    }
 
     load(view) {
         this._loadingClient.load(view);
-        return this;
-    },
-
-    clearAllChanges() {
-        for (let viewId in this._views) {
-            this._views[viewId].clearAllChanges();
-        }
         return this;
     }
 }

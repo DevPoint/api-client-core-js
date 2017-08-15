@@ -36,24 +36,24 @@ class Observer {
         if (listenerIndex < 0) {
             this._listeners.push(listener);
         }
-    },
+    }
 
     removeListener(listener) {
         const listenerIndex = this._listenerIndex(listener);
         if (listenerIndex >= 0) {
             this._listeners.splice(listenerIndex, 1);
         }
-    },
+    }
 
     markAsRead(propKey) {
         this._readProps[propsKey] = true;
         return this;
-    },
+    }
 
     markAsChanged(propKey) {
         this._changedProps[propsKey] = true;
         return this;
-    },
+    }
 
     clearAllReads() {
         this._readProps = {};
