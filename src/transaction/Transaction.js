@@ -4,6 +4,7 @@ import Observable from '../observer/Observable';
 class Transaction extends Observable {
 
     constructor(transactionId, itemType, type, handler) {
+        super(handler);
         this._transactionId = transactionId;
         this._itemType = itemType;
         this._type = type;

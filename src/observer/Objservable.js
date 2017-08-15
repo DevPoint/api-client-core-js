@@ -3,8 +3,8 @@ import Observer from './Observer';
 
 class Observable { 
 
-    constructor(type) {
-        this._type = type;
+    constructor(handler) {
+        this._handler = handler;
         this._observer = null,
     }
 
@@ -37,7 +37,7 @@ class Observable {
 
     addListener(listener) {
         if (!this.observed) {
-            this._observer = new Observer(this._type);
+            this._observer = this._handler.createObserver();
             this._markAsChanged('observed');
         }
         this._observer.addListener(listener);
