@@ -5,8 +5,8 @@ import View from './View';
 
 class ViewHandler extends ObservableHandler {
 
-    constructor(loadingClient) {
-        this._loadingClient = loadingClient;
+    constructor(client) {
+        this._client = client;
         this._views = {};
     }
 
@@ -49,7 +49,7 @@ class ViewHandler extends ObservableHandler {
     }
 
     load(view) {
-        this._loadingClient.load(view);
+        this._client.load(view);
         return this;
     }
 }
