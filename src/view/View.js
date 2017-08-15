@@ -19,7 +19,6 @@ class View extends Observable {
             totalCount: 0,
             errors: []
         };
-        this._itemsHash = '';
         this._items = [];
     }
 
@@ -87,11 +86,6 @@ class View extends Observable {
         return this._loadingMeta.totalCount;
     }
 
-    get itemsHash() {
-        this._markAsRead('itemsHash');
-        return this._itemsHash;
-    }
-
     get items() {
         this._markAsRead('items');
         return this._items;
@@ -147,12 +141,6 @@ class View extends Observable {
                 metaPropKey.charAt(0).toUpperCase() + 
                 metaPropKey.slice(1));
         }
-        return this;
-    }
-
-    setItemsHash(itemsHash) {
-        this._itemsHash = itemsHash;
-        this._markAsChanged('itemsHash');
         return this;
     }
 
