@@ -11,6 +11,7 @@ class Transaction extends Observable {
         this._ready = false;
         this._processing = false;
         this._failed = false;
+        this._released = false;
         this._errors = [];
         this._validationErrors = null;
     }
@@ -43,6 +44,11 @@ class Transaction extends Observable {
     get failed() {
         this._markAsRead('failed');
         return this._failed;
+    }
+
+    get released() {
+        this._markAsRead('released');
+        return this._released;
     }
 
     get hasErrors() {
@@ -133,17 +139,29 @@ class Transaction extends Observable {
 
     start() {
         if (!this.processing) {
-            transactionHandler.start(this);
+            this._handler.start(this);
         }
         return this;
     }
 
     cancel() {
         if (this.processing) {
-            transactionHandler.cancel(this);
+            this._handler.cancel(this);
         }
         return this;
     }
+
+    release() {
+        this.setReady(false);
+        this.setProcessing(false);
+        this.setFailed(false);
+        this.setErrors([]);
+        this.setValidationErrors(null);
+        this._released = true;
+        this._markAsChanged('released');
+        return this;
+    }
 }
+
 
 export default Transaction;
