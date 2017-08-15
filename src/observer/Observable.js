@@ -1,6 +1,4 @@
 
-import Observer from './Observer';
-
 class Observable { 
 
     constructor(handler) {
