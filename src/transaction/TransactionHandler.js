@@ -62,32 +62,34 @@ class TransactionHandler extends ObservableHandler {
     }
 
     createInsert(itemType, data) {
-        const transactionId = this._nextTransactionId(itemType, 'insert');
         return this._register(
-            new InsertTransaction(transactionId, itemType, data, this));
+            new InsertTransaction(
+                this._nextTransactionId(itemType, 'insert'), 
+                itemType, data, this));
     }
 
     createUpdate(itemType, data) {
-        const transactionId = this._nextTransactionId(itemType, 'update');
         return this._register(
-            new UpdateTransaction(transactionId, itemType, data, this));
+            new UpdateTransaction(
+                this._nextTransactionId(itemType, 'update'),
+                transactionId, itemType, data, this));
     }
 
     createDelete(itemType, dataId) {
-        const transactionId = this._nextTransactionId(itemType, 'delete');
         return this._register(
+            this._nextTransactionId(itemType, 'delete'),
             new DeleteTransaction(transactionId, itemType, dataId, this));
     }
 
     createLogin(itemType, credentials) {
-        const transactionId = this._nextTransactionId(itemType, 'login');
         return this._register(
+            this._nextTransactionId(itemType, 'login'),
             new LoginTransaction(transactionId, itemType, credentials, this));
     }
 
     createRegister(itemType, credentials) {
-        const transactionId = this._nextTransactionId(itemType, 'register');
         return this._register(
+            this._nextTransactionId(itemType, 'register'),
             new RegisterTransaction(transactionId, itemType, credentials, this));
     }
 
