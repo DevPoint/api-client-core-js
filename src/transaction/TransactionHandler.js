@@ -93,12 +93,12 @@ class TransactionHandler extends ObservableHandler {
     }
 
     start(transaction) {
-        this._client.start(transaction);
+        this._client.startTransaction(transaction);
         return this;
     }
 
     cancel(transaction) {
-        this._client.cancel(transaction);
+        this._client.cancelTransaction(transaction);
         return this;
     }
 }

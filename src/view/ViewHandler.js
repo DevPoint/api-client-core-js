@@ -49,7 +49,7 @@ class ViewHandler extends ObservableHandler {
     }
 
     load(view) {
-        this._client.load(view);
+        this._client.loadView(view);
         return this;
     }
 }
