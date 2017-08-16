@@ -64,11 +64,11 @@ class TransactionHandler extends ObservableHandler {
                 itemType, data, this));
     }
 
-    createUpdate(itemType, data) {
+    createUpdate(itemType, dataId, data) {
         return this._register(
             new UpdateTransaction(
                 this._nextTransactionId(itemType, 'update'),
-                itemType, data, this));
+                itemType, dataId, data, this));
     }
 
     createDelete(itemType, dataId) {
