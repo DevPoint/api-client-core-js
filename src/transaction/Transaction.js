@@ -102,7 +102,7 @@ class Transaction extends Observable {
         return this;
     }
 
-    handleTransactionStart() {
+    handleProcessingStart() {
         this.setReady(false)
             .setProcessing(true)
             .setFailed(false)
@@ -110,7 +110,7 @@ class Transaction extends Observable {
             .setValidationErrors(null);
     }
 
-    handleTransactionReady() {
+    handleProcessingReady() {
         this.setReady(true)
             .setProcessing(false)
             .setFailed(false)
@@ -118,13 +118,11 @@ class Transaction extends Observable {
             .setValidationErrors(null);
     }
 
-    handleTransactionCanceled() {
-        this.setReady(false)
-            .setProcessing(false)
-            .setFailed(false);
+    handleProcessingCanceled() {
+        this.setProcessing(false);
     }
 
-    handleTransactionFailed(errors, meta) {
+    handleProcessingFailed(errors, meta) {
         this.setReady(true)
             .setProcessing(false)
             .setFailed(true);
