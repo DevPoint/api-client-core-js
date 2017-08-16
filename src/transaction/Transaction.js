@@ -19,17 +19,17 @@ class Transaction extends Observable {
 
     get transactionId() {
         this._markAsRead('transactionId');
-        return transactionId;
+        return this._transactionId;
     }
 
     get itemType() {
         this._markAsRead('itemType');
-        return itemType;
+        return this._itemType;
     }
 
     get type() {
         this._markAsRead('type');
-        return type;
+        return this._type;
     }
 
     get ready() {
