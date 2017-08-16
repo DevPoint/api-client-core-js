@@ -153,13 +153,15 @@ class Transaction extends Observable {
     }
 
     release() {
-        this.setReady(false)
-            .setProcessing(false)
-            .setFailed(false)
-            .setErrors([])
-            .setValidationErrors(null)
-        this._released = true;
-        this._markAsChanged('released');
+        if (!this.processing) {
+            this.setReady(false)
+                .setProcessing(false)
+                .setFailed(false)
+                .setErrors([])
+                .setValidationErrors(null)
+            this._released = true;
+            this._markAsChanged('released');
+        }
         return this;
     }
 }

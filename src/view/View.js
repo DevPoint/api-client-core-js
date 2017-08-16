@@ -201,21 +201,23 @@ class View extends Observable {
     }
 
     release() {
-        this.setReady(false)
-            .setOutdated(false)
-            .setLoading(false)
-            .setLoadingFailed(false)
-            .updateLoadingMeta({
-                eagerType: builder.eagerType,
-                offset: builder.offset,
-                count: builder.count,
-                pageSize: builder.pageSize,
-                totalCount: 0,
-                errors: []
-            })
-            .setItems([]);
-        this._released = true;
-        this._markAsChanged('released');
+        if (!this.processing) {
+            this.setReady(false)
+                .setOutdated(false)
+                .setLoading(false)
+                .setLoadingFailed(false)
+                .updateLoadingMeta({
+                    eagerType: builder.eagerType,
+                    offset: builder.offset,
+                    count: builder.count,
+                    pageSize: builder.pageSize,
+                    totalCount: 0,
+                    errors: []
+                })
+                .setItems([]);
+            this._released = true;
+            this._markAsChanged('released');
+        }
         return this;
     }
 }
