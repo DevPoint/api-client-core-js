@@ -147,17 +147,17 @@ class Transaction extends Observable {
 
     cancelProcessing() {
         if (this.processing) {
-            this._handler.cancel(this);
+            this._handler.cancelProcessing(this);
         }
         return this;
     }
 
     release() {
-        this.setReady(false);
-        this.setProcessing(false);
-        this.setFailed(false);
-        this.setErrors([]);
-        this.setValidationErrors(null);
+        this.setReady(false)
+            .setProcessing(false)
+            .setFailed(false)
+            .setErrors([])
+            .setValidationErrors(null)
         this._released = true;
         this._markAsChanged('released');
         return this;

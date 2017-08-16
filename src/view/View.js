@@ -201,19 +201,19 @@ class View extends Observable {
     }
 
     release() {
-        this.setReady(false);
-        this.setOutdated(false);
-        this.setLoading(false);
-        this.setLoadingFailed(false);
-        this.updateLoadingMeta({
-            eagerType: builder.eagerType,
-            offset: builder.offset,
-            count: builder.count,
-            pageSize: builder.pageSize,
-            totalCount: 0,
-            errors: []
-        });
-        this.setItems([]);
+        this.setReady(false)
+            .setOutdated(false)
+            .setLoading(false)
+            .setLoadingFailed(false)
+            .updateLoadingMeta({
+                eagerType: builder.eagerType,
+                offset: builder.offset,
+                count: builder.count,
+                pageSize: builder.pageSize,
+                totalCount: 0,
+                errors: []
+            })
+            .setItems([]);
         this._released = true;
         this._markAsChanged('released');
         return this;
