@@ -201,7 +201,7 @@ class View extends Observable {
     }
 
     release() {
-        if (!this.processing) {
+        if (!this.loading) {
             this.setReady(false)
                 .setOutdated(false)
                 .setLoading(false)
