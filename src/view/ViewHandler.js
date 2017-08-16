@@ -52,6 +52,17 @@ class ViewHandler extends ObservableHandler {
         this._client.loadView(view);
         return this;
     }
+
+    get supportsCancelLoading() {
+        return this._client.supportsCancelLoadingView;
+    }
+
+    cancelLoading(view) {
+        if (this.supportsCancelLoading) {
+            this._client.cancelLoadingView(view);
+        }
+        return this;
+    }
 }
 
 export default ViewHandler;

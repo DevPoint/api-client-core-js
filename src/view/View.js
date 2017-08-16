@@ -159,9 +159,8 @@ class View extends Observable {
             });
     }
 
-    handleLoadingReady(items, itemsHash, meta) {
-        this.setItemsHash(itemsHash)
-            .setItems(items)
+    handleLoadingReady(items, meta) {
+        this.setItems(items)
             .setReady(true)
             .setOutdated(false)
             .setLoading(false)
@@ -195,6 +194,11 @@ class View extends Observable {
         return this;
     }
 
+    cancelLoading() {
+        this._handler.cancelLoading();
+        return this;
+    }
+
     release() {
         this.setReady(false);
         this.setOutdated(false);
@@ -208,7 +212,6 @@ class View extends Observable {
             totalCount: 0,
             errors: []
         });
-        this.setItemsHash('');
         this.setItems([]);
         this._released = true;
         this._markAsChanged('released');

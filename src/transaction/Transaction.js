@@ -145,7 +145,7 @@ class Transaction extends Observable {
         return this;
     }
 
-    cancel() {
+    cancelProcessing() {
         if (this.processing) {
             this._handler.cancel(this);
         }

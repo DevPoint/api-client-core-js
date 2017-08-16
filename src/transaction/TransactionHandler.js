@@ -97,8 +97,14 @@ class TransactionHandler extends ObservableHandler {
         return this;
     }
 
-    cancel(transaction) {
-        this._client.cancelTransaction(transaction);
+    get supportsCancelProcessing() {
+        return this._client.supportsCancelProcessingTransaction;
+    }
+
+    cancelProcessing(transaction) {
+        if (this.supportsCancelProcessing) {
+            this._client.cancelProcessingTransaction(transaction);
+        }
         return this;
     }
 }
