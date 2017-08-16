@@ -3,8 +3,9 @@ import Observable from '../observer/Observable';
 
 class View extends Observable {
 
-    constructor(builder, handler) {
+    constructor(viewId, builder, handler) {
         super(handler);
+        this._viewId;
         this._builder = builder;
         this._ready = false;
         this._outdated = false;
@@ -24,17 +25,17 @@ class View extends Observable {
 
     get itemType() {
         this._markAsRead('itemType');
-        return this._itemType;
+        return this._builder.itemType;
     }
 
     get viewId() {
         this._markAsRead('viewId');
-        return viewId;
+        return this._viewId;
     }
 
     get builder() {
         this._markAsRead('builder');
-        return builder;
+        return this._builder;
     }
 
     get ready() {
