@@ -1,16 +1,16 @@
 
 class AbstractClient {
 
-	get supportsCancelProcessingTransaction() {
-		return true;
-	}
-
 	startTransaction(transaction) {
 
 	}
 
+	get supportsCancelProcessingTransaction() {
+		return true;
+	}
+
 	cancelProcessingTransaction(transaction) {
-		view.handleProcessingCanceled();
+		transaction.handleProcessingCanceled();
 	}
 
 	loadView(view) {
