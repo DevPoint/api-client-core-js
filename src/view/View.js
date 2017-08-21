@@ -1,5 +1,5 @@
 
-import ObservableObject from '../observer/ObservableObject';
+import { ObservableObject } from '../observer';
 
 class View extends ObservableObject {
 
