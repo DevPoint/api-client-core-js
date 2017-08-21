@@ -41,7 +41,7 @@ class ViewMap extends ObservableObject {
             ? this._views[viewId] : null;
     }
 
-    set(transationId, view) {
+    set(viewId, view) {
         this._views[viewId] = view;
         this._markAsChanged(viewId);
         return this;
