@@ -1,5 +1,5 @@
 
-import { ObservableObject } from '../observer';
+import { ObservableObject } from '../observable';
 
 class ViewMap extends ObservableObject {
 

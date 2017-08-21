@@ -1,5 +1,5 @@
 
-import { ObservableObject } from '../../src/observer';
+import { ObservableObject } from '../../src/observable';
 
 class Person extends ObservableObject { 
 

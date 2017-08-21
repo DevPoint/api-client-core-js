@@ -1,5 +1,5 @@
 
-import { ObservableObject } from '../observer';
+import { ObservableObject } from '../observable';
 
 class TransactionMap extends ObservableObject {
 
