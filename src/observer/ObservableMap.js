@@ -23,4 +23,8 @@ class ObservableMap extends Observable {
             this._observer.markAsChanged(key);
         }
     }
+
+    //
+    // TODO: implement Map.prototype functions
+    //
 }
