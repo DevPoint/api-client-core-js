@@ -1,8 +1,7 @@
 
-import Observable from '../observer/Observable';
-import Observer from '../observer/Observer';
+import ObservableObject from '../observer/ObservableObject';
 
-class View extends Observable {
+class View extends ObservableObject {
 
     constructor(viewId, builder, handler) {
         super();
@@ -23,10 +22,6 @@ class View extends Observable {
             errors: []
         };
         this._items = [];
-    }
-
-    _createObserver() {
-        return new Observer('view');
     }
 
     get itemType() {

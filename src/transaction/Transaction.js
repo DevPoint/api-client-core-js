@@ -1,8 +1,7 @@
 
-import Observable from '../observer/Observable';
-import Observer from '../observer/Observer';
+import ObservableObject from '../observer/ObservableObject';
 
-class Transaction extends Observable {
+class Transaction extends ObservableObject {
 
     constructor(transactionId, itemType, type, handler) {
         super();
@@ -17,10 +16,6 @@ class Transaction extends Observable {
         this._released = false;
         this._errors = [];
         this._validationErrors = null;
-    }
-
-    _createObserver() {
-        return new Observer('transaction');
     }
 
     get transactionId() {

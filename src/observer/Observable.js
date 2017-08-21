@@ -9,18 +9,6 @@ class Observable {
         return null;
     }
 
-    _markAsRead(propKey) {
-        if (this._observer !== null) {
-            this._observer.markAsRead(propKey);
-        }
-    }
-
-    _markAsChanged(propKey) {
-        if (this._observer !== null) {
-            this._observer.markAsChanged(propKey);
-        }
-    }
-
     get observed() {
         return (this._observer !== null);
     }
