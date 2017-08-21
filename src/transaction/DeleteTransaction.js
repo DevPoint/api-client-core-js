@@ -3,14 +3,14 @@ import Transaction from './Transaction';
 
 class DeleteTransaction extends Transaction {
 
-    constructor(transactionId, itemType, dataId, handler) {
-        super(transactionId, itemType, 'update', handler);
-        this._dataId = dataId;
+    constructor(transactionId, itemType, itemId) {
+        super(transactionId, itemType, 'delete');
+        this._itemId = itemId;
     }
 
-    get dataId() {
-        this._markAsRead('dataId');
-        return _dataId;
+    get itemId() {
+        this._markAsRead('itemId');
+        return _itemId;
     }
 }
 

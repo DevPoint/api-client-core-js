@@ -3,8 +3,8 @@ import Transaction from './Transaction';
 
 class DeleteTransaction extends Transaction {
 
-    constructor(transactionId, itemType, credentials, handler) {
-        super(transactionId, itemType, 'update', handler);
+    constructor(transactionId, itemType, credentials) {
+        super(transactionId, itemType, 'update');
         this._credentials = credentials;
     }
 

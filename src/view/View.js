@@ -1,5 +1,6 @@
 
 import { ObservableObject } from '../observer';
+import ViewLoadingMeta from './ViewLoadingMeta';
 
 class View extends ObservableObject {
 
@@ -12,15 +13,25 @@ class View extends ObservableObject {
         this._released = false;
         this._loading = false;
         this._loadingFailed = false;
-        this._loadingMeta = {
-            eagerType: builder.eagerType,
-            offset: builder.offset,
-            count: builder.count,
-            pageSize: builder.pageSize,
-            totalCount: 0,
-            errors: []
-        };
+        this._loadingMeta = new ViewLoadingMeta(
+            builder.eagerType,
+            builder.offset,
+            builder.count);
         this._items = [];
+    }
+
+    get changed() {
+        let changed = super.changed();
+        if (!changed) {
+            changed = this._loadingMeta.changed();
+        }
+        return changed;
+    }
+
+    clearAllChances() {
+        super.clearAllChances();
+        this._loadingMeta.clearAllChances();
+        return this;
     }
 
     get itemType() {
@@ -63,28 +74,9 @@ class View extends ObservableObject {
         return this._loadingFailed;
     }
 
-    get loadingMetaOffset() {
-        this._markAsRead('loadingMetaOffset');
-        return this._loadingMeta.offset;
-    }
-
-    get loadingMetaCount() {
-        this._markAsRead('loadingMetaCount');
-        return this._loadingMeta.count;
-    }
-
-    get loadingMetaPageSize() {
-        return this._loadingMeta.pageSize;
-    }
-
-    get loadingMetaPage() {
-        this._markAsRead('loadingMetaPage');
-        return this.loadingMetaPageSize ? (this.loadingMetaCount / this.loadingMetaPageSize + 1) : 0;
-    }
-
-    get loadingMetaTotalCount() {
-        this._markAsRead('loadingMetaTotalCount');
-        return this._loadingMeta.totalCount;
+    get loadingMeta() {
+        this._markAsRead('loadingMeta');
+        return this._loadingMeta;
     }
 
     get items() {
@@ -137,10 +129,6 @@ class View extends ObservableObject {
     updateLoadingMeta(loadingMeta) {
         for (let metaPropKey in loadingMeta) {
             this._loadingMeta[metaPropKey] = loadingMeta[metaPropKey];
-            this._markAsChanged(
-                'loadingMeta' + 
-                metaPropKey.charAt(0).toUpperCase() + 
-                metaPropKey.slice(1));
         }
         return this;
     }

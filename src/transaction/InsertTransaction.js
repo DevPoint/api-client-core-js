@@ -3,8 +3,8 @@ import Transaction from './Transaction';
 
 class InsertTransaction extends Transaction {
 
-    constructor(transactionId, itemType, data, handler) {
-        super(transactionId, itemType, 'insert', handler);
+    constructor(transactionId, itemType, data) {
+        super(transactionId, itemType, 'insert');
         this._data = data;
     }
 

@@ -16,7 +16,6 @@ class Hotel extends ObservableObject {
     set name(value) {
         this._name = value;
         this._markAsChanged('name');
-        return this;
     }
 
     get name() {
@@ -27,7 +26,6 @@ class Hotel extends ObservableObject {
     set street(value) {
         this._street = value;
         this._markAsChanged('street');
-        return this;
     }
 
     get street() {
@@ -38,7 +36,6 @@ class Hotel extends ObservableObject {
     set postalCode(value) {
         this._postalCode = value;
         this._markAsChanged('postalCode');
-        return this;
     }
 
     get postalCode() {
@@ -49,7 +46,6 @@ class Hotel extends ObservableObject {
     set email(value) {
         this._email = value;
         this._markAsChanged('email');
-        return this;
     }
 
     get email() {
@@ -60,7 +56,6 @@ class Hotel extends ObservableObject {
     set phone(value) {
         this._phone = value;
         this._markAsChanged('phone');
-        return this;
     }
 
     get phone() {
@@ -71,7 +66,6 @@ class Hotel extends ObservableObject {
     set website(value) {
         this._website = value;
         this._markAsChanged('website');
-        return this;
     }
 
     get website() {

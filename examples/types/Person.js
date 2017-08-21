@@ -11,7 +11,6 @@ class Person extends ObservableObject {
     set firstName(value) {
         this._firstName = value;
         this._markAsChanged('firstName');
-        return this;
     }
 
     get firstName() {
@@ -22,7 +21,6 @@ class Person extends ObservableObject {
     set lastName(value) {
         this._lastName = value;
         this._markAsChanged('lastName');
-        return this;
     }
 
     get lastName() {

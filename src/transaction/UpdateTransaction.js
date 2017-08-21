@@ -3,15 +3,15 @@ import Transaction from './Transaction';
 
 class UpdateTransaction extends Transaction {
 
-    constructor(transactionId, itemType, dataId, data, handler) {
-        super(transactionId, itemType, 'update', handler);
-        this._dataId = data;
-        this._data = data;
+    constructor(transactionId, itemType, itemId, data) {
+        super(transactionId, itemType, 'update');
+        this._itemId = itemId;
+        this.data = data;
     }
 
-    get dataId() {
-        this._markAsRead('dataId');
-        return _dataId;
+    get itemId() {
+        this._markAsRead('itemId');
+        return _itemId;
     }
 
     get data() {

@@ -20,16 +20,6 @@ class ObjectObserver extends Observer {
         return changed;
     }
 
-    markAsRead(propKey) {
-        this._readProps[propKey] = true;
-        return this;
-    }
-
-    markAsChanged(propKey) {
-        this._changedProps[propKey] = true;
-        return this;
-    }
-
     clearAllReads() {
         this._readProps = {};
         return this;
@@ -37,6 +27,16 @@ class ObjectObserver extends Observer {
 
     clearAllChanges() {
         this._changedProps = {};
+        return this;
+    }
+
+    markAsRead(propKey) {
+        this._readProps[propKey] = true;
+        return this;
+    }
+
+    markAsChanged(propKey) {
+        this._changedProps[propKey] = true;
         return this;
     }
 }
