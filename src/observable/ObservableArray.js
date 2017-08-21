@@ -31,7 +31,7 @@ class ObservableArray extends Observable {
 
     get [index] {
         this._markAsRead();
-        return index >= 0 && index < this._wrapped.length ? this._wrapped[index] : undefined;
+        return this._wrapped[index];
     }
 
     get length() {
