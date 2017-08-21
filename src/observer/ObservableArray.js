@@ -124,9 +124,9 @@ class ObservableArray extends Observable {
         return this._wrapped.pop();
     }
     
-    push(value) {
+    push(element, element1) {
         this._markAsChanged();
-        this._wrapped.push(value);
+        this._wrapped.push(arguments);
         return this._wrapped.length;
     }
     
