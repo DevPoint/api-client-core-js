@@ -1,10 +1,10 @@
 
 import Observable from './Observable';
-import Observer from './Observer';
+import MapObserver from './MapObserver';
 
 class ObservableMap extends Observable { 
 
     _createObserver() {
-        return new Observer('map');
+        return new MapObserver();
     }
 }

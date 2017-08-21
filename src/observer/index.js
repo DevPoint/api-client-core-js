@@ -1,5 +1,6 @@
 
 export ArrayObserver from './ArrayObserver';
+export MapObserver from './MapObserver';
 export ObjectObserver from './ObjectObserver';
 export Observable from './Observable';
 export ObservableArray from './ObservableArray';
