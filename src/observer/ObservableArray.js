@@ -50,7 +50,7 @@ class ObservableArray extends Observable {
 
     copyWithin(target, start, end) {
         this._markAsRead();
-        return this._wrapped.copyWithin(target, start, end);
+        return this._wrapped.copyWithin(arguments);
     }
 
     entries() {
@@ -60,43 +60,43 @@ class ObservableArray extends Observable {
 
     every(callback, thisArg) {
         this._markAsRead();
-        return this._wrapped.entries(callback, thisArg);
+        return this._wrapped.entries(arguments);
     }
     
     fill(value, start, end) {
         this._markAsChanged();
-        this._wrapped.fill(value, start, end);
+        this._wrapped.fill(arguments);
         return this;
     }
     
     filter(callback, thisArg) {
         this._markAsRead();
-        return this._wrapped.filter(callback, thisArg);
+        return this._wrapped.filter(arguments);
     }
     
     find(callback, thisArg) {
         this._markAsRead();
-        return this._wrapped.find(callback, thisArg);
+        return this._wrapped.find(arguments);
     }
     
     findIndex(callback, thisArg) {
         this._markAsRead();
-        return this._wrapped.findIndex(callback, thisArg);
+        return this._wrapped.findIndex(arguments);
     }
     
     forEach(callback, thisArg) {
         this._markAsRead();
-        this._wrapped.forEach(callback, thisArg);
+        this._wrapped.forEach(arguments);
     }
     
     includes(searchElement, fromIndex) {
         this._markAsRead();
-        return this._wrapped.includes(searchElement, fromIndex);
+        return this._wrapped.includes(arguments);
     }
     
     indexOf(searchElement, fromIndex) {
         this._markAsRead();
-        return this._wrapped.indexOf(searchElement, fromIndex);
+        return this._wrapped.indexOf(arguments);
     }
     
     join(separator) {
@@ -111,12 +111,12 @@ class ObservableArray extends Observable {
     
     lastIndexOf(searchElement, fromIndex) {
         this._markAsRead();
-        return this._wrapped.lastIndexOf(searchElement, fromIndex);
+        return this._wrapped.lastIndexOf(arguments);
     }
     
     map(callback, thisArg) {
         this._markAsRead();
-        return this._wrapped.map(callback, thisArg));
+        return this._wrapped.map(arguments));
     }
     
     pop() {
@@ -132,12 +132,12 @@ class ObservableArray extends Observable {
     
     reduce(callback, initialValue) {
         this._markAsRead();
-        return this._wrapped.reduce(callback, initialValue);
+        return this._wrapped.reduce(arguments);
     }
     
     reduceRight(callback, initialValue) {
         this._markAsRead();
-        return this._wrapped.reduce(callback, initialValue);
+        return this._wrapped.reduce(arguments);
     }
     
     reverse() {
@@ -152,12 +152,12 @@ class ObservableArray extends Observable {
     
     slice(begin, end) {
         this._markAsRead();
-        return this._wrapped.slice(begin, end));
+        return this._wrapped.slice(arguments));
     }
     
     some(callback, thisArg) {
         this._markAsRead();
-        return this._wrapped.some(callback, thisArg);
+        return this._wrapped.some(arguments);
     }
     
     sort(compareFunction) {
