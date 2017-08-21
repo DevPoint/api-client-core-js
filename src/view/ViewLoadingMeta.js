@@ -1,6 +1,5 @@
 
 import { ObservableObject } from '../observer';
-import ViewLoadingMeta from './ViewLoadingMeta';
 
 class ViewLoadingMeta extends ObservableObject {
 
