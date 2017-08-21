@@ -120,14 +120,15 @@ class ObservableArray extends Observable {
     }
     
     pop() {
-        this._markAsRead();
-        return this._wrapped.pop();
+        const result = this._wrapped.pop();
+        this._markAsChanged();
+        return result;
     }
     
     push(element1) {
+        const result = this._wrapped.push(arguments);
         this._markAsChanged();
-        this._wrapped.push(arguments);
-        return this._wrapped.length;
+        return result;
     }
     
     reduce(callback, initialValue) {
@@ -141,13 +142,15 @@ class ObservableArray extends Observable {
     }
     
     reverse() {
+        const result = this._wrapped.reverse();
         this._markAsChanged();
-        return this._wrapped.reverse();
+        return result;
     }
     
     shift() {
+        const result = this._wrapped.shift();
         this._markAsChanged();
-        return this._wrapped.shift();
+        return result;
     }
     
     slice(begin, end) {
@@ -161,8 +164,9 @@ class ObservableArray extends Observable {
     }
     
     sort(compareFunction) {
+        const result = this._wrapped.sort(compareFunction);
         this._markAsChanged();
-        return this._wrapped.sort(compareFunction);
+        return result;
     }
     
     splice(start, deleteCount, item1) {
@@ -186,8 +190,9 @@ class ObservableArray extends Observable {
     }
 
     unshift(element1) {
+        const result = this._wrapped.unshift(arguments);
         this._markAsChanged();
-        return this._wrapped.unshift(arguments);
+        return result;
     }
 
     values() {
