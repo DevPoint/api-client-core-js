@@ -3,9 +3,8 @@ import { ObservableObject } from '../observer';
 
 class View extends ObservableObject {
 
-    constructor(viewId, builder, handler) {
+    constructor(viewId, builder) {
         super();
-        this._handler = handler;
         this._viewId = viewId;
         this._builder = builder;
         this._ready = false;
@@ -189,37 +188,6 @@ class View extends ObservableObject {
                 totalCount: 0,
                 errors: errors.slice(0)
             });
-    }
-
-    load() {
-        this._handler.load(this);
-        return this;
-    }
-
-    cancelLoading() {
-        this._handler.cancelLoading();
-        return this;
-    }
-
-    release() {
-        if (!this.loading) {
-            this.setReady(false)
-                .setOutdated(false)
-                .setLoading(false)
-                .setLoadingFailed(false)
-                .updateLoadingMeta({
-                    eagerType: builder.eagerType,
-                    offset: builder.offset,
-                    count: builder.count,
-                    pageSize: builder.pageSize,
-                    totalCount: 0,
-                    errors: []
-                })
-                .setItems([]);
-            this._released = true;
-            this._markAsChanged('released');
-        }
-        return this;
     }
 }
 

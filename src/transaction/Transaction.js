@@ -3,13 +3,11 @@ import { ObservableObject } from '../observer';
 
 class Transaction extends ObservableObject {
 
-    constructor(transactionId, itemType, type, handler) {
+    constructor(transactionId, itemType, type) {
         super();
-        this._handler = handler;
         this._transactionId = transactionId;
         this._itemType = itemType;
         this._type = type;
-        this._handler = handler;
         this._ready = false;
         this._processing = false;
         this._failed = false;
@@ -135,33 +133,6 @@ class Transaction extends ObservableObject {
             }
             this.setValidationErrors(validationErrors);
         }
-    }
-
-    start() {
-        if (!this.processing) {
-            this._handler.start(this);
-        }
-        return this;
-    }
-
-    cancelProcessing() {
-        if (this.processing) {
-            this._handler.cancelProcessing(this);
-        }
-        return this;
-    }
-
-    release() {
-        if (!this.processing) {
-            this.setReady(false)
-                .setProcessing(false)
-                .setFailed(false)
-                .setErrors([])
-                .setValidationErrors(null)
-            this._released = true;
-            this._markAsChanged('released');
-        }
-        return this;
     }
 }
 
