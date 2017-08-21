@@ -11,8 +11,8 @@ class MapObserver extends Observer {
 
     get changed() {
         let changed = false;
-        for (let propsKey in this._changedProps) {
-            if (this._readProps.hasOwnProperty(propsKey)) {
+        for (let key in this._changedProps) {
+            if (this._readProps.hasOwnProperty(key)) {
                 changed = true;
                 break;
             }
@@ -20,13 +20,13 @@ class MapObserver extends Observer {
         return changed;
     }
 
-    markAsRead(propKey) {
-        this._readProps[propsKey] = true;
+    markAsRead(key) {
+        this._readProps[key] = true;
         return this;
     }
 
-    markAsChanged(propKey) {
-        this._changedProps[propsKey] = true;
+    markAsChanged(key) {
+        this._changedProps[key] = true;
         return this;
     }
 
