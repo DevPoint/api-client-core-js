@@ -11,8 +11,8 @@ class ObjectObserver extends Observer {
 
     get changed() {
         let changed = false;
-        for (let propsKey in this._changedProps) {
-            if (this._readProps.hasOwnProperty(propsKey)) {
+        for (let propKey in this._changedProps) {
+            if (this._readProps.hasOwnProperty(propKey)) {
                 changed = true;
                 break;
             }
@@ -21,12 +21,12 @@ class ObjectObserver extends Observer {
     }
 
     markAsRead(propKey) {
-        this._readProps[propsKey] = true;
+        this._readProps[propKey] = true;
         return this;
     }
 
     markAsChanged(propKey) {
-        this._changedProps[propsKey] = true;
+        this._changedProps[propKey] = true;
         return this;
     }
 
