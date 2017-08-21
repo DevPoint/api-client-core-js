@@ -19,6 +19,10 @@ class ArrayObserver extends Observer {
         return this;
     }
 
+    get changed() {
+        return this._changed && this._read;
+    }
+
     clearAllReads() {
         this._read = false;
         return this;

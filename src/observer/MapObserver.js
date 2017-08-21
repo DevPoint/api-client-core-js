@@ -5,38 +5,31 @@ class MapObserver extends Observer {
 
     constructor() {
         super('map');
-        this._readProps = {};
-        this._changedProps = {};
+        this._read = false;
+        this._changed = false;
+    }
+
+    markAsRead() {
+        this._read = true;
+        return this;
+    }
+
+    markAsChanged(propKey) {
+        this._changed = true;
+        return this;
     }
 
     get changed() {
-        let changed = false;
-        for (let key in this._changedProps) {
-            if (this._readProps.hasOwnProperty(key)) {
-                changed = true;
-                break;
-            }
-        }
-        return changed;
-    }
-
-    markAsRead(key) {
-        this._readProps[key] = true;
-        return this;
-    }
-
-    markAsChanged(key) {
-        this._changedProps[key] = true;
-        return this;
+        return this._changed && this._read;
     }
 
     clearAllReads() {
-        this._readProps = {};
+        this._read = false;
         return this;
     }
 
     clearAllChanges() {
-        this._changedProps = {};
+        this._changed = false;
         return this;
     }
 }

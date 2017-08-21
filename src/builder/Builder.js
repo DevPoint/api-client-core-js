@@ -112,7 +112,7 @@ class Builder {
         return this;
     }
 
-    buildEagerHash() {
+    buildEagerTypeHash() {
         return this.eagerType ? 'eager=' + this.eagerType : '';
     }
 
@@ -149,7 +149,7 @@ class Builder {
 
     buildHash() {
         const hashes = [
-            this.buildEagerHash(),
+            this.buildEagerTypeHash(),
             this.buildOffsetHash(),
             this.buildCountHash(),
             this.buildPageSizeHash(),
