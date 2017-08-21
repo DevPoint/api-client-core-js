@@ -187,7 +187,7 @@ class ObservableArray extends Observable {
 
     unshift(element1) {
         this._markAsChanged();
-        return this._wrapped.splice(arguments);
+        return this._wrapped.unshift(arguments);
     }
 
     values() {
