@@ -4,19 +4,17 @@ import ViewLoadingMeta from './ViewLoadingMeta';
 
 class View extends ObservableObject {
 
-    constructor(viewId, builder) {
+    constructor(viewId, itemType) {
         super();
         this._viewId = viewId;
-        this._builder = builder;
+        this._itemType = itemType;
+        this._builder = null;
         this._ready = false;
         this._outdated = false;
         this._released = false;
         this._loading = false;
         this._loadingFailed = false;
-        this._loadingMeta = new ViewLoadingMeta(
-            builder.eagerType,
-            builder.offset,
-            builder.count);
+        this._loadingMeta = new ViewLoadingMeta('full', 0, 0);
         this._items = [];
     }
 
@@ -100,6 +98,12 @@ class View extends ObservableObject {
         this._markAsRead('last');
         this._markAsRead('items');
         return this._items && this._items.length ? this._items[this._items.length-1] : null;
+    }
+
+    setBuilder(builder) {
+        this._builder = builder;
+        this._markAsChanged('builder');
+        return this;
     }
 
     setReady(ready) {
