@@ -4,8 +4,8 @@ import MapObserver from './MapObserver';
 
 class ObservableMap extends Observable { 
 
-    constructor() {
-        this._wrapped = {};
+    constructor(wrapped) {
+        this._wrapped = wrapped ? wrapped : new Map();
     }
 
     _createObserver() {
