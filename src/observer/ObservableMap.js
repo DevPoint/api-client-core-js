@@ -12,15 +12,15 @@ class ObservableMap extends Observable {
         return new MapObserver();
     }
 
-    _markAsRead(key) {
+    _markAsRead() {
         if (this._observer !== null) {
-            this._observer.markAsRead(key);
+            this._observer.markAsRead();
         }
     }
 
-    _markAsChanged(key) {
+    _markAsChanged() {
         if (this._observer !== null) {
-            this._observer.markAsChanged(key);
+            this._observer.markAsChanged();
         }
     }
 
