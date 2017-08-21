@@ -43,7 +43,7 @@ class ObservableArray extends Observable {
         return this._wrapped;
     }
 
-    concat(other, other1) {
+    concat(other1, other2) {
         this._markAsRead();
         return this._wrapped.concat(arguments);
     }
@@ -124,7 +124,7 @@ class ObservableArray extends Observable {
         return this._wrapped.pop();
     }
     
-    push(element, element1) {
+    push(element1, element2) {
         this._markAsChanged();
         this._wrapped.push(arguments);
         return this._wrapped.length;
