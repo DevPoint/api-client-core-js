@@ -1,13 +1,11 @@
 
-import Observer from '../observer/Observer';
-import ObservableHandler from '../observer/ObservableHandler';
 import InsertTransaction from './InsertTransaction';
 import UpdateTransaction from './UpdateTransaction';
 import DeleteTransaction from './DeleteTransaction';
 import LoginTransaction from './LoginTransaction';
 import RegisterTransaction from './RegisterTransaction';
 
-class TransactionHandler extends ObservableHandler {
+class TransactionHandler {
 
     constructor(client) {
         this._client = client;
@@ -24,10 +22,6 @@ class TransactionHandler extends ObservableHandler {
     _register(transaction) {
         this._transactions[transaction.transactionId] = transaction;
         return transaction;
-    }
-
-    createObserver() {
-        return new Observer('transaction');
     }
 
     get listenersToDispatch() {

@@ -1,11 +1,13 @@
 
 import Observable from '../observer/Observable';
+import Observer from '../observer/Observer';
 
 class View extends Observable {
 
     constructor(viewId, builder, handler) {
-        super(handler);
-        this._viewId;
+        super();
+        this._handler = handler;
+        this._viewId = viewId;
         this._builder = builder;
         this._ready = false;
         this._outdated = false;
@@ -21,6 +23,10 @@ class View extends Observable {
             errors: []
         };
         this._items = [];
+    }
+
+    _createObserver() {
+        return new Observer('view');
     }
 
     get itemType() {

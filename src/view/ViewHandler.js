@@ -1,9 +1,7 @@
 
-import Observer from '../observer/Observer';
-import ObservableHandler from '../observer/ObservableHandler';
 import View from './View';
 
-class ViewHandler extends ObservableHandler {
+class ViewHandler {
 
     constructor(client) {
         this._client = client;
@@ -19,10 +17,6 @@ class ViewHandler extends ObservableHandler {
             }
         }
         return listeners;
-    }
-
-    createObserver() {
-        return new Observer('view');
     }
 
     clearAllChanges() {

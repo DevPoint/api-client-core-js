@@ -1,4 +1,4 @@
 
 export Observable from './Observable';
-export ObservableHandler from './ObservableHandler';
+export ObservableObject from './ObservableObject';
 export default Observer from './Observer';

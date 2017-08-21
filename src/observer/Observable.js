@@ -1,9 +1,12 @@
 
 class Observable { 
 
-    constructor(handler) {
-        this._handler = handler;
+    constructor() {
         this._observer = null,
+    }
+
+    _createObserver() {
+        return null;
     }
 
     _markAsRead(propKey) {
@@ -32,7 +35,7 @@ class Observable {
 
     addListener(listener) {
         if (!this.observed) {
-            this._observer = this._handler.createObserver();
+            this._observer = this._createObserver();
         }
         this._observer.addListener(listener);
         return this;

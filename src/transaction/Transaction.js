@@ -1,10 +1,12 @@
 
 import Observable from '../observer/Observable';
+import Observer from '../observer/Observer';
 
 class Transaction extends Observable {
 
     constructor(transactionId, itemType, type, handler) {
-        super(handler);
+        super();
+        this._handler = handler;
         this._transactionId = transactionId;
         this._itemType = itemType;
         this._type = type;
@@ -15,6 +17,10 @@ class Transaction extends Observable {
         this._released = false;
         this._errors = [];
         this._validationErrors = null;
+    }
+
+    _createObserver() {
+        return new Observer('transaction');
     }
 
     get transactionId() {
