@@ -39,9 +39,12 @@ class ObservableArray extends Observable {
         return this._wrapped.length;
     }
 
-    concat(other) {
+    get plainArray() {
+        return this._wrapped;
+    }
+
+    concat(other, other1) {
         this._markAsRead();
-        const otherWrapped = other instanceof ObservableArray ? other._wrapped : other;
         return this._wrapped.concat(arguments);
     }
 
@@ -154,7 +157,7 @@ class ObservableArray extends Observable {
     
     some(callback, thisArg) {
         this._markAsRead();
-        return this._wrapped.some();
+        return this._wrapped.some(callback, thisArg);
     }
     
     sort(compareFunction) {
