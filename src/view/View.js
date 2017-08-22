@@ -14,7 +14,7 @@ class View extends ObservableObject {
         this._loading = false;
         this._loadingFailed = false;
         this._loadingMeta = new ViewLoadingMeta('full', 0, 0);
-        this._itemIds = [];
+        this._itemsIds = [];
     }
 
     get changed() {
@@ -63,20 +63,20 @@ class View extends ObservableObject {
         return this._loadingMeta;
     }
 
-    get itemIds() {
-        return this._itemIds;
+    get itemsIds() {
+        return this._itemsIds;
     }
 
     get itemId() {
-        return this._itemIds && this._itemIds.length == 1 ? this._itemIds[0] : null;
+        return this._itemsIds && this._itemsIds.length == 1 ? this._itemsIds[0] : null;
     }
 
     get firstId() {
-        return this._itemIds && this._itemIds.length ? this._itemIds[0] : null;
+        return this._itemsIds && this._itemsIds.length ? this._itemsIds[0] : null;
     }
 
     get lastId() {
-        return this._itemIds && this._itemIds.length ? this._itemIds[this._itemIds.length-1] : null;
+        return this._itemsIds && this._itemsIds.length ? this._itemsIds[this._itemsIds.length-1] : null;
     }
 
     setBuilder(builder) {
@@ -116,8 +116,8 @@ class View extends ObservableObject {
         return this;
     }
 
-    setItemIds(itemIds) {
-        this._itemIds = itemIds;
+    setItemsIds(itemsIds) {
+        this._itemsIds = itemsIds;
         this._markAsChanged();
         return this;
     }
