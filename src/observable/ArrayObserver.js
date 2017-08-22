@@ -8,13 +8,13 @@ class ArrayObserver extends Observer {
         this._changed = false;
     }
 
+    get changed() {
+        return this._changed;
+    }
+
     markAsChanged(propKey) {
         this._changed = true;
         return this;
-    }
-
-    get changed() {
-        return this._changed;
     }
 
     clearChanged() {
