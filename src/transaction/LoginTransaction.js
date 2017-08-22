@@ -6,7 +6,12 @@ class DeleteTransaction extends Transaction {
     constructor(transactionId, itemType, credentials) {
         super(transactionId, itemType, 'update');
         this._credentials = credentials;
+        this._userId = null;
         this._validationErrors = {};
+    }
+
+    get userId() {
+        return this._userId;
     }
 
     get credentials() {
@@ -19,6 +24,12 @@ class DeleteTransaction extends Transaction {
 
     get validationErrors() {
         return this._validationErrors;
+    }
+
+    setUserId(userId) {
+        this._userId = userId;
+        this._markAsChanged();
+        return this;
     }
 
     setValidationErrors(errors) {
