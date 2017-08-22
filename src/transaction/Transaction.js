@@ -38,10 +38,6 @@ class Transaction extends ObservableObject {
         return this._failed;
     }
 
-    get released() {
-        return this._released;
-    }
-
     get hasErrors() {
         return (this.errors.length > 0);
     }
