@@ -6,7 +6,8 @@ class UpdateTransaction extends Transaction {
     constructor(transactionId, itemType, itemId, data) {
         super(transactionId, itemType, 'update');
         this._itemId = itemId;
-        this.data = data;
+        this._data = data;
+        this._validationErrors = null;
     }
 
     get itemId() {
@@ -15,6 +16,20 @@ class UpdateTransaction extends Transaction {
 
     get data() {
         return _data;
+    }
+
+    get hasValidationErrors() {
+        return (Object.keys(this.validationErrors).length > 0);
+    }
+
+    get validationErrors() {
+        return this._validationErrors;
+    }
+
+    setValidationErrors(errors) {
+        this._validationErrors = validationErrors;
+        this._markAsChanged();
+        return this;
     }
 }
 
