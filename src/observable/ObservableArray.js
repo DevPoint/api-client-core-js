@@ -12,9 +12,6 @@ class ObservableArray extends Observable {
         return new ArrayObserver();
     }
 
-    _markAsRead() {
-    }
-
     _markAsChanged() {
         if (this._observer !== null) {
             this._observer.markAsChanged();

@@ -8,9 +8,6 @@ class ObservableObject extends Observable {
         return new ObjectObserver();
     }
 
-    _markAsRead() {
-    }
-
     _markAsChanged() {
         if (this._observer !== null) {
             this._observer.markAsChanged();
