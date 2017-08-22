@@ -11,11 +11,10 @@ class View extends ObservableObject {
         this._builder = null;
         this._ready = false;
         this._outdated = false;
-        this._released = false;
         this._loading = false;
         this._loadingFailed = false;
         this._loadingMeta = new ViewLoadingMeta('full', 0, 0);
-        this._items = [];
+        this._itemIds = [];
     }
 
     get changed() {
@@ -52,10 +51,6 @@ class View extends ObservableObject {
         return this._outdated;
     }
 
-    get released() {
-        return this._released;
-    }
-
     get loading() {
         return this._loading;
     }
@@ -68,20 +63,20 @@ class View extends ObservableObject {
         return this._loadingMeta;
     }
 
-    get items() {
-        return this._items;
+    get itemIds() {
+        return this._itemIds;
     }
 
-    get item() {
-        return this._items && this._items.length == 1 ? this._items[0] : null;
+    get itemId() {
+        return this._itemIds && this._itemIds.length == 1 ? this._itemIds[0] : null;
     }
 
-    get first() {
-        return this._items && this._items.length ? this._items[0] : null;
+    get firstId() {
+        return this._itemIds && this._itemIds.length ? this._itemIds[0] : null;
     }
 
-    get last() {
-        return this._items && this._items.length ? this._items[this._items.length-1] : null;
+    get lastId() {
+        return this._itemIds && this._itemIds.length ? this._itemIds[this._itemIds.length-1] : null;
     }
 
     setBuilder(builder) {
@@ -121,8 +116,8 @@ class View extends ObservableObject {
         return this;
     }
 
-    setItems(items) {
-        this._items = items;
+    setItemIds(itemIds) {
+        this._itemIds = itemIds;
         this._markAsChanged();
         return this;
     }
