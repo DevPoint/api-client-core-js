@@ -1,10 +1,10 @@
 
 import Transaction from './Transaction';
 
-class DeleteTransaction extends Transaction {
+class LoginTransaction extends Transaction {
 
     constructor(transactionId, itemType, credentials) {
-        super(transactionId, itemType, 'update');
+        super(transactionId, itemType, 'login');
         this._credentials = credentials;
         this._userId = null;
         this._validationErrors = {};
@@ -39,4 +39,4 @@ class DeleteTransaction extends Transaction {
     }
 }
 
-export default DeleteTransaction;
+export default LoginTransaction;
