@@ -6,7 +6,7 @@ class InsertTransaction extends Transaction {
     constructor(transactionId, itemType, data) {
         super(transactionId, itemType, 'insert');
         this._data = data;
-        this._validationErrors = null;
+        this._validationErrors = {};
     }
 
     get data() {

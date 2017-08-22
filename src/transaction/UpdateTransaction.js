@@ -7,7 +7,7 @@ class UpdateTransaction extends Transaction {
         super(transactionId, itemType, 'update');
         this._itemId = itemId;
         this._data = data;
-        this._validationErrors = null;
+        this._validationErrors = {};
     }
 
     get itemId() {

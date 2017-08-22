@@ -6,7 +6,7 @@ class DeleteTransaction extends Transaction {
     constructor(transactionId, itemType, credentials) {
         super(transactionId, itemType, 'update');
         this._credentials = credentials;
-        this._validationErrors = null;
+        this._validationErrors = {};
     }
 
     get credentials() {
