@@ -31,25 +31,23 @@ class ViewMap extends ObservableObject {
     }
 
     exists(viewId) {
-        this._markAsRead(viewId);
         return this._views.hasOwnProperty(viewId);
     }
 
     find(viewId) {
-        this._markAsRead(viewId);
         return this.exists(viewId) 
             ? this._views[viewId] : null;
     }
 
     set(viewId, view) {
         this._views[viewId] = view;
-        this._markAsChanged(viewId);
+        this._markAsChanged();
         return this;
     }
 
     clear(viewId) {
         delete this._views[viewId];
-        this._markAsChanged(viewId);
+        this._markAsChanged();
         return this;
     }
 }

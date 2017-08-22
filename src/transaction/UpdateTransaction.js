@@ -10,12 +10,10 @@ class UpdateTransaction extends Transaction {
     }
 
     get itemId() {
-        this._markAsRead('itemId');
         return _itemId;
     }
 
     get data() {
-        this._markAsRead('data');
         return _data;
     }
 }

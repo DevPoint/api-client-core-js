@@ -5,13 +5,7 @@ class ArrayObserver extends Observer {
 
     constructor() {
         super('array');
-        this._read = false;
         this._changed = false;
-    }
-
-    markAsRead() {
-        this._read = true;
-        return this;
     }
 
     markAsChanged(propKey) {
@@ -20,15 +14,10 @@ class ArrayObserver extends Observer {
     }
 
     get changed() {
-        return this._changed && this._read;
+        return this._changed;
     }
 
-    clearAllReads() {
-        this._read = false;
-        return this;
-    }
-
-    clearAllChanges() {
+    clearChanged() {
         this._changed = false;
         return this;
     }

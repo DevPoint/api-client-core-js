@@ -31,25 +31,23 @@ class CacheMap extends ObservableObject {
     }
 
     exists(entryId) {
-        this._markAsRead(entryId);
         return this._entries.hasOwnProperty(entryId);
     }
 
     find(entryId) {
-        this._markAsRead(entryId);
         return this.exists(entryId) 
             ? this._entries[entryId] : null;
     }
 
     set(entryId, entry) {
         this._entries[entryId] = entry;
-        this._markAsChanged(entryId);
+        this._markAsChanged();
         return this;
     }
 
     clear(entryId) {
         delete this._entries[entryId];
-        this._markAsChanged(entryId);
+        this._markAsChanged();
         return this;
     }
 }

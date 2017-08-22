@@ -13,9 +13,6 @@ class ObservableArray extends Observable {
     }
 
     _markAsRead() {
-        if (this._observer !== null) {
-            this._observer.markAsRead();
-        }
     }
 
     _markAsChanged() {
@@ -30,12 +27,10 @@ class ObservableArray extends Observable {
     }
 
     get [index] {
-        this._markAsRead();
         return index >= 0 && index < this._wrapped.length ? this._wrapped[index] : undefined;
     }
 
     get length() {
-        this._markAsRead();
         return this._wrapped.length;
     }
 
@@ -44,22 +39,18 @@ class ObservableArray extends Observable {
     }
 
     concat(other1) {
-        this._markAsRead();
         return this._wrapped.concat(arguments);
     }
 
     copyWithin(target, start, end) {
-        this._markAsRead();
         return this._wrapped.copyWithin(arguments);
     }
 
     entries() {
-        this._markAsRead();
         return this._wrapped.entries();
     }
 
     every(callback, thisArg) {
-        this._markAsRead();
         return this._wrapped.entries(arguments);
     }
     
@@ -70,52 +61,42 @@ class ObservableArray extends Observable {
     }
     
     filter(callback, thisArg) {
-        this._markAsRead();
         return this._wrapped.filter(arguments);
     }
     
     find(callback, thisArg) {
-        this._markAsRead();
         return this._wrapped.find(arguments);
     }
     
     findIndex(callback, thisArg) {
-        this._markAsRead();
         return this._wrapped.findIndex(arguments);
     }
     
     forEach(callback, thisArg) {
-        this._markAsRead();
         this._wrapped.forEach(arguments);
     }
     
     includes(searchElement, fromIndex) {
-        this._markAsRead();
         return this._wrapped.includes(arguments);
     }
     
     indexOf(searchElement, fromIndex) {
-        this._markAsRead();
         return this._wrapped.indexOf(arguments);
     }
     
     join(separator) {
-        this._markAsRead();
         return this._wrapped.join(separator);
     }
     
     keys() {
-        this._markAsRead();
         return this._wrapped.keys();
     }
     
     lastIndexOf(searchElement, fromIndex) {
-        this._markAsRead();
         return this._wrapped.lastIndexOf(arguments);
     }
     
     map(callback, thisArg) {
-        this._markAsRead();
         return this._wrapped.map(arguments));
     }
     
@@ -132,12 +113,10 @@ class ObservableArray extends Observable {
     }
     
     reduce(callback, initialValue) {
-        this._markAsRead();
         return this._wrapped.reduce(arguments);
     }
     
     reduceRight(callback, initialValue) {
-        this._markAsRead();
         return this._wrapped.reduce(arguments);
     }
     
@@ -154,12 +133,10 @@ class ObservableArray extends Observable {
     }
     
     slice(begin, end) {
-        this._markAsRead();
         return this._wrapped.slice(arguments));
     }
     
     some(callback, thisArg) {
-        this._markAsRead();
         return this._wrapped.some(arguments);
     }
     
@@ -175,17 +152,14 @@ class ObservableArray extends Observable {
     }
 
     toLocalString() {
-        this._markAsRead();
         return this._wrapped.toLocalString();
     }
 
     toSource() {
-        this._markAsRead();
         return this._wrapped.toSource();
     }
     
     toString() {
-        this._markAsRead();
         return this._wrapped.toString();
     }
 
@@ -196,7 +170,6 @@ class ObservableArray extends Observable {
     }
 
     values() {
-        this._markAsRead();
         return this._wrapped.values();
     }
 }

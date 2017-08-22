@@ -33,100 +33,84 @@ class View extends ObservableObject {
     }
 
     get itemType() {
-        this._markAsRead('itemType');
         return this._builder.itemType;
     }
 
     get viewId() {
-        this._markAsRead('viewId');
         return this._viewId;
     }
 
     get builder() {
-        this._markAsRead('builder');
         return this._builder;
     }
 
     get ready() {
-        this._markAsRead('ready');
         return this._ready;
     }
 
     get outdated() {
-        this._markAsRead('outdated');
         return this._outdated;
     }
 
     get released() {
-        this._markAsRead('released');
         return this._released;
     }
 
     get loading() {
-        this._markAsRead('loading');
         return this._loading;
     }
 
     get loadingFailed() {
-        this._markAsRead('loadingFailed');
         return this._loadingFailed;
     }
 
     get loadingMeta() {
-        this._markAsRead('loadingMeta');
         return this._loadingMeta;
     }
 
     get items() {
-        this._markAsRead('items');
         return this._items;
     }
 
     get item() {
-        this._markAsRead('item');
-        this._markAsRead('items');
         return this._items && this._items.length == 1 ? this._items[0] : null;
     }
 
     get first() {
-        this._markAsRead('first');
-        this._markAsRead('items');
         return this._items && this._items.length ? this._items[0] : null;
     }
 
     get last() {
-        this._markAsRead('last');
-        this._markAsRead('items');
         return this._items && this._items.length ? this._items[this._items.length-1] : null;
     }
 
     setBuilder(builder) {
         this._builder = builder;
-        this._markAsChanged('builder');
+        this._markAsChanged();
         return this;
     }
 
     setReady(ready) {
         this._ready = ready;
-        this._markAsChanged('ready');
+        this._markAsChanged();
         return this;
     }
 
     setOutdated(outdated) {
         this._outdated = outdated;
-        this._markAsChanged('outdated');
+        this._markAsChanged();
         return this;
     }
 
     setLoading(loading) {
         this._loading = loading;
-        this._markAsChanged('loading');
+        this._markAsChanged();
         return this;
     }
 
     setLoadingFailed(loadingFailed) {
         this._loadingFailed = loadingFailed;
-        this._markAsChanged('loadingFailed');
+        this._markAsChanged();
         return this;
     }
 
@@ -139,7 +123,7 @@ class View extends ObservableObject {
 
     setItems(items) {
         this._items = items;
-        this._markAsChanged('items');
+        this._markAsChanged();
         return this;
     }
 

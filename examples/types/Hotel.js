@@ -15,61 +15,55 @@ class Hotel extends ObservableObject {
 
     set name(value) {
         this._name = value;
-        this._markAsChanged('name');
+        this._markAsChanged()
     }
 
     get name() {
-        this._markAsRead('name');
         return this._name;
     }
 
     set street(value) {
         this._street = value;
-        this._markAsChanged('street');
+        this._markAsChanged()
     }
 
     get street() {
-        this._markAsRead('street');
         return this._street;
     }
 
     set postalCode(value) {
         this._postalCode = value;
-        this._markAsChanged('postalCode');
+        this._markAsChanged()
     }
 
     get postalCode() {
-        this._markAsRead('postalCode');
         return this._postalCode;
     }
 
     set email(value) {
         this._email = value;
-        this._markAsChanged('email');
+        this._markAsChanged()
     }
 
     get email() {
-        this._markAsRead('email');
         return this._email;
     }
 
     set phone(value) {
         this._phone = value;
-        this._markAsChanged('phone');
+        this._markAsChanged()
     }
 
     get phone() {
-        this._markAsRead('phone');
         return this._phone;
     }
 
     set website(value) {
         this._website = value;
-        this._markAsChanged('website');
+        this._markAsChanged()
     }
 
     get website() {
-        this._markAsRead('website');
         return this._website;
     }
 }

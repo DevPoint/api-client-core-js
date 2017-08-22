@@ -31,25 +31,23 @@ class TransactionMap extends ObservableObject {
     }
 
     exists(transactionId) {
-        this._markAsRead(transactionId);
         return this._transactions.hasOwnProperty(transactionId);
     }
 
     find(transactionId) {
-        this._markAsRead(transactionId);
         return this.exists(transactionId) 
             ? this._transactions[transactionId] : null;
     }
 
     set(transationId, transaction) {
         this._transactions[transactionId] = transaction;
-        this._markAsChanged(transactionId);
+        this._markAsChanged();
         return this;
     }
 
     clear(transactionId) {
         delete this._transactions[transactionId];
-        this._markAsChanged(transactionId);
+        this._markAsChanged();
         return this;
     }
 }

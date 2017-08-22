@@ -8,15 +8,12 @@ class ObservableObject extends Observable {
         return new ObjectObserver();
     }
 
-    _markAsRead(propKey) {
-        if (this._observer !== null) {
-            this._observer.markAsRead(propKey);
-        }
+    _markAsRead() {
     }
 
-    _markAsChanged(propKey) {
+    _markAsChanged() {
         if (this._observer !== null) {
-            this._observer.markAsChanged(propKey);
+            this._observer.markAsChanged();
         }
     }
 }

@@ -5,13 +5,11 @@ class PropertyObserver extends Observer {
 
     constructor(type) {
         super(type);
-        this._read = false;
         this._changed = false;
     }
 
-    markAsRead() {
-        this._read = true;
-        return this;
+    get changed() {
+        return this._changed;
     }
 
     markAsChanged() {
@@ -19,12 +17,7 @@ class PropertyObserver extends Observer {
         return this;
     }
 
-    clearAllReads() {
-        this._read = false;
-        return this;
-    }
-
-    clearAllChanges() {
+    clearChanged() {
         this._changed = false;
         return this;
     }

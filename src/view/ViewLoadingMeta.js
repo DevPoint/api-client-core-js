@@ -15,27 +15,25 @@ class ViewLoadingMeta extends ObservableObject {
 
     set offset(value) {
         this._offset = value;
-        this._markAsRead('offset');
+        this._markAsChanged();
     }
 
     get offset() {
-        this._markAsRead('offset');
         return this._offset;
     }
 
     set count(value) {
         this._count = value;
-        this._markAsRead('count');
+        this._markAsChanged();
     }
 
     get count() {
-        this._markAsRead('count');
         return this._count;
     }
 
     set pageSize(value) {
         this._pageSize = value;
-        this._markAsRead('pageSize');
+        this._markAsChanged();
     }
 
     get pageSize() {
@@ -44,16 +42,14 @@ class ViewLoadingMeta extends ObservableObject {
 
     set page(value) {
         this._page = value;
-        this._markAsRead('page');
+        this._markAsChanged();
     }
 
     get page() {
-        this._markAsRead('page');
         return this.pageSize ? (this.count / this.pageSize + 1) : 0;
     }
 
     get totalCount() {
-        this._markAsRead('totalCount');
         return this._totalCount;
     }
 }

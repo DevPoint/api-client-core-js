@@ -9,7 +9,6 @@ class DeleteTransaction extends Transaction {
     }
 
     get credentials() {
-        this._markAsRead('credentials');
         return _credentials;
     }
 }

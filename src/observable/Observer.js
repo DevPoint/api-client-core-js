@@ -22,11 +22,7 @@ class Observer {
         return false;
     }
 
-    clearAllReads() {
-        return this;
-    }
-
-    clearAllChanges() {
+    clearChanged() {
         return this;
     }
 

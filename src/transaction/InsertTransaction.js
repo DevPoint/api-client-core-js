@@ -9,7 +9,6 @@ class InsertTransaction extends Transaction {
     }
 
     get data() {
-        this._markAsRead('data');
         return _data;
     }
 }

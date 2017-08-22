@@ -9,7 +9,6 @@ class DeleteTransaction extends Transaction {
     }
 
     get itemId() {
-        this._markAsRead('itemId');
         return _itemId;
     }
 }

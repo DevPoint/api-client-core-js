@@ -17,87 +17,76 @@ class Transaction extends ObservableObject {
     }
 
     get transactionId() {
-        this._markAsRead('transactionId');
         return this._transactionId;
     }
 
     get itemType() {
-        this._markAsRead('itemType');
         return this._itemType;
     }
 
     get type() {
-        this._markAsRead('type');
         return this._type;
     }
 
     get ready() {
-        this._markAsRead('ready');
         return this._ready;
     }
 
     get processing() {
-        this._markAsRead('processing');
         return this._processing;
     }
 
     get failed() {
-        this._markAsRead('failed');
         return this._failed;
     }
 
     get released() {
-        this._markAsRead('released');
         return this._released;
     }
 
     get hasErrors() {
-        this._markAsRead('hasErrors');
         return (this.errors.length > 0);
     }
 
     get errors() {
-        this._markAsRead('errors');
         return this._errors;
     }
 
     get hasValidationErrors() {
-        this._markAsRead('hasValidationErrors');
         return (Object.keys(this.validationErrors).length > 0);
     }
 
     get validationErrors() {
-        this._markAsRead('validationErrors');
         return this._validationErrors;
     }
 
     setReady(ready) {
         this._ready = ready;
-        this._markAsChanged('ready');
+        this._markAsChanged();
         return this;
     }
 
     setProcessing(processing) {
         this._processing = processing;
-        this._markAsChanged('processing');
+        this._markAsChanged();
         return this;
     }
 
     setFailed(failed) {
         this._failed = failed;
-        this._markAsChanged('failed');
+        this._markAsChanged();
         return this;
     }
 
     setErrors(errors) {
         this._errors = errors;
-        this._markAsChanged('errors');
+        this._markAsChanged();
         return this;
     }
 
     setValidationErrors(errors) {
         this._validationErrors = validationErrors;
-        this._markAsChanged('validationErrors');
+        this._markAsChanged();
         return this;
     }
 
