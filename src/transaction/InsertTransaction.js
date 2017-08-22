@@ -5,12 +5,17 @@ class InsertTransaction extends Transaction {
 
     constructor(transactionId, itemType, data) {
         super(transactionId, itemType, 'insert');
+        this._itemId = null;
         this._data = data;
         this._validationErrors = {};
     }
 
+    get itemId() {
+        return this._itemId;
+    }
+
     get data() {
-        return _data;
+        return this._data;
     }
 
     get hasValidationErrors() {
@@ -19,6 +24,12 @@ class InsertTransaction extends Transaction {
 
     get validationErrors() {
         return this._validationErrors;
+    }
+
+    setItemId(itemId) {
+        this._itemId = itemId;
+        this._markAsChanged();
+        return this;
     }
 
     setValidationErrors(errors) {

@@ -64,6 +64,12 @@ class Transaction extends ObservableObject {
         return this;
     }
 
+    setUserId(userId) {
+        this._userId = userId;
+        this._markAsChanged();
+        return this;
+    }
+
     setErrors(errors) {
         this._errors = errors;
         this._markAsChanged();

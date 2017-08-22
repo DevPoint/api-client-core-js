@@ -11,11 +11,11 @@ class UpdateTransaction extends Transaction {
     }
 
     get itemId() {
-        return _itemId;
+        return this._itemId;
     }
 
     get data() {
-        return _data;
+        return this._data;
     }
 
     get hasValidationErrors() {
