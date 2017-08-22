@@ -10,7 +10,6 @@ class ViewLoadingMeta extends ObservableObject {
         this._count = count;
         this._pageSize = pageSize;
         this._totalCount = 0;
-        this._errors = [];
     }
 
     set offset(value) {
