@@ -26,9 +26,9 @@ class View extends ObservableObject {
         return changed;
     }
 
-    clearAllChances() {
-        super.clearAllChances();
-        this._loadingMeta.clearAllChances();
+    clearChanged() {
+        super.clearChanged();
+        this._loadingMeta.clearChanged();
         return this;
     }
 

@@ -20,11 +20,11 @@ class TransactionMap extends ObservableObject {
         return changed;
     }
 
-    clearAllChances() {
-        super.clearAllChances();
+    clearChanged() {
+        super.clearChanged();
         if (this.observed) {
             for (let transactionId in this._transactions) {
-                this._transactions[transactionId].clearAllChances();
+                this._transactions[transactionId].clearChanged();
             }
         }
         return this;

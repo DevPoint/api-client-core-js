@@ -20,11 +20,11 @@ class CacheMap extends ObservableObject {
         return changed;
     }
 
-    clearAllChances() {
-        super.clearAllChances();
+    clearChanged() {
+        super.clearChanged();
         if (this.observed) {
             for (let entryId in this._entries) {
-                this._entries[entryId].clearAllChances();
+                this._entries[entryId].clearChanged();
             }
         }
         return this;

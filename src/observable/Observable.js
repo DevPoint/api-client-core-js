@@ -39,9 +39,9 @@ class Observable {
         return this;
     }
 
-    clearAllChances() {
+    clearChanged() {
         if (this.observed) {
-            this._observer.clearAllChances();
+            this._observer.clearChanged();
         }
         return this;
     }

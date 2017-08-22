@@ -20,11 +20,11 @@ class ViewMap extends ObservableObject {
         return changed;
     }
 
-    clearAllChances() {
-        super.clearAllChances();
+    clearChanged() {
+        super.clearChanged();
         if (this.observed) {
             for (let viewId in this._views) {
-                this._views[viewId].clearAllChances();
+                this._views[viewId].clearChanged();
             }
         }
         return this;

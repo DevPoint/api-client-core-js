@@ -8,31 +8,17 @@ class ObservableArray extends Observable {
         this._wrapped = wrapped ? wrapped : [];
     }
 
-    _createObserver() {
-        return new ArrayObserver();
-    }
-
-    _markAsChanged() {
-        if (this._observer !== null) {
-            this._observer.markAsChanged();
-        }
-    }
-
-    set [index](value) {
-        this._wrapped[index] = value;
-        this._markAsChanged();
-    }
-
-    get [index] {
-        return index >= 0 && index < this._wrapped.length ? this._wrapped[index] : undefined;
-    }
-
     get length() {
         return this._wrapped.length;
     }
 
-    get plainArray() {
-        return this._wrapped;
+    get(index) {
+        return this._wrapped[index];
+    }
+
+    set(index, value) {
+        this._wrapped[index] = value;
+        this._markAsChanged();
     }
 
     concat(other1) {
