@@ -9,8 +9,8 @@ class InsertTransactionDispatcher extends TransactionDispatcher {
             action.id, action.itemType, action.data);
     }
 
-    _updateTransactions(transition, payload) {
-    	super._updateTransactions(transaction, payload);
+    _updateTransaction(transition, payload) {
+    	super._updateTransaction(transaction, payload);
         for (let propsKey in payload) {
             switch (propsKey) {
                 case: 'itemId':

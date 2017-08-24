@@ -17,7 +17,7 @@ class TransactionDispatcher extends TransactionDispatcher {
         return null;
     }
 
-    _updateTransactions(transition, payload) {
+    _updateTransaction(transition, payload) {
         for (let propsKey in payload) {
             switch (propsKey) {
                 case: 'ready';
@@ -44,12 +44,12 @@ class TransactionDispatcher extends TransactionDispatcher {
         if (actionTypeFrags[0] === 'UPDATE') {
             const transaction = transactionMap.find(action.id);
             if (transaction) {
-                this._updateTransactions(transaction, action.payload);
+                this._updateTransaction(transaction, action.payload);
             }
         }
         else if (actionTypeFrags[0] === 'SET' || actionTypeFrags[0] === 'ADD') {
             const newTransactAction = _createTransaction(action);
-            this._updateTransactions(newTransactAction, action.payload);
+            this._updateTransaction(newTransactAction, action.payload);
             transactionMap.set(action.id, newTransactAction);
         }
     }
