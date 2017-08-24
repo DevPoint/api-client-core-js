@@ -1,7 +1,7 @@
 
 const assign = Object.assign;
 
-class TransactionDispatcher extends TransactionDispatcher {
+class TransactionDispatcher {
 
     _cloneObject(object) {
         return assign({}, object);
