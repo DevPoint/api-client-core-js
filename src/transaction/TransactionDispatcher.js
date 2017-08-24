@@ -47,7 +47,9 @@ class TransactionDispatcher extends TransactionDispatcher {
         }
         else if (actionTypeFrags[0] === 'SET' || actionTypeFrags[0] === 'ADD') {
             const newTransactAction = this._createTransaction(action);
-            this._updateTransaction(newTransactAction, action.payload);
+            if (action.payload) {
+                this._updateTransaction(newTransactAction, action.payload);
+            }
             transactionMap.set(action.id, newTransactAction);
         }
     }

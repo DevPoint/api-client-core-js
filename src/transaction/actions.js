@@ -11,17 +11,7 @@ export default {
             type: nameSpacePrefix . 'SET_TRANSACTION_INSERT',
             id: transactionId,
             itemType: itemType,
-            data: data,
-            payload: {
-                type: 'insert',
-                ready: false,
-                processing: true,
-                succeeded: false,
-                failed: false,
-                itemId: null,
-                errors: [],
-                validationErrors: {}
-            }
+            data: data
         };
     }
 
@@ -67,17 +57,8 @@ export default {
             id: transactionId,
             itemType: itemType,
             itemId: itemId,
-            data: data,
-            payload: {
-                type: 'update',
-                ready: false,
-                processing: true,
-                succeeded: false,
-                failed: false,
-                errors: [],
-                validationErrors: {}
-            }
-        };
+            data: data
+       };
     }
 
     updateSucceeded(nameSpace, transactionId) {
@@ -119,15 +100,7 @@ export default {
         return {
             type: nameSpacePrefix . 'SET_TRANSACTION_DELETE',
             id: transactionId,
-            itemType: itemType,
-            payload: {
-                type: 'delete',
-                ready: false,
-                processing: true,
-                failed: false,
-                itemId: itemId,
-                errors: []
-            }
+            itemType: itemType
         };
     }
 
@@ -169,17 +142,7 @@ export default {
             type: nameSpacePrefix . 'SET_TRANSACTION_LOGIN',
             id: transactionId,
             itemType: itemType,
-            credentials: credentials,
-            payload: {
-                type: 'login',
-                ready: false,
-                processing: true,
-                succeeded: false,
-                failed: false,
-                userId: null,
-                errors: [],
-                validationErrors: {}
-            }
+            credentials: credentials
         };
     }
 
@@ -225,16 +188,7 @@ export default {
             type: nameSpacePrefix . 'REGISTER_TRANSACTION_REGISTER',
             id: transactionId,
             itemType: itemType,
-            credentials: credentials,
-            payload: {
-                type: 'register',
-                ready: false,
-                processing: true,
-                succeeded: false,
-                failed: false,
-                token: '',
-                errors: [],
-            }
+            credentials: credentials
         };
     }
 
