@@ -19,6 +19,10 @@ class ApiDispatcher {
         return this._transactionDispatchers[$type];
     }
 
+    _getViewDispatcher() {
+        return this._viewDispatcher;
+    }
+
     dispatch(action) {
         const actionTypeFrags = action.type.split('_');
         if (actionTypeFrags.length >= 2) {
