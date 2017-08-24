@@ -10,7 +10,7 @@ class ApiClient {
         this._api.dispatch(this._api.insertStart(transactionId, itemType, data));
         this._api.dispatch(this._api.insertFailed(transactionId, ['not_implemented'], {}));
         this._api.endDispatch();
-        return this._api.transactions()->find(transactionId);
+        return this._api.transactions().find(transactionId);
     }
 
     updateTransaction(transactionId, itemType, itemId, data) {
@@ -18,7 +18,7 @@ class ApiClient {
         this._api.dispatch(this._api.updateStart(transactionId, itemType, itemId, data));
         this._api.dispatch(this._api.updateFailed(transactionId, ['not_implemented'], {}));
         this._api.endDispatch();
-        return this._api.transactions()->find(transactionId);
+        return this._api.transactions().find(transactionId);
     }
 
     deleteTransaction(transactionId, itemType, itemId) {
@@ -26,7 +26,7 @@ class ApiClient {
         this._api.dispatch(this._api.deleteStart(transactionId, itemType, itemId));
         this._api.dispatch(this._api.deleteFailed(transactionId, ['not_implemented']));
         this._api.endDispatch();
-        return this._api.transactions()->find(transactionId);
+        return this._api.transactions().find(transactionId);
     }
 
     loginTransaction(transactionId, credentials) {
@@ -34,7 +34,7 @@ class ApiClient {
         this._api.dispatch(this._api.loginStart(transactionId, credentials));
         this._api.dispatch(this._api.loginFailed(transactionId, ['not_implemented'], {}));
         this._api.endDispatch();
-        return this._api.transactions()->find(transactionId);
+        return this._api.transactions().find(transactionId);
     }
 
     registerTransaction(transactionId, credentials) {
@@ -42,7 +42,7 @@ class ApiClient {
         this._api.dispatch(this._api.registerStart(transactionId, credentials));
         this._api.dispatch(this._api.registerFailed(transactionId, ['not_implemented'], {}));
         this._api.endDispatch();
-        return this._api.transactions()->find(transactionId);
+        return this._api.transactions().find(transactionId);
     }
 
     loadView(viewId, builder) {
@@ -54,6 +54,6 @@ class ApiClient {
             pageSize: builder.pageSize}));
         this._api.dispatch(this._api.loadingFailed(viewId, ['not_implemented']));
         this._api.endDispatch();
-        return this._api.views()->find(viewId);
+        return this._api.views().find(viewId);
     }
 }
