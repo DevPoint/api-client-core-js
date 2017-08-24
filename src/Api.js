@@ -1,4 +1,5 @@
 
+import ApiClient from './ApiClient';
 import ApiDispatcher from './ApiDispatcher';
 import { CacheDispatcherFactory } from './cache';
 import transactionActions from './transaction/actions';
@@ -13,11 +14,16 @@ class Api {
         this._transactions = new TransactionMap();
         this._views = new ViewMap();
         this._caches = this._createCaches();
+        this._client = this._createClient();
         this._dispatcher = this._createDispatcher();
     }
 
     _createCaches() {
         return {};
+    }
+
+    _createClient() {
+        return new ApiClient(this);
     }
 
     _createCacheDispatcherFactory() {
@@ -48,11 +54,35 @@ class Api {
     }
 
     transactions() {
-        return _transactions;
+        return this._transactions;
+    }
+
+    insertTransaction(transactionId, itemType, data) {
+        return this._client.insertTransaction(transactionId, itemType, data);
+    }
+
+    updateTransaction(transactionId, itemType, itemId, data) {
+        return this._client.updateTransaction(transactionId, itemType, itemId, data);
+    }
+
+    deleteTransaction(transactionId, itemType, itemId) {
+        return this._client.deleteTransaction(transactionId, itemId);
+    }
+
+    loginTransaction(transactionId, credentials) {
+        return this._client.loginTransaction(transactionId, credentials);
+    }
+
+    registerTransaction(transactionId, credentials) {
+        return this._client.registerTransaction(transactionId, credentials);
     }
 
     views() {
-        return _views;
+        return this._views;
+    }
+
+    loadView(viewId, builder) {
+        return this._client.loadView(viewId, builder);
     }
 
     dispatch(action) {
@@ -118,4 +148,17 @@ class Api {
     registerFailed(transactionId, error) {
         return transactionActions.registerFailed(this.nameSpace, transactionId, error);
     }
+
+    loadingStart(viewId, itemType, loadingMeta) {
+        return viewActions.loadingStart(this.nameSpace, viewId, itemType, loadingMeta);
+    }
+
+    loadingSucceeded(viewId, loadingMeta, itemsIds) {
+        return viewActions.loadingSucceeded(this.nameSpace, viewId, loadingMeta, itemsIds);
+    }
+
+    loadingFailed(viewId, errors) {
+        return viewActions.loadingFailed(this.nameSpace, viewId, errors);
+    }
+
 }

@@ -35,7 +35,7 @@ class ViewDispatcher extends ViewDispatcher {
                     view.setReady(payload[propsKey]);
                     break;
                 case 'loadingMeta':
-                    view.setLoadingMeta(this._cloneObject(payload[propsKey]));
+                    view.updateLoadingMeta(payload[propsKey]);
                     break;
                 case 'itemsIds':
                     view.setItemsIds(this._cloneArray(payload[propsKey]));

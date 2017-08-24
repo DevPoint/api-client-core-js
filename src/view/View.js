@@ -4,7 +4,7 @@ import ViewLoadingMeta from './ViewLoadingMeta';
 
 class View extends ObservableObject {
 
-    constructor(viewId, itemType) {
+    constructor(viewId, itemType, loadingMeta) {
         super();
         this._viewId = viewId;
         this._itemType = itemType;

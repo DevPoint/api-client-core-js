@@ -1,0 +1,60 @@
+
+export default {
+
+    loadingStart(nameSpace, viewId, itemType, loadingMeta) {
+        const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
+        return {
+            type: nameSpacePrefix . 'SET_VIEW',
+            id: viewId,
+            itemType: itemType,
+            payload: {
+                ready: false,
+                loading: true,
+                succeeded: false,
+                failed: false,
+                loadingMeta: {
+                    eagerType: loadingMeta.eagerType,
+                    offset: loadingMeta.offset,
+                    count: loadingMeta.count,
+                    pageSize: loadingMeta.pageSize,
+                    totalCount: 0
+                }
+                itemsIds: [],
+                errors: []
+            }
+        };
+    }
+
+    loadingSucceeded(nameSpace, viewId, loadingMeta, itemsIds) {
+        const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
+        return {
+            type: nameSpacePrefix . 'UPDATE_VIEW',
+            id: viewId,
+            payload: {
+                ready: true,
+                loading: false,
+                succeeded: true,
+                loadingMeta: {
+                    totalCount: loadingMeta.totalCount
+                }
+                itemsIds: itemsIds;
+                errors: [],
+                validationErrors: {}
+            }
+        };
+    }
+
+    loadingFailed(nameSpace, viewId, errors) {
+        const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
+        return {
+            type: nameSpacePrefix . 'UPDATE_VIEW',
+            id: viewId,
+            payload: {
+                ready: true,
+                loading: false,
+                failed: true,
+                errors: errors
+            }
+        };
+    }
+};

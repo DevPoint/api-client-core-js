@@ -29,16 +29,16 @@ class ApiDispatcher {
             if (actionTypeFrags[1] === 'TRANSACTION') {
                 const transactionType = actionTypeFrags[2].toLowerCase();
                 const transactionDispatcher = this._getTransactionDispatcher(transactionType);
-                transactionDispatcher.dispatch(api.transactions(), action);
+                transactionDispatcher.dispatch(this._api.transactions(), action);
             }
             else if (actionTypeFrags[1] === 'VIEW') {
                 const viewDispatcher = this._getViewDispatcher();
-                viewDispatcher.dispatch(api.views(), action);
+                viewDispatcher.dispatch(this._api.views(), action);
             }
             else if (actionTypeFrags[1] === 'CACHE') {
                 const itemType = actionTypeFrags[2].toLowerCase();
                 const cacheDispatcher = this._getCacheDispatcher(itemType);
-                cacheDispatcher.dispatch(api.cache(itemType), action);
+                cacheDispatcher.dispatch(this._api.cache(itemType), action);
             }
         }
     }
