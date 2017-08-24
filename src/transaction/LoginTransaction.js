@@ -3,9 +3,9 @@ import Transaction from './Transaction';
 
 class LoginTransaction extends Transaction {
 
-    constructor(transactionId, itemType, credentials) {
+    constructor(transactionId, itemType) {
         super(transactionId, itemType, 'login');
-        this._credentials = credentials;
+        this._credentials = {};
         this._userId = null;
         this._validationErrors = {};
     }
@@ -24,6 +24,12 @@ class LoginTransaction extends Transaction {
 
     get validationErrors() {
         return this._validationErrors;
+    }
+
+    setCredentials(credentials) {
+        this._credentials = credentials;
+        this._markAsChanged();
+        return this;
     }
 
     setUserId(userId) {
