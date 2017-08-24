@@ -56,4 +56,16 @@ class ApiClient {
         this._api.endDispatch();
         return this._api.views().find(viewId);
     }
+
+    loadItemView(viewId, itemType, itemId) {
+        this._api.beginDispatch();
+        this._api.dispatch(this._api.loadingStart(viewId, itemType, {
+            eagerType: 'full',
+            offset: 0,
+            count: 1,
+            pageSize: 0}));
+        this._api.dispatch(this._api.loadingFailed(viewId, ['not_implemented']));
+        this._api.endDispatch();
+        return this._api.views().find(viewId);
+    }
 }

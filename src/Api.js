@@ -85,6 +85,10 @@ class Api {
         return this._client.loadView(viewId, builder);
     }
 
+    loadItemView(viewId, itemType, itemId) {
+        return this._client.loadView(viewId, itemType, itemId);
+    }
+
     beginDispatch() {
 
     }
