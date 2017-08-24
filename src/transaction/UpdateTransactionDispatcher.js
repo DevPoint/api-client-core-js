@@ -13,7 +13,7 @@ class UpdateTransactionDispatcher extends TransactionDispatcher {
     	super._updateTransaction(transaction, payload);
         for (let propsKey in payload) {
             switch (propsKey) {
-                case: 'validationErrors':
+                case 'validationErrors':
                     transaction.setValidationErrors(this._cloneObject(payload[propsKey]));
                     break;
             }

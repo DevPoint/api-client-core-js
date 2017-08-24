@@ -13,10 +13,10 @@ class InsertTransactionDispatcher extends TransactionDispatcher {
     	super._updateTransaction(transaction, payload);
         for (let propsKey in payload) {
             switch (propsKey) {
-                case: 'itemId':
+                case 'itemId':
                     transaction.setItemId(this._cloneObject(payload[propsKey]));
                     break;
-                case: 'validationErrors':
+                case 'validationErrors':
                     transaction.setValidationErrors(this._cloneObject(payload[propsKey]));
                     break;
             }

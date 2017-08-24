@@ -8,11 +8,11 @@ class View extends ObservableObject {
         super();
         this._viewId = viewId;
         this._itemType = itemType;
-        this._builder = null;
         this._ready = false;
-        this._outdated = false;
         this._loading = false;
-        this._loadingFailed = false;
+        this._succeeded = false;
+        this._failed = false;
+        this._outdated = false;
         this._loadingMeta = new ViewLoadingMeta('full', 0, 0);
         this._itemsIds = [];
     }
@@ -39,24 +39,24 @@ class View extends ObservableObject {
         return this._viewId;
     }
 
-    get builder() {
-        return this._builder;
-    }
-
     get ready() {
         return this._ready;
-    }
-
-    get outdated() {
-        return this._outdated;
     }
 
     get loading() {
         return this._loading;
     }
 
-    get loadingFailed() {
-        return this._loadingFailed;
+    get succeeded() {
+        return this._succeeded;
+    }
+
+    get failed() {
+        return this._failed;
+    }
+
+    get outdated() {
+        return this._outdated;
     }
 
     get loadingMeta() {
@@ -79,14 +79,20 @@ class View extends ObservableObject {
         return this._itemsIds && this._itemsIds.length ? this._itemsIds[this._itemsIds.length-1] : null;
     }
 
-    setBuilder(builder) {
-        this._builder = builder;
+    setReady(ready) {
+        this._ready = ready;
         this._markAsChanged();
         return this;
     }
 
-    setReady(ready) {
-        this._ready = ready;
+    setSucceeded(succeeded) {
+        this._succeeded = succeeded;
+        this._markAsChanged();
+        return this;
+    }
+
+    setFailed(failed) {
+        this._failed = failed;
         this._markAsChanged();
         return this;
     }
@@ -99,12 +105,6 @@ class View extends ObservableObject {
 
     setLoading(loading) {
         this._loading = loading;
-        this._markAsChanged();
-        return this;
-    }
-
-    setLoadingFailed(loadingFailed) {
-        this._loadingFailed = loadingFailed;
         this._markAsChanged();
         return this;
     }
@@ -124,7 +124,7 @@ class View extends ObservableObject {
 
     handleLoadingStart() {
         this.setLoading(true)
-            .setLoadingFailed(false)
+            .setFailed(false)
             .updateLoadingMeta({
                 totalCount: 0,
                 errors: []
@@ -136,7 +136,7 @@ class View extends ObservableObject {
             .setReady(true)
             .setOutdated(false)
             .setLoading(false)
-            .setLoadingFailed(false)
+            .setFailed(false)
             .updateLoadingMeta({
                 eagerType: meta.eagerType,
                 offset: meta.offset,
@@ -149,12 +149,12 @@ class View extends ObservableObject {
 
     handleLoadingCanceled() {
         this.setLoading(false)
-            .setLoadingFailed(false);
+            .setFailed(false);
     }
 
-    handleLoadingFailed(errors) {
+    handleFailed(errors) {
         this.setLoading(false);
-            .setLoadingFailed(true)
+            .setFailed(true)
             .updateLoadingMeta({
                 totalCount: 0,
                 errors: errors.slice(0)

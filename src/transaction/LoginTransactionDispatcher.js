@@ -13,10 +13,10 @@ class LoginTransactionDispatcher extends TransactionDispatcher {
     	super._updateTransaction(transaction, payload);
         for (let propsKey in payload) {
             switch (propsKey) {
-                case: 'userid':
+                case 'userid':
                     transaction.setUserId(this._cloneObject(payload[propsKey]));
                     break;
-                case: 'validationErrors':
+                case 'validationErrors':
                     transaction.setValidationErrors(this._cloneObject(payload[propsKey]));
                     break;
             }
