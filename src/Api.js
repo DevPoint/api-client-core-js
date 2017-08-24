@@ -1,4 +1,5 @@
 
+import ApiDispatcher from './ApiDispatcher';
 import transactionActions from './transaction/actions';
 import TransactionMap from './transaction';
 import viewActions from './view/actions';
@@ -19,7 +20,7 @@ class Api {
     }
 
     _createDispatcher() {
-        return {};
+        return new ApiDispatcher(this);
     }
 
     get nameSpace() {
