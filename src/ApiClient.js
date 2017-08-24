@@ -57,10 +57,10 @@ class ApiClient {
         return this._api.views().find(viewId);
     }
 
-    loadItemView(viewId, itemType, itemId) {
+    loadItemView(viewId, itemType, itemId, eagerType) {
         this._api.beginDispatch();
         this._api.dispatch(this._api.loadingStart(viewId, itemType, {
-            eagerType: 'full',
+            eagerType: eagerType ? eagerType : 'full',
             offset: 0,
             count: 1,
             pageSize: 0}));
