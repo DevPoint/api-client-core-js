@@ -15,7 +15,7 @@ class ApiDispatcher {
         this._api = api;
         this._cacheDispatchers = this._createCacheDispatchers();
         this._transactionDispatchers = this._createTransactionDispatchers();
-        this._viewDispatcher = this._createViewTransactionDispatcher();
+        this._viewDispatcher = this._createViewDispatcher();
     }
 
     _createCacheDispatchers() {
@@ -29,11 +29,11 @@ class ApiDispatcher {
 
     _createTransactionDispatchers() {
         const transactionDispatchers = {
-            'insert': this.__createInsertTransactionDispatcher(),
-            'update': this._createUpdateTransactionDispatcher(),
-            'delete': this._createDeleteTransactionDispatcher(),
-            'login': this._createLoginTransactionDispatcher(),
-            'register': this._createRegisterTransactionDispatcher()
+            insert: this.__createInsertTransactionDispatcher(),
+            update: this._createUpdateTransactionDispatcher(),
+            delete: this._createDeleteTransactionDispatcher(),
+            login: this._createLoginTransactionDispatcher(),
+            register: this._createRegisterTransactionDispatcher()
         };
         return transactionDispatchers;
     }
