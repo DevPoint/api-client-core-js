@@ -57,6 +57,10 @@ class Api {
         return this._transactions;
     }
 
+    views() {
+        return this._views;
+    }
+
     insertTransaction(transactionId, itemType, data) {
         return this._client.insertTransaction(transactionId, itemType, data);
     }
@@ -75,10 +79,6 @@ class Api {
 
     registerTransaction(transactionId, credentials) {
         return this._client.registerTransaction(transactionId, credentials);
-    }
-
-    views() {
-        return this._views;
     }
 
     loadView(viewId, builder) {
