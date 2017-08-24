@@ -1,6 +1,4 @@
 
-import InsertTransaction from './InsertTransaction';
-
 const assign = Object.assign;
 
 class TransactionDispatcher extends TransactionDispatcher {
