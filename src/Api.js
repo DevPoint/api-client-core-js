@@ -1,9 +1,10 @@
 
 import ApiDispatcher from './ApiDispatcher';
+import { CacheDispatcherFactory } from './cache';
 import transactionActions from './transaction/actions';
-import TransactionMap from './transaction';
+import TransactionMap, { TransactionDispatcherFactory } from './transaction';
 import viewActions from './view/actions';
-import ViewMap from './transaction';
+import ViewMap, { ViewDispatcherFactory } from './transaction';
 
 class Api {
 
@@ -20,7 +21,10 @@ class Api {
     }
 
     _createDispatcher() {
-        return new ApiDispatcher(this);
+        return new ApiDispatcher(this,
+            new CacheDispatcherFactory(),
+            new TransactionDispatcherFactory(),
+            new ViewDispatcherFactory());
     }
 
     get nameSpace() {

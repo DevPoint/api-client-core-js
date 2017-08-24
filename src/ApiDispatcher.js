@@ -1,69 +1,22 @@
 
-import {
-    InsertTransactionDispatcher,
-    UpdateTransactionDispatcher,
-    DeleteTransactionDispatcher,
-    LoginTransactionDispatcher,
-    RegisterTransactionDispatcher } from './transaction';
-
-import {
-    ViewDispatcher } from './view';
-
 class ApiDispatcher {
 
-    constructor(api) {
+    constructor(api, 
+            cacheDispatcherFactory,
+            transactionDispatcherFactory,
+            viewDispatcherFactory) {
         this._api = api;
-        this._cacheDispatchers = this._createCacheDispatchers();
-        this._transactionDispatchers = this._createTransactionDispatchers();
-        this._viewDispatcher = this._createViewDispatcher();
-    }
-
-    _createCacheDispatchers() {
-        const cacheDispatchers = {};
-        return cacheDispatchers;
+        this._cacheDispatchers = cacheDispatcherFactory.createDispatchers();
+        this._transactionDispatchers = transactionDispatcherFactory.createDispatchers();
+        this._viewDispatcher = viewDispatcherFactory.createDispatcher();
     }
 
     _getCacheDispatcher($itemType) {
         return this._cacheDispatchers[$itemType];
     }
 
-    _createTransactionDispatchers() {
-        const transactionDispatchers = {
-            insert: this._createInsertTransactionDispatcher(),
-            update: this._createUpdateTransactionDispatcher(),
-            delete: this._createDeleteTransactionDispatcher(),
-            login: this._createLoginTransactionDispatcher(),
-            register: this._createRegisterTransactionDispatcher()
-        };
-        return transactionDispatchers;
-    }
-
     _getTransactionDispatcher($type) {
         return this._transactionDispatchers[$type];
-    }
-
-    _createInsertTransactionDispatcher() {
-        return new InsertTransactionDispatcher();
-    }
-
-    _createUpdateTransactionDispatcher() {
-        return new UpdateTransactionDispatcher();
-    }
-
-    _createDeleteTransactionDispatcher() {
-        return new DeleteTransactionDispatcher();
-    }
-
-    _createLoginTransactionDispatcher() {
-        return new LoginTransactionDispatcher();
-    }
-
-    _createRegisterTransactionDispatcher() {
-        return new RegisterTransactionDispatcher();
-    }
-
-    _createViewDispatcher() {
-        return new ViewDispatcher();
     }
 
     dispatch(action) {
