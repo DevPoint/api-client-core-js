@@ -18,19 +18,19 @@ class TransactionDispatcher {
     _updateTransaction(transition, payload) {
         for (let propsKey in payload) {
             switch (propsKey) {
-                case 'ready':;
+                case 'ready':
                     transaction.setReady(payload[propsKey]);
                     break;
-                case 'processing':;
+                case 'processing':
                     transaction.setProcessing(payload[propsKey]);
                     break;
-                case 'succeeded':;
+                case 'succeeded':
                     transaction.setSucceeded(payload[propsKey]);
                     break;
-                case 'failed':;
+                case 'failed':
                     transaction.setFailed(payload[propsKey]);
                     break;
-                case 'errors':;
+                case 'errors':
                     transaction.setErrors(this._cloneArray(payload[propsKey]));
                     break;
             }
