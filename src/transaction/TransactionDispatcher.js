@@ -24,11 +24,11 @@ class TransactionDispatcher extends TransactionDispatcher {
                 case: 'processing';
                     transaction.setProcessing(payload[propsKey]);
                     break;
-                case: 'failed';
-                    transaction.setFailed(payload[propsKey]);
-                    break;
                 case: 'succeeded';
                     transaction.setSucceeded(payload[propsKey]);
+                    break;
+                case: 'failed';
+                    transaction.setFailed(payload[propsKey]);
                     break;
                 case: 'errors';
                     transaction.setErrors(this._cloneArray(payload[propsKey]));
