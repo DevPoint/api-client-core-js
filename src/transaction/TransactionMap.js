@@ -36,7 +36,7 @@ class TransactionMap extends ObservableObject {
 
     find(transactionId) {
         return this.exists(transactionId) 
-            ? this._transactions[transactionId] : null;
+            ? this._transactions[transactionId] : undefined;
     }
 
     set(transationId, transaction) {

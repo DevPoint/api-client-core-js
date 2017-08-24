@@ -36,7 +36,7 @@ class ViewMap extends ObservableObject {
 
     find(viewId) {
         return this.exists(viewId) 
-            ? this._views[viewId] : null;
+            ? this._views[viewId] : undefined;
     }
 
     set(viewId, view) {

@@ -36,7 +36,7 @@ class CacheMap extends ObservableObject {
 
     find(entryId) {
         return this.exists(entryId) 
-            ? this._entries[entryId] : null;
+            ? this._entries[entryId] : undefined;
     }
 
     set(entryId, entry) {
