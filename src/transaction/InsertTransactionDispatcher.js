@@ -6,8 +6,7 @@ class InsertTransactionDispatcher extends TransactionDispatcher {
 
     _createTransaction(action) {
         return new InsertTransaction(
-                action.id, 
-                action.itemType);
+            action.id, action.itemType, action.data);
     }
 
     _updateTransition(transition, payload) {
@@ -16,9 +15,6 @@ class InsertTransactionDispatcher extends TransactionDispatcher {
             switch (propsKey) {
                 case: 'itemId':
                     transaction.setItemId(this._cloneObject(payload[propsKey]));
-                    break;
-                case: 'data':
-                    transaction.setData(this._cloneObject(payload[propsKey]));
                     break;
                 case: 'validationErrors':
                     transaction.setValidationErrors(this._cloneObject(payload[propsKey]));
