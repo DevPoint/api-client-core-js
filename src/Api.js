@@ -31,16 +31,16 @@ class Api {
         return this._nameSpace;
     }
 
-    get transactions() {
+    cache(itemType) {
+        return this._caches[itemType];
+    }
+
+    transactions() {
         return _transactions;
     }
 
-    get views() {
+    views() {
         return _views;
-    }
-
-    cache(itemType) {
-        return this._caches[itemType];
     }
 
     dispatch(action) {

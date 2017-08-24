@@ -29,11 +29,11 @@ class ApiDispatcher {
             if (actionTypeFrags[1] === 'TRANSACTION') {
                 const transactionType = actionTypeFrags[2].toLowerCase();
                 const transactionDispatcher = this._getTransactionDispatcher(transactionType);
-                transactionDispatcher.dispatch(api.transactions, action);
+                transactionDispatcher.dispatch(api.transactions(), action);
             }
             else if (actionTypeFrags[1] === 'VIEW') {
                 const viewDispatcher = this._getViewDispatcher();
-                viewDispatcher.dispatch(api.views, action);
+                viewDispatcher.dispatch(api.views(), action);
             }
             else if (actionTypeFrags[1] === 'CACHE') {
                 const itemType = actionTypeFrags[2].toLowerCase();
