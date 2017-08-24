@@ -8,19 +8,12 @@ export default {
             id: viewId,
             itemType: itemType,
             payload: {
-                ready: false,
-                loading: true,
-                succeeded: false,
-                failed: false,
                 loadingMeta: {
                     eagerType: loadingMeta.eagerType,
                     offset: loadingMeta.offset,
                     count: loadingMeta.count,
                     pageSize: loadingMeta.pageSize,
-                    totalCount: 0
                 }
-                itemsIds: [],
-                errors: []
             }
         };
     }
