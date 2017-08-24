@@ -85,8 +85,16 @@ class Api {
         return this._client.loadView(viewId, builder);
     }
 
+    beginDispatch() {
+
+    }
+
     dispatch(action) {
         return this._dispatcher.dispatch(action);
+    }
+
+    endDispatch() {
+        
     }
 
     insertStart(transactionId, itemType, data) {
