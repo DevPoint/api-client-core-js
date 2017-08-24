@@ -30,9 +30,7 @@ export default {
                 loadingMeta: {
                     totalCount: loadingMeta.totalCount
                 }
-                itemsIds: itemsIds;
-                errors: [],
-                validationErrors: {}
+                itemsIds: itemsIds
             }
         };
     }
