@@ -3,10 +3,10 @@ import Transaction from './Transaction';
 
 class InsertTransaction extends Transaction {
 
-    constructor(transactionId, itemType, data) {
+    constructor(transactionId, itemType) {
         super(transactionId, itemType, 'insert');
         this._itemId = null;
-        this._data = data;
+        this._data = {};
         this._validationErrors = {};
     }
 
@@ -28,6 +28,12 @@ class InsertTransaction extends Transaction {
 
     setItemId(itemId) {
         this._itemId = itemId;
+        this._markAsChanged();
+        return this;
+    }
+
+    setData(data) {
+        this._data = data;
         this._markAsChanged();
         return this;
     }

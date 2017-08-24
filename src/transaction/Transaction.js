@@ -10,6 +10,7 @@ class Transaction extends ObservableObject {
         this._type = type;
         this._ready = false;
         this._processing = false;
+        this._succeeded = false;
         this._failed = false;
         this._errors = [];
     }
@@ -38,6 +39,10 @@ class Transaction extends ObservableObject {
         return this._failed;
     }
 
+    get succeeded() {
+        return this._succeeded;
+    }
+
     get hasErrors() {
         return (this.errors.length > 0);
     }
@@ -58,14 +63,14 @@ class Transaction extends ObservableObject {
         return this;
     }
 
-    setFailed(failed) {
-        this._failed = failed;
+    setSucceeded(succeeded) {
+        this._succeeded = succeeded;
         this._markAsChanged();
         return this;
     }
 
-    setUserId(userId) {
-        this._userId = userId;
+    setFailed(failed) {
+        this._failed = failed;
         this._markAsChanged();
         return this;
     }
