@@ -12,7 +12,7 @@ export default {
                     eagerType: loadingMeta.eagerType,
                     offset: loadingMeta.offset,
                     count: loadingMeta.count,
-                    pageSize: loadingMeta.pageSize,
+                    pageSize: loadingMeta.pageSize
                 }
             }
         };
