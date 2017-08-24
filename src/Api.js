@@ -4,16 +4,21 @@ import TransactionMap from './transaction';
 import viewActions from './view/actions';
 import ViewMap from './transaction';
 
-class ApiClientCore {
+class Api {
 
     constructor(nameSpace) {
         this._nameSpace = nameSpace;
         this._transactions = new TransactionMap();
         this._views = new ViewMap();
-        this._caches = this._createCaches(),
+        this._caches = this._createCaches();
+        this._dispatcher = this._createDispatcher();
     }
 
     _createCaches() {
+        return {};
+    }
+
+    _createDispatcher() {
         return {};
     }
 
@@ -31,6 +36,10 @@ class ApiClientCore {
 
     cache(itemType) {
         return this._caches[itemType];
+    }
+
+    dispatch(action) {
+
     }
 
     insertStart(transactionId, itemType, data) {
