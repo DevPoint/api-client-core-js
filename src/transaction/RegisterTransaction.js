@@ -3,10 +3,10 @@ import Transaction from './Transaction';
 
 class RegisterTransaction extends Transaction {
 
-    constructor(transactionId, itemType) {
+    constructor(transactionId, itemType, credentials) {
         super(transactionId, itemType, 'register');
         this._userId = null;
-        this._credentials = {};
+        this._credentials = credentials;
         this._validationErrors = {};
     }
 
@@ -24,12 +24,6 @@ class RegisterTransaction extends Transaction {
 
     get validationErrors() {
         return this._validationErrors;
-    }
-
-    setCredentials(credentials) {
-        this._credentials = credentials;
-        this._markAsChanged();
-        return this;
     }
 
     setUserId(userId) {

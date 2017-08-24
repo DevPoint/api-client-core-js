@@ -6,17 +6,13 @@ class RegisterTransactionDispatcher extends TransactionDispatcher {
 
     _createTransaction(action) {
         return new RegisterTransaction(
-                action.id, 
-                action.itemType);
+            action.id, action.itemType, action.credentials);
     }
 
     _updateTransition(transition, payload) {
     	super._updateTransition(transaction, payload);
         for (let propsKey in payload) {
             switch (propsKey) {
-                case: 'credentials':
-                    transaction.setCredentials(this._cloneObject(payload[propsKey]));
-                    break;
                 case: 'userid':
                     transaction.setUserId(this._cloneObject(payload[propsKey]));
                     break;
