@@ -20,11 +20,23 @@ class Api {
         return {};
     }
 
+    _createCacheDispatcherFactory() {
+        return new CacheDispatcherFactory();
+    }
+
+    _createTransactionDispatcherFactory() {
+        return new TransactionDispatcherFactory();
+    }
+
+    _createViewDispatcherFactory() {
+        return new ViewDispatcherFactory();
+    }
+
     _createDispatcher() {
         return new ApiDispatcher(this,
-            new CacheDispatcherFactory(),
-            new TransactionDispatcherFactory(),
-            new ViewDispatcherFactory());
+            this._createCacheDispatcherFactory(),
+            this._createTransactionDispatcherFactory(),
+            this._createViewDispatcherFactory());
     }
 
     get nameSpace() {
