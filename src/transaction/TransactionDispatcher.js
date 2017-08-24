@@ -46,11 +46,11 @@ class TransactionDispatcher {
             }
         }
         else if (actionTypeFrags[0] === 'SET' || actionTypeFrags[0] === 'ADD') {
-            const newTransactAction = this._createTransaction(action);
+            const newTransaction = this._createTransaction(action);
             if (action.payload) {
-                this._updateTransaction(newTransactAction, action.payload);
+                this._updateTransaction(newTransaction, action.payload);
             }
-            transactionMap.set(action.id, newTransactAction);
+            transactionMap.set(action.id, newTransaction);
         }
     }
 }
