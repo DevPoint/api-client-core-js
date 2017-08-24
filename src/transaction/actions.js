@@ -5,7 +5,7 @@ export default {
      * Transaction INSERT actions
      */
 
-    insertStart: function(nameSpace, transactionId, itemType, data) {
+    insertStart(nameSpace, transactionId, itemType, data) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'SET_TRANSACTION_INSERT',
@@ -22,9 +22,9 @@ export default {
                 validationErrors: {}
             }
         };
-    },
+    }
 
-    insertReady: function(nameSpace, transactionId, itemId) {
+    insertReady(nameSpace, transactionId, itemId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_INSERT',
@@ -38,9 +38,9 @@ export default {
                 validationErrors: {}
             }
         };
-    },
+    }
 
-    insertFailed: function(nameSpace, transactionId, errors, validationErrors) {
+    insertFailed(nameSpace, transactionId, errors, validationErrors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_INSERT',
@@ -53,13 +53,13 @@ export default {
                 validationErrors: validationErrors
             }
         };
-    },
+    }
 
     /*
      * Transaction UPDATE actions
      */
 
-    updateStart: function(nameSpace, transactionId, itemType, itemId, data) {
+    updateStart(nameSpace, transactionId, itemType, itemId, data) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'SET_TRANSACTION_UPDATE',
@@ -76,9 +76,9 @@ export default {
                 validationErrors: {}
             }
         };
-    },
+    }
 
-    updateReady: function(nameSpace, transactionId) {
+    updateReady(nameSpace, transactionId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_UPDATE',
@@ -91,9 +91,9 @@ export default {
                 validationErrors: {}
             }
         };
-    },
+    }
 
-    updateFailed: function(nameSpace, transactionId, errors, validationErrors) {
+    updateFailed(nameSpace, transactionId, errors, validationErrors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_UPDATE',
@@ -106,13 +106,13 @@ export default {
                 validationErrors: validationErrors
             }
         };
-    },
+    }
 
     /*
      * Transaction DELETE actions
      */
 
-    deleteStart: function(nameSpace, transactionId, itemType, itemId) {
+    deleteStart(nameSpace, transactionId, itemType, itemId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'SET_TRANSACTION_DELETE',
@@ -127,9 +127,9 @@ export default {
                 errors: []
             }
         };
-    },
+    }
 
-    deleteReady: function(nameSpace, transactionId) {
+    deleteReady(nameSpace, transactionId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_DELETE',
@@ -141,9 +141,9 @@ export default {
                 errors: []
             }
         };
-    },
+    }
 
-    deleteFailed: function(nameSpace, transactionId, errors) {
+    deleteFailed(nameSpace, transactionId, errors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_DELETE',
@@ -155,13 +155,13 @@ export default {
                 errors: errors
             }
         };
-    },
+    }
 
     /*
      * Transaction LOGIN actions
      */
 
-    loginStart: function(nameSpace, transactionId, itemType, credentials) {
+    loginStart(nameSpace, transactionId, itemType, credentials) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'SET_TRANSACTION_LOGIN',
@@ -178,10 +178,10 @@ export default {
                 validationErrors: {}
             }
         };
-    },
+    }
 
 
-    loginReady: function(nameSpace, transactionId, userId) {
+    loginReady(nameSpace, transactionId, userId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_LOGIN',
@@ -195,9 +195,9 @@ export default {
                 validationErrors: {}
             }
         };
-    },
+    }
 
-    loginFailed: function(nameSpace, transactionId, errors, validationErrors) {
+    loginFailed(nameSpace, transactionId, errors, validationErrors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_LOGIN',
@@ -210,13 +210,13 @@ export default {
                 validationErrors: validationErrors
             }
         };
-    },
+    }
 
     /*
      * Transaction REGISTER actions
      */
 
-    registerStart: function(nameSpace, transactionId, itemType, credentials) {
+    registerStart(nameSpace, transactionId, itemType, credentials) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'REGISTER_TRANSACTION_REGISTER',
@@ -232,9 +232,9 @@ export default {
                 errors: [],
             }
         };
-    },
+    }
 
-    registerReady: function(nameSpace, transactionId, userId) {
+    registerReady(nameSpace, transactionId, userId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_REGISTER',
@@ -247,9 +247,9 @@ export default {
                 errors: '',
             }
         };
-    },
+    }
 
-    registerFailed: function(nameSpace, transactionId, error) {
+    registerFailed(nameSpace, transactionId, error) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_REGISTER',
@@ -261,5 +261,5 @@ export default {
                 errors: [error]
             }
         };
-    },
+    }
 };
