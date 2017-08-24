@@ -13,31 +13,31 @@ class ApiDispatcher {
 
     constructor(api) {
         this._api = api;
-        this._insertDispatcher = this._createInsertDispatcher();
-        this._updateDispatcher = this._createUpdateDispatcher();
-        this._deleteDispatcher = this._createDeleteDispatcher();
-        this._loginDispatcher = this._createLoginDispatcher();
-        this._registerDispatcher = this._createRegisterDispatcher();
-        this._viewDispatcher = this._createViewDispatcher();
+        this._insertDispatcher = this._createInsertTransactionDispatcher();
+        this._updateDispatcher = this._createUpdateTransactionDispatcher();
+        this._deleteDispatcher = this._createDeleteTransactionDispatcher();
+        this._loginDispatcher = this._createLoginTransactionDispatcher();
+        this._registerDispatcher = this._createRegisterTransactionDispatcher();
+        this._viewDispatcher = this._createViewTransactionDispatcher();
     }
 
-    _createInsertDispatcher() {
+    _createInsertTransactionDispatcher() {
         return new InsertTransactionDispatcher();
     }
 
-    _createUpdateDispatcher() {
+    _createUpdateTransactionDispatcher() {
         return new UpdateTransactionDispatcher();
     }
 
-    _createDeleteDispatcher() {
+    _createDeleteTransactionDispatcher() {
         return new DeleteTransactionDispatcher();
     }
 
-    _createLoginDispatcher() {
+    _createLoginTransactionDispatcher() {
         return new LoginTransactionDispatcher();
     }
 
-    _createRegisterDispatcher() {
+    _createRegisterTransactionDispatcher() {
         return new RegisterTransactionDispatcher();
     }
 
