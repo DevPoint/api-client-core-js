@@ -6,7 +6,7 @@ class LoginTransactionDispatcher extends TransactionDispatcher {
 
     _createTransaction(action) {
         return new LoginTransaction(
-            action.id, action.itemType, action.credentials);
+            action.id, action.credentials);
     }
 
     _updateTransaction(transition, payload) {

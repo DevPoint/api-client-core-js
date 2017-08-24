@@ -6,7 +6,7 @@ class RegisterTransactionDispatcher extends TransactionDispatcher {
 
     _createTransaction(action) {
         return new RegisterTransaction(
-            action.id, action.itemType, action.credentials);
+            action.id, action.credentials);
     }
 
     _updateTransaction(transition, payload) {

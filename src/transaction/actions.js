@@ -136,12 +136,11 @@ export default {
      * Transaction LOGIN actions
      */
 
-    loginStart(nameSpace, transactionId, itemType, credentials) {
+    loginStart(nameSpace, transactionId, credentials) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'SET_TRANSACTION_LOGIN',
             id: transactionId,
-            itemType: itemType,
             credentials: credentials
         };
     }
@@ -182,12 +181,11 @@ export default {
      * Transaction REGISTER actions
      */
 
-    registerStart(nameSpace, transactionId, itemType, credentials) {
+    registerStart(nameSpace, transactionId, credentials) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'REGISTER_TRANSACTION_REGISTER',
             id: transactionId,
-            itemType: itemType,
             credentials: credentials
         };
     }

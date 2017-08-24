@@ -3,8 +3,8 @@ import Transaction from './Transaction';
 
 class RegisterTransaction extends Transaction {
 
-    constructor(transactionId, itemType, credentials) {
-        super(transactionId, itemType, 'register');
+    constructor(transactionId, credentials) {
+        super(transactionId, 'user', 'register');
         this._userId = null;
         this._credentials = credentials;
         this._validationErrors = {};
