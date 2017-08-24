@@ -47,7 +47,7 @@ class ApiClient {
 
     loadView(viewId, builder) {
         this._api.beginDispatch();
-        this._api.dispatch(this._api.loadingStart(viewId, itemType, {
+        this._api.dispatch(this._api.loadingStart(viewId, builder.itemType, {
             eagerType: builder.eagerType,
             offset: builder.offset,
             count: builder.count,
