@@ -39,7 +39,7 @@ class Api {
     }
 
     dispatch(action) {
-
+        return this._dispatcher.dispatch(action);
     }
 
     insertStart(transactionId, itemType, data) {

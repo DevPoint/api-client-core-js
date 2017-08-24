@@ -13,11 +13,11 @@ class ApiDispatcher {
 
     constructor(api) {
         this._api = api;
-        this._insertDispatcher = this._createInsertTransactionDispatcher();
-        this._updateDispatcher = this._createUpdateTransactionDispatcher();
-        this._deleteDispatcher = this._createDeleteTransactionDispatcher();
-        this._loginDispatcher = this._createLoginTransactionDispatcher();
-        this._registerDispatcher = this._createRegisterTransactionDispatcher();
+        this._insertTransactionDispatcher = this._createInsertTransactionDispatcher();
+        this._updateTransactionDispatcher = this._createUpdateTransactionDispatcher();
+        this._deleteTransactionDispatcher = this._createDeleteTransactionDispatcher();
+        this._loginTransactionDispatcher = this._createLoginTransactionDispatcher();
+        this._registerTransactionDispatcher = this._createRegisterTransactionDispatcher();
         this._viewDispatcher = this._createViewTransactionDispatcher();
     }
 
