@@ -16,6 +16,7 @@ export default {
                 type: 'insert',
                 ready: false,
                 processing: true,
+                succeeded: false,
                 failed: false,
                 itemId: null,
                 errors: [],
@@ -24,7 +25,7 @@ export default {
         };
     }
 
-    insertReady(nameSpace, transactionId, itemId) {
+    insertSucceeded(nameSpace, transactionId, itemId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_INSERT',
@@ -32,7 +33,7 @@ export default {
             payload: {
                 ready: true,
                 processing: false,
-                failed: false,
+                succeeded: true,
                 itemId: itemId,
                 errors: [],
                 validationErrors: {}
@@ -71,6 +72,7 @@ export default {
                 type: 'update',
                 ready: false,
                 processing: true,
+                succeeded: false,
                 failed: false,
                 errors: [],
                 validationErrors: {}
@@ -78,7 +80,7 @@ export default {
         };
     }
 
-    updateReady(nameSpace, transactionId) {
+    updateSucceeded(nameSpace, transactionId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_UPDATE',
@@ -86,7 +88,7 @@ export default {
             payload: {
                 ready: true,
                 processing: false,
-                failed: false,
+                succeeded: true,
                 errors: [],
                 validationErrors: {}
             }
@@ -129,7 +131,7 @@ export default {
         };
     }
 
-    deleteReady(nameSpace, transactionId) {
+    deleteSucceeded(nameSpace, transactionId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_DELETE',
@@ -137,7 +139,7 @@ export default {
             payload: {
                 ready: true,
                 processing: false,
-                failed: false,
+                succeeded: true,
                 errors: []
             }
         };
@@ -172,6 +174,7 @@ export default {
                 type: 'login',
                 ready: false,
                 processing: true,
+                succeeded: false,
                 failed: false,
                 userId: null,
                 errors: [],
@@ -181,7 +184,7 @@ export default {
     }
 
 
-    loginReady(nameSpace, transactionId, userId) {
+    loginSucceeded(nameSpace, transactionId, userId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_LOGIN',
@@ -189,7 +192,7 @@ export default {
             payload: {
                 ready: true,
                 processing: false,
-                failed: false,
+                succeeded: true,
                 userId: userId,
                 errors: [],
                 validationErrors: {}
@@ -227,6 +230,7 @@ export default {
                 type: 'register',
                 ready: false,
                 processing: true,
+                succeeded: false,
                 failed: false,
                 token: '',
                 errors: [],
@@ -234,7 +238,7 @@ export default {
         };
     }
 
-    registerReady(nameSpace, transactionId, userId) {
+    registerSucceeded(nameSpace, transactionId, userId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix . 'UPDATE_TRANSACTION_REGISTER',
@@ -242,7 +246,7 @@ export default {
             payload: {
                 ready: true,
                 processing: false,
-                failed: false,
+                succeeded: true,
                 userId: userId,
                 errors: '',
             }
