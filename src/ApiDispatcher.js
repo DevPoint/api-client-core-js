@@ -29,7 +29,7 @@ class ApiDispatcher {
 
     _createTransactionDispatchers() {
         const transactionDispatchers = {
-            insert: this.__createInsertTransactionDispatcher(),
+            insert: this._createInsertTransactionDispatcher(),
             update: this._createUpdateTransactionDispatcher(),
             delete: this._createDeleteTransactionDispatcher(),
             login: this._createLoginTransactionDispatcher(),
