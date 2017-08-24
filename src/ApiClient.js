@@ -14,44 +14,42 @@ class ApiClient {
     }
 
     insertTransaction(transactionId, itemType, data) {
-        const transaction = new InsertTransaction(transactionId, itemType, data);
-        this._api.transactions()->set(transactionId, transaction);
+        this._api.dispatch(this._api.insertStart(transactionId, itemType, data));
         this._api.dispatch(this._api.insertFailed(transactionId, ['not_implemented'], {}));
-        return transaction;
+        return this._api.transactions()->find(transactionId);
     }
 
     updateTransaction(transactionId, itemType, itemId, data) {
-        const transaction = new UpdateTransaction(transactionId, itemType, itemId, data);
-        this._api.transactions()->set(transactionId, transaction);
+        this._api.dispatch(this._api.updateStart(transactionId, itemType, itemId, data));
         this._api.dispatch(this._api.updateFailed(transactionId, ['not_implemented'], {}));
-        return transaction;
+        return this._api.transactions()->find(transactionId);
     }
 
     deleteTransaction(transactionId, itemType, itemId) {
-        const transaction = new DeleteTransaction(transactionId, itemType, itemId);
-        this._api.transactions()->set(transactionId, transaction);
+        this._api.dispatch(this._api.deleteStart(transactionId, itemType, itemId));
         this._api.dispatch(this._api.deleteFailed(transactionId, ['not_implemented']));
-        return transaction;
+        return this._api.transactions()->find(transactionId);
     }
 
     loginTransaction(transactionId, credentials) {
-        const transaction = new LoginTransaction(transactionId, itemType, credentials);
-        this._api.transactions()->set(transactionId, transaction);
+        this._api.dispatch(this._api.loginStart(transactionId, credentials));
         this._api.dispatch(this._api.loginFailed(transactionId, ['not_implemented'], {}));
-        return transaction;
+        return this._api.transactions()->find(transactionId);
     }
 
     registerTransaction(transactionId, credentials) {
-        const transaction = new RegisterTransaction(transactionId, itemType, credentials);
-        this._api.transactions()->set(transactionId, transaction);
+        this._api.dispatch(this._api.registerStart(transactionId, credentials));
         this._api.dispatch(this._api.registerFailed(transactionId, ['not_implemented'], {}));
-        return transaction;
+        return this._api.transactions()->find(transactionId);
     }
 
     loadView(viewId, builder) {
-        const view = new View(viewId, itemType);
-        this._api.views()->set(viewId, view);
+        this._api.dispatch(this._api.loadingStart(viewId, itemType, {
+            eagerType: builder.eagerType,
+            offset: builder.offset,
+            count: builder.count,
+            pageSize: builder.pageSize}));
         this._api.dispatch(this._api.loadingFailed(viewId, ['not_implemented']));
-        return view;
+        return this._api.views()->find(viewId);
     }
 }
