@@ -20,3 +20,5 @@ class UpdateTransactionDispatcher extends TransactionDispatcher {
         }
     }
 }
+
+export default UpdateTransactionDispatcher;

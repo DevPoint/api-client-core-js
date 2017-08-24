@@ -11,3 +11,5 @@ class DeleteTransactionDispatcher extends TransactionDispatcher {
                 action.itemId);
     }
 }
+
+export default DeleteTransactionDispatcher;
