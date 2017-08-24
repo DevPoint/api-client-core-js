@@ -1,7 +1,8 @@
 
+import TransactionDispatcher from './TransactionDispatcher';
 import InsertTransaction from './InsertTransaction';
 
-class InsertTransactionDispatcer extends TransactionDispatcher {
+class InsertTransactionDispatcher extends TransactionDispatcher {
 
     _createTransaction(action) {
         return new InsertTransaction(

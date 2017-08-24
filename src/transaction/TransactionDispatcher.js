@@ -3,7 +3,7 @@ import InsertTransaction from './InsertTransaction';
 
 const assign = Object.assign;
 
-class TransactionDispatcer extends TransactionDispatcher {
+class TransactionDispatcher extends TransactionDispatcher {
 
     _cloneObject(object) {
         return assign({}, object);
