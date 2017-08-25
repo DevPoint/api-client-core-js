@@ -45,7 +45,7 @@ class ViewMap extends ObservableObject {
         return this;
     }
 
-    clear(viewId) {
+    remove(viewId) {
         delete this._views[viewId];
         this._markAsChanged();
         return this;

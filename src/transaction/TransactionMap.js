@@ -45,7 +45,7 @@ class TransactionMap extends ObservableObject {
         return this;
     }
 
-    clear(transactionId) {
+    remove(transactionId) {
         delete this._transactions[transactionId];
         this._markAsChanged();
         return this;

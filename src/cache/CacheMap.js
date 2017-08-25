@@ -45,7 +45,7 @@ class CacheMap extends ObservableObject {
         return this;
     }
 
-    clear(entryId) {
+    remove(entryId) {
         delete this._entries[entryId];
         this._markAsChanged();
         return this;
