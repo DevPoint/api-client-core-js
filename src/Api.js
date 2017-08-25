@@ -166,8 +166,8 @@ class Api {
         return viewActions.loadingStart(this.nameSpace, viewId, itemType, loadingMeta);
     }
 
-    loadingSucceeded(viewId, loadingMeta, itemsIds) {
-        return viewActions.loadingSucceeded(this.nameSpace, viewId, loadingMeta, itemsIds);
+    loadingSucceeded(viewId, itemsIds, loadingMeta) {
+        return viewActions.loadingSucceeded(this.nameSpace, viewId, itemsIds, loadingMeta);
     }
 
     loadingFailed(viewId, errors) {

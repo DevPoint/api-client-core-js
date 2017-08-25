@@ -18,7 +18,7 @@ export default {
         };
     }
 
-    loadingSucceeded(nameSpace, viewId, loadingMeta, itemsIds) {
+    loadingSucceeded(nameSpace, viewId, itemsIds, loadingMeta) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_VIEW',
