@@ -23,7 +23,7 @@ class ApiClient {
     }
 
     loadView(viewId, builder) {
-        return this._cacheEntryClients[itemType].loadMany(viewId, builder);
+        return this._cacheEntryClients[builder.itemType].loadMany(viewId, builder);
     }
 
     loadViewByItemId(viewId, itemType, itemId, eagerType) {
