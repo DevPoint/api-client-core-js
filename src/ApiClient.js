@@ -3,32 +3,33 @@ class ApiClient {
 
     constructor(api) {
         this._api = api;
+        this._cacheEntryClients = this._createCacheEntryClients(api);
+    }
+
+    _createCacheEntryClients(api) {
+        return {};
     }
 
     insertTransaction(transactionId, itemType, data) {
-        this._api.beginDispatch();
-        this._api.dispatch(this._api.insertStart(transactionId, itemType, data));
-        this._api.dispatch(this._api.insertFailed(transactionId, ['not_implemented'], {}));
-        this._api.endDispatch();
-        return this._api.transactions().find(transactionId);
+        return this._cacheEntryClients[itemType].insert(transactionId, data);
     }
 
     updateTransaction(transactionId, itemType, itemId, data) {
-        this._api.beginDispatch();
-        this._api.dispatch(this._api.updateStart(transactionId, itemType, itemId, data));
-        this._api.dispatch(this._api.updateFailed(transactionId, ['not_implemented'], {}));
-        this._api.endDispatch();
-        return this._api.transactions().find(transactionId);
+        return this._cacheEntryClients[itemType].update(transactionId, itemId, data);
     }
 
     deleteTransaction(transactionId, itemType, itemId) {
-        this._api.beginDispatch();
-        this._api.dispatch(this._api.deleteStart(transactionId, itemType, itemId));
-        this._api.dispatch(this._api.deleteFailed(transactionId, ['not_implemented']));
-        this._api.endDispatch();
-        return this._api.transactions().find(transactionId);
+        return this._cacheEntryClients[itemType].delete(transactionId, itemId);
     }
 
+    loadView(viewId, builder) {
+        return this._cacheEntryClients[itemType].loadMany(viewId, builder);
+    }
+
+    loadViewByItemId(viewId, itemType, itemId, eagerType) {
+        return this._cacheEntryClients[itemType].load(viewId, itemId, eagerType);
+    }
+    
     loginTransaction(transactionId, credentials) {
         this._api.beginDispatch();
         this._api.dispatch(this._api.loginStart(transactionId, credentials));
@@ -43,29 +44,5 @@ class ApiClient {
         this._api.dispatch(this._api.registerFailed(transactionId, ['not_implemented'], {}));
         this._api.endDispatch();
         return this._api.transactions().find(transactionId);
-    }
-
-    loadView(viewId, builder) {
-        this._api.beginDispatch();
-        this._api.dispatch(this._api.loadingStart(viewId, builder.itemType, {
-            eagerType: builder.eagerType,
-            offset: builder.offset,
-            count: builder.count,
-            pageSize: builder.pageSize}));
-        this._api.dispatch(this._api.loadingFailed(viewId, ['not_implemented']));
-        this._api.endDispatch();
-        return this._api.views().find(viewId);
-    }
-
-    loadItemView(viewId, itemType, itemId, eagerType) {
-        this._api.beginDispatch();
-        this._api.dispatch(this._api.loadingStart(viewId, itemType, {
-            eagerType: eagerType ? eagerType : 'full',
-            offset: 0,
-            count: 1,
-            pageSize: 0}));
-        this._api.dispatch(this._api.loadingFailed(viewId, ['not_implemented']));
-        this._api.endDispatch();
-        return this._api.views().find(viewId);
     }
 }
