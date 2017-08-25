@@ -4,7 +4,7 @@ export default {
     loadingStart(nameSpace, viewId, itemType, loadingMeta) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
-            type: nameSpacePrefix . 'SET_VIEW',
+            type: nameSpacePrefix + 'SET_VIEW',
             id: viewId,
             itemType: itemType,
             payload: {
@@ -21,7 +21,7 @@ export default {
     loadingSucceeded(nameSpace, viewId, loadingMeta, itemsIds) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
-            type: nameSpacePrefix . 'UPDATE_VIEW',
+            type: nameSpacePrefix + 'UPDATE_VIEW',
             id: viewId,
             payload: {
                 ready: true,
@@ -38,7 +38,7 @@ export default {
     loadingFailed(nameSpace, viewId, errors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
-            type: nameSpacePrefix . 'UPDATE_VIEW',
+            type: nameSpacePrefix + 'UPDATE_VIEW',
             id: viewId,
             payload: {
                 ready: true,
