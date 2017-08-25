@@ -3,8 +3,13 @@ import { ObservableObject } from '../observable';
 
 class CacheMap extends ObservableObject {
 
-    constructor() {
+    constructor(itemType) {
+        this._itemType = itemType;
         this._entries = {};
+    }
+
+    get itemType() {
+        return this._itemType;
     }
 
     get changed() {
