@@ -12,29 +12,6 @@ class CacheMap extends ObservableObject {
         return this._cacheMapId;
     }
 
-    get changed() {
-        let changed = super.changed();
-        if (!changed) {
-            for (let entryId in this._entries) {
-                if (this._entries[entryId].changed()) {
-                    changed = true;
-                    break;
-                }
-            }
-        }
-        return changed;
-    }
-
-    clearChanged() {
-        super.clearChanged();
-        if (this.observed) {
-            for (let entryId in this._entries) {
-                this._entries[entryId].clearChanged();
-            }
-        }
-        return this;
-    }
-
     exists(entryId) {
         return this._entries.hasOwnProperty(entryId);
     }
@@ -54,6 +31,18 @@ class CacheMap extends ObservableObject {
         delete this._entries[entryId];
         this._markAsChanged();
         return this;
+    }
+
+    findAllChanged() {
+        const changedEntries = [];
+        for (let entryId in this._entries) {
+            const entry = this._entries[entryId];
+            if (entry.changed()) {
+                changedEntries.push(entry));
+                break;
+            }
+        }
+        return changedEntries;
     }
 }
 

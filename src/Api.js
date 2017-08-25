@@ -46,6 +46,36 @@ class Api {
             this._createViewDispatcherFactory());
     }
 
+    _changedObservables() {
+        const changedObservables = [];
+        const cacheItemTypes = this.getCacheItemTypes();
+        for (let itemType in this._caches) {
+            const cacheMap = this.cache(itemType);
+            if (cacheMap.changed) {
+                changedObservables.push(cacheMap);
+            }
+            changedObservables = changedObservables.concat(cacheMap.findAllChanged());
+        }
+        const transactionMap = this.transactions();
+        if (transactionMap.changed) {
+            changedObservables.push(transactionMap);
+        }
+        changedObservables = changedObservables.concat(transactionMap.findAllChanged());
+        const viewMap = this.views();
+        if (viewMap.changed) {
+            changedObservables.push(viewMap);
+        }
+        changedObservables = changedObservables.concat(viewMap.findAllChanged());
+        return changedObservables;
+    }
+
+        // collect listeners to notify and remove all duplicates
+    //    const listenersToNotify = [];
+    //    for (let i = 0; i < changedObservables.length; i++) {
+    //        listenersToNotify = listenersToNotify.concat(changedObservables[i].listeners);
+    //    }
+    //    return listenersToNotify.filter((v, i, a) => a.indexOf(v) === i);
+
     get nameSpace() {
         return this._nameSpace;
     }

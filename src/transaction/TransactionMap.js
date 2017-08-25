@@ -7,29 +7,6 @@ class TransactionMap extends ObservableObject {
         this._transactions = {};
     }
 
-    get changed() {
-        let changed = super.changed();
-        if (!changed) {
-            for (let transactionId in this._transactions) {
-                if (this._transactions[transactionId].changed()) {
-                    changed = true;
-                    break;
-                }
-            }
-        }
-        return changed;
-    }
-
-    clearChanged() {
-        super.clearChanged();
-        if (this.observed) {
-            for (let transactionId in this._transactions) {
-                this._transactions[transactionId].clearChanged();
-            }
-        }
-        return this;
-    }
-
     exists(transactionId) {
         return this._transactions.hasOwnProperty(transactionId);
     }
@@ -49,6 +26,18 @@ class TransactionMap extends ObservableObject {
         delete this._transactions[transactionId];
         this._markAsChanged();
         return this;
+    }
+
+    findAllChanged() {
+        const changedTransactions = [];
+        for (let transactionId in this._transactions) {
+            const transaction = this._transactions[transactionId];
+            if (transaction.changed()) {
+                changedTransactions.push(transaction));
+                break;
+            }
+        }
+        return changedTransactions;
     }
 }
 
