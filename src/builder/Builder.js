@@ -111,54 +111,6 @@ class Builder {
         this._pageSize = 0;
         return this;
     }
-
-    buildEagerTypeHash() {
-        return this.eagerType ? 'eager=' + this.eagerType : '';
-    }
-
-    buildOffsetHash() {
-        return this.offset ? 'offs=' + this.offset : '';
-    }
-
-    buildCountHash() {
-        return this.count ? 'cnt=' + this.count : '';
-    }
-
-    buildPageSizeHash() {
-        return this.pageSize ? 'psz=' + this.pageSize : '';
-    }
-
-    buildFiltersHash() {
-        const filterHashes = this.filters.map(filter => filter.hash());
-        return filterHashes.length ? 'filters=' + filterHashes.join(',') : '';
-    }
-
-    buildSortsHash() {
-        const sortHashes = this.sorts.map(sort => sort.hash());
-        return sortHashes.length ? 'sorts=' + sortHashes.join(',') : '';
-    }
-
-    buildRelationsHash() {
-        const relationHashes = [];
-        for (let relationName in this.relations) {
-            relationHashes.push(
-                `${relation}(${this.relations[relationName].hash()})`);
-        }
-        return relationHashes.length ? 'relations=' + relationHashes.join(',') : '';
-    }
-
-    buildHash() {
-        const hashes = [
-            this.buildEagerTypeHash(),
-            this.buildOffsetHash(),
-            this.buildCountHash(),
-            this.buildPageSizeHash(),
-            this.buildFiltersHash(),
-            this.buildSortsHash(),
-            this.buildRelationsHash()
-        ];
-        return hashes.join('&');
-    }
 }
 
 export default Builder;
