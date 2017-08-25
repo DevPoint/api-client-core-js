@@ -1,6 +1,7 @@
 
 import ApiClient from './ApiClient';
 import ApiDispatcher from './ApiDispatcher';
+import cacheActions from './cache/actions';
 import { CacheDispatcherFactory } from './cache';
 import transactionActions from './transaction/actions';
 import { TransactionMap, TransactionDispatcherFactory } from './transaction';
@@ -173,4 +174,19 @@ class Api {
         return viewActions.loadingFailed(this.nameSpace, viewId, errors);
     }
 
+    setCacheEntry(itemType, cacheId, data) {
+        return cacheActions.setCacheEntry(this.nameSpace, itemType, cacheId, data);
+    }
+
+    setCacheEntries(itemType, data) {
+        return cacheActions.setCacheEntries[this.nameSpace, itemType, data);
+    }
+
+    updateCacheEntry(itemType, cacheId, data) {
+        return cacheActions.updateCacheEntry(this.nameSpace, itemType, cacheId, data);
+    }
+
+    removeCacheEntry(itemType, cacheId) {
+        return cacheActions.removeCacheEntry(this.nameSpace, itemType, cacheId);
+    }
 }
