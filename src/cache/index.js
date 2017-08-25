@@ -1,3 +1,3 @@
 
 export CacheDispatcherFactory from './CacheDispatcherFactory';
-export export CacheMap from './CacheMap';
+export CacheMap from './CacheMap';

@@ -12,4 +12,4 @@ export LoginTransactionDispatcher from './LoginTransactionDispatcher';
 export RegisterTransactionDispatcher from './RegisterTransactionDispatcher';
 export TransactionDispatcher from './TransactionDispatcher';
 export TransactionDispatcherFactory from './TransactionDispatcherFactory';
-export export TransactionMap from './TransactionMap';
+export TransactionMap from './TransactionMap';

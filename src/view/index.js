@@ -4,4 +4,4 @@ export ViewLoadingMeta from './ViewLoadingMeta';
 export View from './View';
 export ViewDispatcher from './ViewDispatcher';
 export ViewDispatcherFactory from './ViewDispatcherFactory';
-export default ViewMap from './ViewMap';
+export ViewMap from './ViewMap';

@@ -7,7 +7,7 @@ export
 	RelationBuilder } from './builder';
 
 export 
-	CacheDispatcher,
+	CacheMap,
 	CacheDispatcherFactory } from './cache';
 
 export 

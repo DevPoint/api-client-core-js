@@ -3,9 +3,9 @@ import ApiClient from './ApiClient';
 import ApiDispatcher from './ApiDispatcher';
 import { CacheDispatcherFactory } from './cache';
 import transactionActions from './transaction/actions';
-import TransactionMap, { TransactionDispatcherFactory } from './transaction';
+import { TransactionMap, TransactionDispatcherFactory } from './transaction';
 import viewActions from './view/actions';
-import ViewMap, { ViewDispatcherFactory } from './transaction';
+import { ViewMap, ViewDispatcherFactory } from './transaction';
 
 class Api {
 
