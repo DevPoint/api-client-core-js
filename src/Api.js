@@ -50,6 +50,10 @@ class Api {
         return this._nameSpace;
     }
 
+    getCacheItemTypes() {
+        return Object.keys(this._caches);
+    }
+
     cache(itemType) {
         return this._caches[itemType];
     }
