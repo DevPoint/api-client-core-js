@@ -14,7 +14,7 @@ class Observable {
 
     addParentObserver(observer) {
         if (this._parentObserver !== null) {
-            throw new ObservableException('Only one parent observer allowed');
+            throw new ObservableException('Only 1 parent observer allowed!');
         }
         this._parentObserver = observer;
         return this;
@@ -22,26 +22,22 @@ class Observable {
 
     removeParentObserver(observer) {
         if (observer !== null && this._parentObserver !== observer) {
-            throw new ObservableException('Tried to remove unknown parent observer');
+            throw new ObservableException('Tried to remove unknown parent observer!');
         }
         this._parentObserver = null;
         return this;
     }
 
-    get observed() {
-        return (this._observer !== null || this._parentObserver !== null);
-    }
-
     get listeners() {
-        return (this.observed) ? _observer.listeners : [];
+        return (this._observer) ? _observer.listeners : [];
     }
 
     get changed() {
-        return (this.observed) ? _observer.changed : false;
+        return (this._observer) ? _observer.changed : false;
     }
 
     addListener(listener) {
-        if (!this.observed) {
+        if (!this._observer) {
             this._observer = this._createObserver();
         }
         this._observer.addListener(listener);
@@ -49,7 +45,7 @@ class Observable {
     }
 
     removeListener(listener) {
-        if (this.observed) {
+        if (this._observer) {
             this._observer.removeListener(listener);
             if (this._observer.listeners.length == 0) {
                 this._observer = null;
@@ -59,7 +55,7 @@ class Observable {
     }
 
     clearChanged() {
-        if (this.observed) {
+        if (this._observer) {
             this._observer.clearChanged();
         }
         return this;
