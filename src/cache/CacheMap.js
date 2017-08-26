@@ -30,6 +30,14 @@ class CacheMap extends ObservableObject {
         return this._entriesAreObservables;
     }
 
+    entries() {
+        return Object.values(this._entries);
+    }
+
+    entriesById() {
+        return this._entries;
+    }
+
     exists(entryId) {
         return this._entries.hasOwnProperty(entryId);
     }
@@ -61,7 +69,6 @@ class CacheMap extends ObservableObject {
         this._remove(entryId);
         return this;
     }
-
 }
 
 export default CacheMap; 
