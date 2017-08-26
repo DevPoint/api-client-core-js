@@ -25,18 +25,14 @@ class CacheEntryDispatcher  {
             if (actionTypeFrags.length >= 4 && actionTypeFrags[3] === 'MANY') {
                 const entryCount = action.payload.length;
                 for (let i = 0; i < entryCount; i++) {
-                    const newCacheEntry = this._createCacheEntry(action.payload);
-                    if (action.payload) {
-                        this._updateCacheEntry(newCacheEntry, action.payload);
-                    }
+                    const newCacheEntry = this._createCacheEntry(action.payload[i]);
+                    this._updateCacheEntry(newCacheEntry, action.payload[i]);
                     cacheMap.set(this._getCacheEntryId(cacheEntry), cacheEntry);
                 }
             }
             else {
                 const newCacheEntry = this._createCacheEntry(action.payload);
-                if (action.payload) {
-                    this._updateCacheEntry(newCacheEntry, action.payload);
-                }
+                this._updateCacheEntry(newCacheEntry, action.payload);
                 cacheMap.set(this._getCacheEntryId(cacheEntry), cacheEntry);
             }
         }
