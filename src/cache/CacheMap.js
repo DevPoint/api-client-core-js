@@ -30,12 +30,8 @@ class CacheMap extends ObservableObject {
         return this._entriesAreObservables;
     }
 
-    entries() {
-        return Object.values(this._entries);
-    }
-
-    entriesById() {
-        return this._entries;
+    ids() {
+        return Object.keys(this._views);
     }
 
     exists(entryId) {

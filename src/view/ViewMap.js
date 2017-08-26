@@ -14,12 +14,8 @@ class ViewMap extends ObservableObject {
         this._markAsChanged();
     }
 
-    views() {
-        return Object.values(this._views);
-    }
-
-    viewsById() {
-        return this._views;
+    ids() {
+        return Object.keys(this._views);
     }
 
     exists(viewId) {

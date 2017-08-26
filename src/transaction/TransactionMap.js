@@ -14,12 +14,8 @@ class TransactionMap extends ObservableObject {
         this._markAsChanged();
     }
 
-    transactions() {
-        return Object.values(this._transactions);
-    }
-
-    transactionsById() {
-        return this._transactions;
+    ids() {
+        return Object.keys(this._views);
     }
 
     exists(transactionId) {
