@@ -55,9 +55,10 @@ class CacheMap extends ObservableObject {
     }
 
     remove(entryId) {
-        if (this.exists(entryId)) {
-            this._remove(entryId);
+        if (!this.exists(entryId)) {
+            throw new CacheMapException('Try to remove entry which doesn\'t exist!');
         }
+        this._remove(entryId);
         return this;
     }
 
