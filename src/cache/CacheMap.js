@@ -8,6 +8,12 @@ class CacheMap extends ObservableObject {
         this._entries = {};
     }
 
+    _remove(entryId) {
+        const entry = this.find(entryId);
+        delete this._entries[entryId];
+        this._markAsChanged();
+    }
+
     get cacheMapId() {
         return this._cacheMapId;
     }
@@ -22,28 +28,21 @@ class CacheMap extends ObservableObject {
     }
 
     set(entryId, entry) {
+        if (this.exists(entryId)) {
+            this._remove(entryId);
+        }
         this._entries[entryId] = entry;
         this._markAsChanged();
         return this;
     }
 
     remove(entryId) {
-        delete this._entries[entryId];
-        this._markAsChanged();
+        if (this.exists(entryId)) {
+            this._remove(entryId);
+        }
         return this;
     }
 
-    findAllChanged() {
-        const changedEntries = [];
-        for (let entryId in this._entries) {
-            const entry = this._entries[entryId];
-            if (entry.changed()) {
-                changedEntries.push(entry));
-                break;
-            }
-        }
-        return changedEntries;
-    }
 }
 
 export default CacheMap; 

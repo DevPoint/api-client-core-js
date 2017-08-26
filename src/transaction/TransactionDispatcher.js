@@ -52,6 +52,9 @@ class TransactionDispatcher {
             }
             transactionMap.set(action.id, newTransaction);
         }
+        else if (actionTypeFrags[0] === 'REMOVE') {
+            transactionMap.remove(action.id);
+        }
     }
 }
 

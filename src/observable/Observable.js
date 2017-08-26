@@ -12,6 +12,10 @@ class Observable {
         return null;
     }
 
+    get observer() {
+        return this._observer;
+    }
+
     addParentObserver(observer) {
         if (this._parentObserver !== null) {
             throw new ObservableException('Only 1 parent observer allowed!');

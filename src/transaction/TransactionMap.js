@@ -7,6 +7,13 @@ class TransactionMap extends ObservableObject {
         this._transactions = {};
     }
 
+    _remove(transactionId) {
+        const transaction = this.find(transactionId);
+        transaction.removeParentObserver(this.observer);
+        delete this._transactions[transactionId];
+        this._markAsChanged();
+    }
+
     exists(transactionId) {
         return this._transactions.hasOwnProperty(transactionId);
     }
@@ -16,15 +23,20 @@ class TransactionMap extends ObservableObject {
             ? this._transactions[transactionId] : undefined;
     }
 
-    set(transationId, transaction) {
+    set(transactionId, transaction) {
+        if (this.exists(transactionId)) {
+            this._remove(transactionId);
+        }
         this._transactions[transactionId] = transaction;
+        transaction.addParentObserver(this.observer);
         this._markAsChanged();
         return this;
     }
 
     remove(transactionId) {
-        delete this._transactions[transactionId];
-        this._markAsChanged();
+        if (this.exists(transactionId)) {
+            this._remove(transactionId);
+        }
         return this;
     }
 

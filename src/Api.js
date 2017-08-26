@@ -54,18 +54,17 @@ class Api {
             if (cacheMap.changed) {
                 changedObservables.push(cacheMap);
             }
-            changedObservables = changedObservables.concat(cacheMap.findAllChanged());
         }
         const transactionMap = this.transactions();
         if (transactionMap.changed) {
             changedObservables.push(transactionMap);
+            changedObservables = changedObservables.concat(transactionMap.findAllChanged());
         }
-        changedObservables = changedObservables.concat(transactionMap.findAllChanged());
         const viewMap = this.views();
         if (viewMap.changed) {
             changedObservables.push(viewMap);
+            changedObservables = changedObservables.concat(viewMap.findAllChanged());
         }
-        changedObservables = changedObservables.concat(viewMap.findAllChanged());
         return changedObservables;
     }
 

@@ -7,6 +7,13 @@ class ViewMap extends ObservableObject {
         this._views = {};
     }
 
+    _remove(viewId) {
+        const view = this.find(viewId);
+        view.removeParentObserver(this.observer);
+        delete this._views[viewId];
+        this._markAsChanged();
+    }
+
     exists(viewId) {
         return this._views.hasOwnProperty(viewId);
     }
@@ -17,14 +24,19 @@ class ViewMap extends ObservableObject {
     }
 
     set(viewId, view) {
+        if (this.exists(viewId)) {
+            this._remove(viewId);
+        }
         this._views[viewId] = view;
+        view.addParentObserver(this.observer);
         this._markAsChanged();
         return this;
     }
 
     remove(viewId) {
-        delete this._views[viewId];
-        this._markAsChanged();
+        if (this.exists(viewId)) {
+            this._remove(viewId);
+        }
         return this;
     }
 

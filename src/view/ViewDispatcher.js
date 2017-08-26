@@ -59,6 +59,9 @@ class ViewDispatcher extends ViewDispatcher {
             }
             viewMap.set(action.id, newView);
         }
+        else if (actionTypeFrags[0] === 'REMOVE') {
+            viewMap.remove(action.id);
+        }
     }
 }
 
