@@ -12,5 +12,10 @@ class ObservableObject extends Observable {
         if (this._observer !== null) {
             this._observer.markAsChanged();
         }
+        if (this._parentObserver !== null) {
+            this._parentObserver.markAsChanged();
+        }
     }
 }
+
+default export ObservableObject;

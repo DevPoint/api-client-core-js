@@ -1,7 +1,10 @@
 
+import ObservableException from './ObservableException';
+
 class Observable { 
 
     constructor() {
+        this._parentObserver = null;
         this._observer = null,
     }
 
@@ -9,8 +12,24 @@ class Observable {
         return null;
     }
 
+    addParentObserver(observer) {
+        if (this._parentObserver !== null) {
+            throw new ObservableException('Only one parent observer allowed');
+        }
+        this._parentObserver = observer;
+        return this;
+    }
+
+    removeParentObserver(observer) {
+        if (observer !== null && this._parentObserver !== observer) {
+            throw new ObservableException('Tried to remove unknown parent observer');
+        }
+        this._parentObserver = null;
+        return this;
+    }
+
     get observed() {
-        return (this._observer !== null);
+        return (this._observer !== null || this._parentObserver !== null);
     }
 
     get listeners() {
@@ -46,3 +65,5 @@ class Observable {
         return this;
     }
 }
+
+default export Observable;

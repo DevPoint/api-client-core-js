@@ -8,6 +8,19 @@ class ObservableArray extends Observable {
         this._wrapped = wrapped ? wrapped : [];
     }
 
+    _createObserver() {
+        return new ArrayObserver();
+    }
+
+    _markAsChanged() {
+        if (this._observer !== null) {
+            this._observer.markAsChanged();
+        }
+        if (this._parentObserver !== null) {
+            this._parentObserver.markAsChanged();
+        }
+    }
+
     get length() {
         return this._wrapped.length;
     }
@@ -156,3 +169,5 @@ class ObservableArray extends Observable {
         return this._wrapped.values();
     }
 }
+
+default export ObservableArray;

@@ -23,3 +23,4 @@ class PropertyObserver extends Observer {
     }
 }
 
+default export PropertyObserver;
