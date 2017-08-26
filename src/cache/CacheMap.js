@@ -44,7 +44,7 @@ class CacheMap extends ObservableObject {
             this._remove(entryId);
         }
         this._entries[entryId] = entry;
-        if (entry instanceof Observable) {
+        if (this._entriesAreObservables) {
             if (!entry instanceof Observable) {
                 throw new CacheMapException('Cache entry must be instanceof Observable!');
             }
