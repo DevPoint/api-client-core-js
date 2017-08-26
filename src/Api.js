@@ -46,7 +46,7 @@ class Api {
             this._createViewDispatcherFactory());
     }
 
-    _changedObservables() {
+    _notify() {
         const changedObservables = [];
         const cacheItemTypes = this.getCacheItemTypes();
         for (let itemType in this._caches) {
