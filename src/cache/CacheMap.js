@@ -1,21 +1,33 @@
 
-import { ObservableObject } from '../observable';
+import { Observable, ObservableObject } from '../observable';
+import CacheMapException from './CacheMapException';
 
 class CacheMap extends ObservableObject {
 
-    constructor(cacheMapId) {
+    constructor(cacheMapId, entriesAreObservables) {
         this._cacheMapId = cacheMapId;
+        this._entriesAreObservables = entriesAreObservables;
         this._entries = {};
     }
 
     _remove(entryId) {
         const entry = this.find(entryId);
+        if (this._entriesAreObservables) {
+            if (!entry instanceof Observable) {
+                throw new CacheMapException('Cache entry must be instanceof Observable!');
+            }
+            entry.removeParentObserver(this.observer);
+        }
         delete this._entries[entryId];
         this._markAsChanged();
     }
 
     get cacheMapId() {
         return this._cacheMapId;
+    }
+
+    get entriesAreObservables() {
+        return this._entriesAreObservables;
     }
 
     exists(entryId) {
@@ -32,6 +44,12 @@ class CacheMap extends ObservableObject {
             this._remove(entryId);
         }
         this._entries[entryId] = entry;
+        if (entry instanceof Observable) {
+            if (!entry instanceof Observable) {
+                throw new CacheMapException('Cache entry must be instanceof Observable!');
+            }
+            entry.addParentObserver(this.observer);
+        }
         this._markAsChanged();
         return this;
     }
