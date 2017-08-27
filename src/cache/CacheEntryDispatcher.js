@@ -1,12 +1,10 @@
 
-import CacheEntry from './CacheEntry';
-
 const assign = Object.assign;
 
 class CacheEntryDispatcher  {
 
-    constructor(cacheEntryType) {
-        this._cacheEntryType = cacheEntryType;
+    constructor(CacheEntryClass) {
+        this._CacheEntryClass = CacheEntryClass;
     }
 
     _cloneObject(object) {
@@ -18,7 +16,8 @@ class CacheEntryDispatcher  {
     }
 
     _createCacheEntry(payload) {
-        return new CacheEntry(this._cacheEntryType, payload);
+        const CacheEntryClass = this._CacheEntryClass;
+        return new CacheEntryClass(payload);
     }
 
     _updateCacheEntry(cacheEntry, payload) {
