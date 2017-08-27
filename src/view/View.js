@@ -22,11 +22,8 @@ class View extends Observable {
     }
 
     get changed() {
-        let changed = false;
-        if (this._observer) {
-            changed = this._observer.changed;
-            changed = changed || this._loadingMeta.changed();
-        }
+        let changed = this._observer ? this._observer.changed : false;
+        changed = changed || this._loadingMeta.changed();
         return changed;
     }
 
