@@ -25,6 +25,10 @@ class CacheEntry extends Observable {
         }
     }
 
+    update(data) {
+
+    }
+
     toObject() {
         return {};
     }
