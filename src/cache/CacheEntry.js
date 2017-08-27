@@ -5,7 +5,7 @@ import ObjectObserver from './observable/ObjectObserver';
 
 class CacheEntry extends Observable { 
 
-    constructor(type) {
+    constructor(type, data) {
         super();
         this._observer = this._createObserver();
         this._observerLocked = true;
