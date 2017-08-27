@@ -11,7 +11,7 @@ export const CachePropArray = new CachePropType('array', [], CachePropObject);
 export const CachePropNullableString = new CachePropType('nullableString', null, CachePropString);
 export const CachePropNullableNumber = new CachePropType('nullableNumber', null, CachePropNumber);
 export const CachePropNullableInteger = new CachePropType('nullableInteger', null, CachePropInteger);
-export const CachePropNullableObject = new CachePropType('nullableArray', null, CachePropObject);
+export const CachePropNullableObject = new CachePropType('nullableObject', null, CachePropObject);
 export const CachePropNullableArray = new CachePropType('nullableArray', null, CachePropArray);
 
 export default {
