@@ -21,7 +21,7 @@ class CacheEntryDispatcher  {
     }
 
     _updateCacheEntry(cacheEntry, payload) {
-        cacheEntry.update(payload);
+        cacheEntry.fill(payload);
         return this;
     }
 

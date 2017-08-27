@@ -25,7 +25,7 @@ class CacheDispatcherFactory {
         }
         CacheEntryClass.prototype = CacheEntry;
         CacheEntryClass.type  = cacheEntryType;     
-        CacheEntryClass.update = function(data) {
+        CacheEntryClass.fill = function(data) {
             const type = this.prototype.type;
             for (let propKey in data) {
                 if (type.hasOwnProperty(propKey)) {

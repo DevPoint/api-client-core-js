@@ -26,7 +26,7 @@ class CacheEntry extends Observable {
         }
     }
 
-    update(data) {
+    fill(data) {
         return this;
     }
 
