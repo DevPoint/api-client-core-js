@@ -50,8 +50,8 @@ class CacheEntryDispatcher  {
             const cacheEntry = cacheMap.find(action.id);
             if (cacheEntry) {
                 this._updateCacheEntry(cacheEntry, action.payload);
+                cacheMap.markAsChanged();
             }
-            cacheMap.markAsChanged();
         }
         else if (actionTypeFrags[0] === 'REMOVE') {
             cacheMap.remove(action.id);
