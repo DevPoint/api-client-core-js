@@ -21,6 +21,11 @@ class CacheEntryDispatcher  {
         return new CacheEntry(this._cacheEntryType, payload);
     }
 
+    _updateCacheEntry(cacheEntry, payload) {
+        cacheEntry.update(payload);
+        return this;
+    }
+
     _getCacheEntryId(cacheEntry) {
         return cacheEntry.id;
     }
@@ -32,7 +37,7 @@ class CacheEntryDispatcher  {
                 const entryCount = action.payload.length;
                 for (let i = 0; i < entryCount; i++) {
                     const newCacheEntry = this._createCacheEntry(action.payload[i]);
-                    this._updateCacheEntry(newCacheEntry, action.payload[i]);
+                    newCacheEntry.markAsChanged();
                     cacheMap.set(this._getCacheEntryId(cacheEntry), cacheEntry);
                 }
             }
