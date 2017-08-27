@@ -17,6 +17,14 @@ class ViewLoadingMeta extends Observable {
         return this._changed;
     }
 
+    addListener(listener) {
+        return this;
+    }
+
+    removeListener(listener) {
+        return this;
+    }
+
     markAsChanged() {
         this._changed = true;
         return this;
