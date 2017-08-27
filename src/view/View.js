@@ -6,6 +6,8 @@ class View extends Observable {
 
     constructor(viewId, itemType, loadingMeta) {
         super();
+        this._observer = this._createObserver();
+        this._observerLocked = true;
         this._viewId = viewId;
         this._itemType = itemType;
         this._ready = false;
@@ -22,15 +24,13 @@ class View extends Observable {
     }
 
     get changed() {
-        let changed = this._observer ? this._observer.changed : false;
+        let changed = this._observer.changed;
         changed = changed || this._loadingMeta.changed();
         return changed;
     }
 
     markAsChanged() {
-        if (this._observer) {
-            this._observer.markAsChanged();
-        }
+        this._observer.markAsChanged();
         if (this._parentObserver) {
             this._parentObserver.markAsChanged();
         }

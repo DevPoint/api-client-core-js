@@ -5,6 +5,8 @@ class Transaction extends Observable {
 
     constructor(transactionId, itemType, type) {
         super();
+        this._observer = this._createObserver();
+        this._observerLocked = true;
         this._transactionId = transactionId;
         this._itemType = itemType;
         this._type = type;
@@ -20,13 +22,11 @@ class Transaction extends Observable {
     }
 
     get changed() {
-        return this._observer ? this._observer.changed : false;
+        return this._observer.changed;
     }
 
     markAsChanged() {
-        if (this._observer !== null) {
-            this._observer.markAsChanged();
-        }
+        this._observer.markAsChanged();
         if (this._parentObserver !== null) {
             this._parentObserver.markAsChanged();
         }
