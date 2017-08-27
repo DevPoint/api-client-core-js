@@ -1,6 +1,9 @@
 
 import { Observable, ObservableObject } from '../observable';
 import CacheMapException from './CacheMapException';
+import CacheConstructorType from './CacheConstructorType';
+import CachePropType from './CachePropType';
+import CacheEntry from './CacheEntry';
 
 class CacheMap extends ObservableObject {
 
@@ -31,8 +34,21 @@ class CacheMap extends ObservableObject {
         return this._entriesAreObservables;
     }
 
-    createEntry() {
-        return null;
+    createEntry(payload) {
+        const entry = new CacheEntry();
+        for (let propKey in this._entryType) {
+            const propType = this._entryType[propKey];
+            if (propType instanceof CachePropType) {
+                entry[propKey] = propType.default;
+            }
+        }
+        if (this.entryType.construct && 
+            this.entryType.construct instanceof CacheConstructorType) {
+            for (let propKey in this.entryType.construct.propKeys) {
+                entry[propKey] = payload[propKey];
+            } 
+        }
+        return entry;
     }
 
     ids() {
