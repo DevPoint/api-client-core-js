@@ -37,7 +37,7 @@ class View extends Observable {
     }
 
     clearChanged() {
-        super.clearChanged();
+        this._observer.clearChanged();
         this._loadingMeta.clearChanged();
         return this;
     }
