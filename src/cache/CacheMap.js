@@ -4,9 +4,9 @@ import CacheMapException from './CacheMapException';
 
 class CacheMap extends ObservableObject {
 
-    constructor(cacheMapId, entriesAreObservables) {
+    constructor(cacheMapId, entrySchema, entriesAreObservables) {
         this._cacheMapId = cacheMapId;
-        this._entrySchema = {};
+        this._entrySchema = entrySchema;
         this._entriesAreObservables = entriesAreObservables;
         this._entries = {};
     }
