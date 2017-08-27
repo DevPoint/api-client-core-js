@@ -14,6 +14,10 @@ class CacheEntry extends Observable {
         return new ObjectObserver();
     }
 
+    get changed() {
+        return _observer.changed;
+    }
+
     markAsChanged() {
         this._observer.markAsChanged();
         if (this._parentObserver !== null) {
