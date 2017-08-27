@@ -9,3 +9,10 @@ export * from './cache';
 export * from './observable';
 export * from './transaction';
 export * from './view';
+
+export ObservablePropType from './observable/PropType';
+export ObservablePropTypes from './observable/PropTypes';
+
+export cacheActions from './cache/actions';
+export transactionActions from './transaction/actions';
+export viewActions from './view/actions';
