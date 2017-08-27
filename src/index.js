@@ -6,6 +6,7 @@ export ApiDispatcher from './ApiDispatcher';
 
 export * from './builder';
 export * from './cache';
+export * from './cache/proptypes';
 export * from './observable';
 export * from './transaction';
 export * from './view';
