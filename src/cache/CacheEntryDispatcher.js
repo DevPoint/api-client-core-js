@@ -1,7 +1,13 @@
 
+import CacheEntry from './CacheEntry';
+
 const assign = Object.assign;
 
 class CacheEntryDispatcher  {
+
+    constructor(cacheEntryType) {
+        this._cacheEntryType = cacheEntryType;
+    }
 
     _cloneObject(object) {
         return assign({}, object);
@@ -11,8 +17,8 @@ class CacheEntryDispatcher  {
         return array.slice(0);
     }
 
-    _createCacheEntry(cacheMap, payload) {
-        return cacheEntry.createEntry(payload);
+    _createCacheEntry(payload) {
+        return new CacheEntry(this._cacheEntryType, payload);
     }
 
     _getCacheEntryId(cacheEntry) {
@@ -25,7 +31,7 @@ class CacheEntryDispatcher  {
             if (actionTypeFrags.length >= 4 && actionTypeFrags[3] === 'MANY') {
                 const entryCount = action.payload.length;
                 for (let i = 0; i < entryCount; i++) {
-                    const newCacheEntry = this._createCacheEntry(cacheMap, action.payload[i]);
+                    const newCacheEntry = this._createCacheEntry(action.payload[i]);
                     this._updateCacheEntry(newCacheEntry, action.payload[i]);
                     cacheMap.set(this._getCacheEntryId(cacheEntry), cacheEntry);
                 }

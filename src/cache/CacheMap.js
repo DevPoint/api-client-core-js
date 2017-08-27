@@ -6,9 +6,8 @@ import CacheEntry from './CacheEntry';
 
 class CacheMap extends ObservableObject {
 
-    constructor(cacheMapId, cacheEntryType, entriesAreObservables) {
+    constructor(cacheMapId, entriesAreObservables) {
         this._cacheMapId = cacheMapId;
-        this._cacheEntryType = cacheEntryType;
         this._entriesAreObservables = entriesAreObservables;
         this._entries = {};
     }
@@ -31,51 +30,6 @@ class CacheMap extends ObservableObject {
 
     get entriesAreObservables() {
         return this._entriesAreObservables;
-    }
-
-    createEntry(data) {
-        const CacheEntryClass = function(type, data) {
-            CachEntry.call(this);
-            this._type = type;
-            for (let propKey in type) {
-                const propType = type[propKey];
-                if (propType instanceof CachePropType) {
-                    this[propKey] = propType.default;
-                }
-            }
-            for (let propKey in data) {
-                if (type.hasOwnProperty(propKey)) {
-                    const propType = type[propKey];
-                    if (propType instanceof CachePropType) {
-                        this[propKey] = data[propKey];
-                    }
-                }
-            }
-        };
-        CacheEntryClass.prototype = CacheEntry;
-        CacheEntryClass.toObject = function() {
-            const result = {};
-            const type = this._type;
-            for (let propKey in type) {
-                const propType = type[propKey];
-                if (propType instanceof CachePropType) {
-                    result[propKey] = this[propKey];
-                }
-            }
-            return result;
-        };
-        CacheEntryClass.update = function(data) {
-            const type = this._type;
-            for (let propKey in data) {
-                if (type.hasOwnProperty(propKey)) {
-                    const propType = type[propKey];
-                    if (propType instanceof CachePropType) {
-                        this[propKey] = data[propKey];
-                    }
-                }
-            }
-        };
-        return new CachEntryClass(this._cacheEntryType, data);
     }
 
     ids() {
