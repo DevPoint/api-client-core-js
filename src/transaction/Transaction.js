@@ -1,7 +1,7 @@
 
-import { ObservableObject } from '../observable';
+import { ObjectObserver, Observable } from '../observable';
 
-class Transaction extends ObservableObject {
+class Transaction extends Observable {
 
     constructor(transactionId, itemType, type) {
         super();
@@ -13,6 +13,23 @@ class Transaction extends ObservableObject {
         this._succeeded = false;
         this._failed = false;
         this._errors = [];
+    }
+
+    _createObserver() {
+        return new ObjectObserver();
+    }
+
+    get changed() {
+        return this._observer ? this._observer.changed : false;
+    }
+
+    markAsChanged() {
+        if (this._observer !== null) {
+            this._observer.markAsChanged();
+        }
+        if (this._parentObserver !== null) {
+            this._parentObserver.markAsChanged();
+        }
     }
 
     get transactionId() {
@@ -53,31 +70,31 @@ class Transaction extends ObservableObject {
 
     setReady(ready) {
         this._ready = ready;
-        this._markAsChanged();
+        this.markAsChanged();
         return this;
     }
 
     setProcessing(processing) {
         this._processing = processing;
-        this._markAsChanged();
+        this.markAsChanged();
         return this;
     }
 
     setSucceeded(succeeded) {
         this._succeeded = succeeded;
-        this._markAsChanged();
+        this.markAsChanged();
         return this;
     }
 
     setFailed(failed) {
         this._failed = failed;
-        this._markAsChanged();
+        this.markAsChanged();
         return this;
     }
 
     setErrors(errors) {
         this._errors = errors;
-        this._markAsChanged();
+        this.markAsChanged();
         return this;
     }
 }

@@ -28,7 +28,7 @@ class UpdateTransaction extends Transaction {
 
     setValidationErrors(errors) {
         this._validationErrors = validationErrors;
-        this._markAsChanged();
+        this.markAsChanged();
         return this;
     }
 }

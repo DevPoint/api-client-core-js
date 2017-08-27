@@ -47,6 +47,7 @@ class TransactionDispatcher {
         }
         else if (actionTypeFrags[0] === 'SET' || actionTypeFrags[0] === 'ADD') {
             const newTransaction = this._createTransaction(action);
+            newTransaction.markAsChanged();
             if (action.payload) {
                 this._updateTransaction(newTransaction, action.payload);
             }

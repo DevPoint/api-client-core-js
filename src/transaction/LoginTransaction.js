@@ -28,13 +28,13 @@ class LoginTransaction extends Transaction {
 
     setUserId(userId) {
         this._userId = userId;
-        this._markAsChanged();
+        this.markAsChanged();
         return this;
     }
 
     setValidationErrors(errors) {
         this._validationErrors = validationErrors;
-        this._markAsChanged();
+        this.markAsChanged();
         return this;
     }
 }

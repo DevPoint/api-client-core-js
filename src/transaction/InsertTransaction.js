@@ -28,13 +28,13 @@ class InsertTransaction extends Transaction {
 
     setItemId(itemId) {
         this._itemId = itemId;
-        this._markAsChanged();
+        this.markAsChanged();
         return this;
     }
 
     setValidationErrors(errors) {
         this._validationErrors = validationErrors;
-        this._markAsChanged();
+        this.markAsChanged();
         return this;
     }
 }

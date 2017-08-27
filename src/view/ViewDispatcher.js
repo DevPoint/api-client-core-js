@@ -54,6 +54,7 @@ class ViewDispatcher extends ViewDispatcher {
         }
         else if (actionTypeFrags[0] === 'SET' || actionTypeFrags[0] === 'ADD') {
             const newView = this._createView(action);
+            newView.markAsChanged();
             if (action.payload) {
                 this._updateView(newView, action.payload);
             }

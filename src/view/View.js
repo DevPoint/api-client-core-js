@@ -1,8 +1,8 @@
 
-import { ObservableObject } from '../observable';
+import { Observable, ObjectObserver } from '../observable';
 import ViewLoadingMeta from './ViewLoadingMeta';
 
-class View extends ObservableObject {
+class View extends Observable {
 
     constructor(viewId, itemType, loadingMeta) {
         super();
@@ -17,12 +17,26 @@ class View extends ObservableObject {
         this._itemsIds = [];
     }
 
+    _createObserver() {
+        return new ObjectObserver();
+    }
+
     get changed() {
-        let changed = super.changed();
-        if (!changed) {
-            changed = this._loadingMeta.changed();
+        let changed = false;
+        if (this._observer) {
+            changed = this._observer.changed;
+            changed = changed || this._loadingMeta.changed();
         }
         return changed;
+    }
+
+    markAsChanged() {
+        if (this._observer) {
+            this._observer.markAsChanged();
+        }
+        if (this._parentObserver) {
+            this._parentObserver.markAsChanged();
+        }
     }
 
     clearChanged() {

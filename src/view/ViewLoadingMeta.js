@@ -1,15 +1,30 @@
 
-import { ObservableObject } from '../observable';
+import { Observable } from '../observable';
 
-class ViewLoadingMeta extends ObservableObject {
+class ViewLoadingMeta extends Observable {
 
     constructor(eagerType, offset, count, pageSize) {
         super();
+        this._changed = false;
         this._eagerType = eagerType;
         this._offset = offset;
         this._count = count;
         this._pageSize = pageSize;
         this._totalCount = 0;
+    }
+
+    get changed() {
+        return this._changed;
+    }
+
+    markAsChanged() {
+        this._changed = true;
+        return this;
+    }
+
+    clearChanged() {
+        this._changed = false;
+        return this;
     }
 
     set offset(value) {
