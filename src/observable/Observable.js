@@ -5,7 +5,8 @@ class Observable {
 
     constructor() {
         this._parentObserver = null;
-        this._observer = null,
+        this._observer = null;
+        this._observerLocked = false;
     }
 
     _createObserver() {
@@ -41,7 +42,7 @@ class Observable {
     }
 
     addListener(listener) {
-        if (!this._observer) {
+        if (!this._observer && !this._observerLocked) {
             this._observer = this._createObserver();
         }
         this._observer.addListener(listener);
@@ -51,7 +52,7 @@ class Observable {
     removeListener(listener) {
         if (this._observer) {
             this._observer.removeListener(listener);
-            if (this._observer.listeners.length == 0) {
+            if (this._observer.listeners.length == 0 && !this._observerLocked) {
                 this._observer = null;
             }
         }
