@@ -41,8 +41,8 @@ class CacheEntryDispatcher  {
                 }
             }
             else {
-                const newCacheEntry = this._createCacheEntry(cacheMap, action.payload);
-                this._updateCacheEntry(newCacheEntry, action.payload);
+                const newCacheEntry = this._createCacheEntry(action.payload);
+                newCacheEntry.markAsChanged();
                 cacheMap.set(this._getCacheEntryId(cacheEntry), cacheEntry);
             }
         }
