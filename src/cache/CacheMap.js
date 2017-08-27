@@ -6,6 +6,7 @@ class CacheMap extends ObservableObject {
 
     constructor(cacheMapId, entriesAreObservables) {
         this._cacheMapId = cacheMapId;
+        this._entrySchema = {};
         this._entriesAreObservables = entriesAreObservables;
         this._entries = {};
     }
@@ -28,6 +29,10 @@ class CacheMap extends ObservableObject {
 
     get entriesAreObservables() {
         return this._entriesAreObservables;
+    }
+
+    createEntry() {
+        return null;
     }
 
     ids() {
