@@ -31,7 +31,7 @@ class CacheEntry extends Observable {
     }
 
     get changed() {
-        return _observer.changed;
+        return this._observer.changed;
     }
 
     markAsChanged() {
@@ -51,6 +51,7 @@ class CacheEntry extends Observable {
                 }
             }
         }
+        this.markAsChanged();
         return this;
     }
 
