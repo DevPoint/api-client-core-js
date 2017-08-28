@@ -31,18 +31,16 @@ class ApiClient {
     }
     
     loginTransaction(transactionId, credentials) {
-        this._api.beginDispatch();
         this._api.dispatch(this._api.loginStart(transactionId, credentials));
-        this._api.dispatch(this._api.loginFailed(transactionId, ['not_implemented'], {}));
-        this._api.endDispatch();
-        return this._api.transactions().find(transactionId);
+        return new Promise((resolve, reject) => {
+            reject(this._api.dispatch(this._api.loginFailed(transactionId, ['not_implemented'], {})));
+        });
     }
 
     registerTransaction(transactionId, credentials) {
-        this._api.beginDispatch();
         this._api.dispatch(this._api.registerStart(transactionId, credentials));
-        this._api.dispatch(this._api.registerFailed(transactionId, ['not_implemented'], {}));
-        this._api.endDispatch();
-        return this._api.transactions().find(transactionId);
+        return new Promise((resolve, reject) => {
+            reject(this._api.dispatch(this._api.registerFailed(transactionId, ['not_implemented'], {})));
+        });
     }
 }
