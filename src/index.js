@@ -11,7 +11,7 @@ export * from './observable';
 export * from './transaction';
 export * from './view';
 
-export cachePropTypes from './cache/proptypes';
+export observablePropTypes from './observable/proptypes';
 export cacheActions from './cache/actions';
 export transactionActions from './transaction/actions';
 export viewActions from './view/actions';
