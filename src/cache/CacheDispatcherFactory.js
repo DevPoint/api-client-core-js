@@ -1,6 +1,6 @@
 
 import CacheEntry from './CacheEntry';
-import CachePropType from './CachePropType';
+import ObservablePropType from '../observable/ObservablePropType';
 
 class CacheDispatcherFactory {
 
@@ -10,14 +10,14 @@ class CacheDispatcherFactory {
             const type = this.prototype.type;
             for (let propKey in type) {
                 const propType = type[propKey];
-                if (propType instanceof CachePropType) {
+                if (propType instanceof ObservablePropType) {
                     this[propKey] = propType.default;
                 }
             }
             for (let propKey in data) {
                 if (type.hasOwnProperty(propKey)) {
                     const propType = type[propKey];
-                    if (propType instanceof CachePropType) {
+                    if (propType instanceof ObservablePropType) {
                         this[propKey] = data[propKey];
                     }
                 }
@@ -30,7 +30,7 @@ class CacheDispatcherFactory {
             for (let propKey in data) {
                 if (type.hasOwnProperty(propKey)) {
                     const propType = type[propKey];
-                    if (propType instanceof CachePropType) {
+                    if (propType instanceof ObservablePropType) {
                         this[propKey] = data[propKey];
                     }
                 }
@@ -43,7 +43,7 @@ class CacheDispatcherFactory {
             const type = this.prototype.type;
             for (let propKey in type) {
                 const propType = type[propKey];
-                if (propType instanceof CachePropType) {
+                if (propType instanceof ObservablePropType) {
                     result[propKey] = this[propKey];
                 }
             }

@@ -1,5 +1,4 @@
 
-import CachePropType from './CachePropType';
 import Observable from '../observable/Observable';
 import ObjectObserver from './observable/ObjectObserver';
 
