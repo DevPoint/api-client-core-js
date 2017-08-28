@@ -128,7 +128,10 @@ class Api {
     }
 
     dispatch(action) {
-        return this._dispatcher.dispatch(action);
+        this.beginDispatch();
+        const result = this._dispatcher.dispatch(action);
+        this.endDispatch();
+        return result;
     }
 
     endDispatch() {
