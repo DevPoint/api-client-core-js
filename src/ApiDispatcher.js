@@ -41,5 +41,6 @@ class ApiDispatcher {
                 cacheDispatcher.dispatch(this._api.cache(itemType), action);
             }
         }
+        return action;
     }
 }
