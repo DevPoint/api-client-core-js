@@ -1,5 +1,5 @@
 
-import { Observable, ObservableObject } from '../observable';
+import { Observable, ObservableObject, ObservableException } from '../observable';
 import CacheMapException from './CacheMapException';
 import CacheEntry from './CacheEntry';
 
@@ -13,7 +13,7 @@ class CacheMap extends ObservableObject {
     _remove(entryId) {
         const entry = this.find(entryId);
         if (!(entry instanceof Observable)) {
-            throw new CacheMapException('Entry not an instance of Observable!');
+            throw new ObservableException('Entry not an instance of Observable!');
         }
         entry.removeParentObserver(this.observer);
         delete this._entries[entryId];
@@ -43,7 +43,7 @@ class CacheMap extends ObservableObject {
         }
         this._entries[entryId] = entry;
         if (!(entry instanceof Observable)) {
-            throw new CacheMapException('Entry not an instance of Observable!');
+            throw new ObservableException('Entry not an instance of Observable!');
         }
         entry.addParentObserver(this.observer);
         this._markAsChanged();
