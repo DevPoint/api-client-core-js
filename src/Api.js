@@ -151,7 +151,7 @@ class Api {
     }
 
     updateStart(transactionId, itemType, itemId, data) {
-        return transactionActions.updateStart(this.nameSpace, transactionId, itemId, data);
+        return transactionActions.updateStart(this.nameSpace, transactionId, itemType, itemId, data);
     }
 
     updateSucceeded(transactionId) {
