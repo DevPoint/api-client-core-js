@@ -23,9 +23,7 @@ export default {
                 ready: true,
                 processing: false,
                 succeeded: true,
-                itemsIds: [itemId],
-                errors: [],
-                validationErrors: {}
+                itemsIds: [itemId]
             }
         };
     }
@@ -69,9 +67,7 @@ export default {
             payload: {
                 ready: true,
                 processing: false,
-                succeeded: true,
-                errors: [],
-                validationErrors: {}
+                succeeded: true
             }
         };
     }
@@ -100,7 +96,7 @@ export default {
         return {
             type: nameSpacePrefix + 'SET_TRANSACTION_DELETE',
             id: transactionId,
-            itemType: itemType
+            itemType: itemType,
             payload: {
                 itemsIds: [itemId]
             }
@@ -115,8 +111,7 @@ export default {
             payload: {
                 ready: true,
                 processing: false,
-                succeeded: true,
-                errors: []
+                succeeded: true
             }
         };
     }
@@ -143,10 +138,10 @@ export default {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'SET_TRANSACTION_LOGIN',
-            id: transactionId
+            id: transactionId,
+            itemType: 'user'
         };
     }
-
 
     loginSucceeded(nameSpace, transactionId, userId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
@@ -157,9 +152,7 @@ export default {
                 ready: true,
                 processing: false,
                 succeeded: true,
-                itemsIds: [userId],
-                errors: [],
-                validationErrors: {}
+                itemsIds: [userId]
             }
         };
     }
@@ -187,7 +180,8 @@ export default {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'REGISTER_TRANSACTION_REGISTER',
-            id: transactionId
+            id: transactionId,
+            itemType: 'user'
         };
     }
 
@@ -200,13 +194,12 @@ export default {
                 ready: true,
                 processing: false,
                 succeeded: true,
-                itemsIds: [userId],
-                errors: '',
+                itemsIds: [userId]
             }
         };
     }
 
-    registerFailed(nameSpace, transactionId, error) {
+    registerFailed(nameSpace, transactionId, errors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_TRANSACTION_REGISTER',
@@ -215,7 +208,7 @@ export default {
                 ready: true,
                 processing: false,
                 failed: true,
-                errors: [error]
+                errors: errors
             }
         };
     }

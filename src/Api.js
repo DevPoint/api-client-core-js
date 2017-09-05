@@ -138,8 +138,8 @@ class Api {
         
     }
 
-    insertStart(transactionId, itemType, data) {
-        return transactionActions.insertStart(this.nameSpace, transactionId, itemType, data);
+    insertStart(transactionId, itemType) {
+        return transactionActions.insertStart(this.nameSpace, transactionId, itemType);
     }
 
     insertSucceeded(transactionId, itemId) {
@@ -150,8 +150,8 @@ class Api {
         return transactionActions.insertFailed(this.nameSpace, transactionId, errors, validationErrors);
     }
 
-    updateStart(transactionId, itemType, itemId, data) {
-        return transactionActions.updateStart(this.nameSpace, transactionId, itemId, data);
+    updateStart(transactionId, itemType, itemId) {
+        return transactionActions.updateStart(this.nameSpace, transactionId, itemId);
     }
 
     updateSucceeded(transactionId) {
@@ -174,8 +174,8 @@ class Api {
         return transactionActions.deleteFailed(this.nameSpace, transactionId, errors);
     }
 
-    loginStart(transactionId, credentials) {
-        return transactionActions.loginStart(this.nameSpace, transactionId, credentials);
+    loginStart(transactionId) {
+        return transactionActions.loginStart(this.nameSpace, transactionId);
     }
 
     loginSucceeded(transactionId, userId) {
@@ -186,8 +186,8 @@ class Api {
         return transactionActions.loginFailed(this.nameSpace, transactionId, errors, validationErrors);
     }
 
-    registerStart(transactionId, credentials) {
-        return transactionActions.registerStart(this.nameSpace, transactionId, credentials);
+    registerStart(transactionId) {
+        return transactionActions.registerStart(this.nameSpace, transactionId);
     }
 
     registerSucceeded(transactionId, userId) {
