@@ -1,26 +1,17 @@
 
 import TransactionDispatcher from './TransactionDispatcher';
-import RegisterTransaction from './RegisterTransaction';
+import Transaction from './Transaction';
 
 class RegisterTransactionDispatcher extends TransactionDispatcher {
 
     _createTransaction(action) {
-        return new RegisterTransaction(
-            action.id, action.credentials);
+        const transaction = new Transaction(action.id, action.itemType, 'register');
+        return transaction;
     }
 
-    _updateTransaction(transition, payload) {
-    	super._updateTransaction(transaction, payload);
-        for (let propsKey in payload) {
-            switch (propsKey) {
-                case 'userid':
-                    transaction.setUserId(this._cloneObject(payload[propsKey]));
-                    break;
-                case 'validationErrors':
-                    transaction.setValidationErrors(this._cloneObject(payload[propsKey]));
-                    break;
-            }
-        }
+    _updateTransaction(transaction, payload) {
+        transaction.fill(payload);
+        return this;
     }
 }
 

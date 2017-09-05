@@ -36,108 +36,6 @@ class Transaction extends Observable {
         }
     }
 
-    get transactionId() {
-        return this._transactionId;
-    }
-
-    get itemType() {
-        return this._itemType;
-    }
-
-    get type() {
-        return this._type;
-    }
-
-    get ready() {
-        return this._ready;
-    }
-
-    get processing() {
-        return this._processing;
-    }
-
-    get failed() {
-        return this._failed;
-    }
-
-    get succeeded() {
-        return this._succeeded;
-    }
-
-    get itemsIds() {
-        return this._itemsIds;
-    }
-
-    get itemId() {
-        return this._itemsIds.length == 1 ? this._itemsIds[0] : null;
-    }
-
-    get firstId() {
-        return this._itemsIds.length ? this._itemsIds[0] : null;
-    }
-
-    get lastId() {
-        return this._itemsIds.length ? this._itemsIds[this._itemsIds.length-1] : null;
-    }
-
-    get hasErrors() {
-        return (this.errors.length > 0);
-    }
-
-    get errors() {
-        return this._errors;
-    }
-
-    get hasValidationErrors() {
-        return (Object.keys(this.validationErrors).length > 0);
-    }
-
-    get validationErrors() {
-        return this._validationErrors;
-    }
-
-    setReady(ready) {
-        this._ready = ready;
-        this.markAsChanged();
-        return this;
-    }
-
-    setProcessing(processing) {
-        this._processing = processing;
-        this.markAsChanged();
-        return this;
-    }
-
-    setSucceeded(succeeded) {
-        this._succeeded = succeeded;
-        this.markAsChanged();
-        return this;
-    }
-
-    setFailed(failed) {
-        this._failed = failed;
-        this.markAsChanged();
-        return this;
-    }
-
-    setItemsIds(itemsIds) {
-        this._itemsIds = itemsIds;
-        this._markAsChanged();
-        return this;
-    }
-
-    setErrors(errors) {
-        this._errors = errors;
-        this.markAsChanged();
-        return this;
-    }
-
-    setValidationErrors(errors) {
-        this._validationErrors = validationErrors;
-        this.markAsChanged();
-        return this;
-    }
-
     fill(data) {
         for (let propsKey in data) {
             switch (propsKey) {
@@ -180,6 +78,132 @@ class Transaction extends Observable {
             errors: this.errors,
             validationErrors: this.validationErrors
         };
+    }
+
+    get transactionId() {
+        return this._transactionId;
+    }
+
+    get itemType() {
+        return this._itemType;
+    }
+
+    get type() {
+        return this._type;
+    }
+
+    get ready() {
+        return this._ready;
+    }
+
+    get processing() {
+        return this._processing;
+    }
+
+    get failed() {
+        return this._failed;
+    }
+
+    get succeeded() {
+        return this._succeeded;
+    }
+
+    get itemsIds() {
+        return this._itemsIds;
+    }
+
+    get itemId() {
+        return this._itemsIds.length == 1 ? this._itemsIds[0] : null;
+    }
+
+    get firstItemId() {
+        return this._itemsIds.length ? this._itemsIds[0] : null;
+    }
+
+    get lastItemId() {
+        return this._itemsIds.length ? this._itemsIds[this._itemsIds.length-1] : null;
+    }
+
+    get hasErrors() {
+        return (this.errors.length > 0);
+    }
+
+    get errors() {
+        return this._errors;
+    }
+
+    get error() {
+        return this._errors.length == 1 ? this._errors[0] : undefined;
+    }
+
+    get firstError() {
+        return this._errors.length ? this._errors[0] : undefined;
+    }
+
+    get lastError() {
+        return this._errors.length ? this._errors[this._errors.length-1] : undefined;
+    }
+
+    get hasValidationErrors() {
+        return (Object.keys(this.validationErrors).length > 0);
+    }
+
+    get validationErrors() {
+        return this._validationErrors;
+    }
+
+    setReady(ready) {
+        this._ready = ready;
+        this.markAsChanged();
+        return this;
+    }
+
+    setProcessing(processing) {
+        this._processing = processing;
+        this.markAsChanged();
+        return this;
+    }
+
+    setSucceeded(succeeded) {
+        this._succeeded = succeeded;
+        this.markAsChanged();
+        return this;
+    }
+
+    setFailed(failed) {
+        this._failed = failed;
+        this.markAsChanged();
+        return this;
+    }
+
+    setItemId(itemId) {
+        this._itemsIds = [itemId];
+        this.markAsChanged();
+        return this;
+    }
+
+    setItemsIds(itemsIds) {
+        this._itemsIds = itemsIds;
+        this._markAsChanged();
+        return this;
+    }
+
+    setError(error) {
+        this._errors = [error];
+        this.markAsChanged();
+        return this;
+    }
+
+    setErrors(errors) {
+        this._errors = errors;
+        this.markAsChanged();
+        return this;
+    }
+
+    setValidationErrors(errors) {
+        this._validationErrors = validationErrors;
+        this.markAsChanged();
+        return this;
     }
 }
 

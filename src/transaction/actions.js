@@ -5,13 +5,12 @@ export default {
      * Transaction INSERT actions
      */
 
-    insertStart(nameSpace, transactionId, itemType, data) {
+    insertStart(nameSpace, transactionId, itemType) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'SET_TRANSACTION_INSERT',
             id: transactionId,
-            itemType: itemType,
-            data: data
+            itemType: itemType
         };
     }
 
@@ -24,7 +23,7 @@ export default {
                 ready: true,
                 processing: false,
                 succeeded: true,
-                itemId: itemId,
+                itemsIds: [itemId],
                 errors: [],
                 validationErrors: {}
             }
@@ -50,14 +49,15 @@ export default {
      * Transaction UPDATE actions
      */
 
-    updateStart(nameSpace, transactionId, itemType, itemId, data) {
+    updateStart(nameSpace, transactionId, itemType, itemId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'SET_TRANSACTION_UPDATE',
             id: transactionId,
             itemType: itemType,
-            itemId: itemId,
-            data: data
+            payload: {
+                itemsIds: [itemId]
+            }
        };
     }
 
@@ -101,6 +101,9 @@ export default {
             type: nameSpacePrefix + 'SET_TRANSACTION_DELETE',
             id: transactionId,
             itemType: itemType
+            payload: {
+                itemsIds: [itemId]
+            }
         };
     }
 
@@ -136,12 +139,11 @@ export default {
      * Transaction LOGIN actions
      */
 
-    loginStart(nameSpace, transactionId, credentials) {
+    loginStart(nameSpace, transactionId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'SET_TRANSACTION_LOGIN',
-            id: transactionId,
-            credentials: credentials
+            id: transactionId
         };
     }
 
@@ -155,7 +157,7 @@ export default {
                 ready: true,
                 processing: false,
                 succeeded: true,
-                userId: userId,
+                itemsIds: [userId],
                 errors: [],
                 validationErrors: {}
             }
@@ -181,12 +183,11 @@ export default {
      * Transaction REGISTER actions
      */
 
-    registerStart(nameSpace, transactionId, credentials) {
+    registerStart(nameSpace, transactionId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'REGISTER_TRANSACTION_REGISTER',
-            id: transactionId,
-            credentials: credentials
+            id: transactionId
         };
     }
 
@@ -199,7 +200,7 @@ export default {
                 ready: true,
                 processing: false,
                 succeeded: true,
-                userId: userId,
+                itemsIds: [userId],
                 errors: '',
             }
         };

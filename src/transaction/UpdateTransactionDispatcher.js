@@ -1,23 +1,18 @@
 
 import TransactionDispatcher from './TransactionDispatcher';
-import UpdateTransaction from './UpdateTransaction';
+import Transaction from './Transaction';
 
 class UpdateTransactionDispatcher extends TransactionDispatcher {
 
     _createTransaction(action) {
-        return new UpdateTransaction(
-            action.id, action.itemType, action.itemId, action.data);
+        const transaction = new Transaction(action.id, action.itemType, 'update');
+        transaction.setItemId(action.itemId);
+        return transaction;
     }
 
-    _updateTransaction(transition, payload) {
-    	super._updateTransaction(transaction, payload);
-        for (let propsKey in payload) {
-            switch (propsKey) {
-                case 'validationErrors':
-                    transaction.setValidationErrors(this._cloneObject(payload[propsKey]));
-                    break;
-            }
-        }
+    _updateTransaction(transaction, payload) {
+        transaction.fill(payload);
+        return this;
     }
 }
 

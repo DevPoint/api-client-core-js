@@ -15,8 +15,9 @@ class TransactionDispatcher {
         return null;
     }
 
-    _updateTransaction(transition, payload) {
-        transition.fill(payload);
+    _updateTransaction(transaction, payload) {
+        transaction.fill(payload);
+        return this;
     }
 
     dispatch(transactionMap, action) {

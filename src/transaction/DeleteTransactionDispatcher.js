@@ -1,14 +1,18 @@
 
 import TransactionDispatcher from './TransactionDispatcher';
-import DeleteTransaction from './DeleteTransaction';
+import Transaction from './Transaction';
 
 class DeleteTransactionDispatcher extends TransactionDispatcher {
 
     _createTransaction(action) {
-        return new DeleteTransaction(
-                action.id, 
-                action.itemType,
-                action.itemId);
+    	const transaction = new Transaction(action.id, action.itemType, 'delete');
+    	transaction.setItemId(action.itemId);
+    	return transaction;
+    }
+
+    _updateTransaction(transaction, payload) {
+        transaction.fill(payload);
+        return this;
     }
 }
 
