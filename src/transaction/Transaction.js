@@ -14,7 +14,9 @@ class Transaction extends Observable {
         this._processing = false;
         this._succeeded = false;
         this._failed = false;
+        this._itemsIds = [];
         this._errors = [];
+        this._validationErrors = {};
     }
 
     _createObserver() {
@@ -60,12 +62,36 @@ class Transaction extends Observable {
         return this._succeeded;
     }
 
+    get itemsIds() {
+        return this._itemsIds;
+    }
+
+    get itemId() {
+        return this._itemsIds && this._itemsIds.length == 1 ? this._itemsIds[0] : null;
+    }
+
+    get firstId() {
+        return this._itemsIds && this._itemsIds.length ? this._itemsIds[0] : null;
+    }
+
+    get lastId() {
+        return this._itemsIds && this._itemsIds.length ? this._itemsIds[this._itemsIds.length-1] : null;
+    }
+
     get hasErrors() {
         return (this.errors.length > 0);
     }
 
     get errors() {
         return this._errors;
+    }
+
+    get hasValidationErrors() {
+        return (Object.keys(this.validationErrors).length > 0);
+    }
+
+    get validationErrors() {
+        return this._validationErrors;
     }
 
     setReady(ready) {
@@ -92,8 +118,20 @@ class Transaction extends Observable {
         return this;
     }
 
+    setItemsIds(itemsIds) {
+        this._itemsIds = itemsIds;
+        this._markAsChanged();
+        return this;
+    }
+
     setErrors(errors) {
         this._errors = errors;
+        this.markAsChanged();
+        return this;
+    }
+
+    setValidationErrors(errors) {
+        this._validationErrors = validationErrors;
         this.markAsChanged();
         return this;
     }
