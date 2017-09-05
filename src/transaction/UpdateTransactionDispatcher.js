@@ -6,7 +6,6 @@ class UpdateTransactionDispatcher extends TransactionDispatcher {
 
     _createTransaction(action) {
         const transaction = new Transaction(action.id, action.itemType, 'update');
-        transaction.setItemId(action.itemId);
         return transaction;
     }
 

@@ -176,26 +176,26 @@ class Transaction extends Observable {
         return this;
     }
 
-    setItemId(itemId) {
-        this._itemsIds = [itemId];
-        this.markAsChanged();
-        return this;
-    }
-
     setItemsIds(itemsIds) {
         this._itemsIds = itemsIds;
         this._markAsChanged();
         return this;
     }
 
-    setError(error) {
-        this._errors = [error];
+    setItemId(itemId) {
+        this._itemsIds = [itemId];
         this.markAsChanged();
         return this;
     }
 
     setErrors(errors) {
         this._errors = errors;
+        this.markAsChanged();
+        return this;
+    }
+
+    setError(error) {
+        this._errors = [error];
         this.markAsChanged();
         return this;
     }

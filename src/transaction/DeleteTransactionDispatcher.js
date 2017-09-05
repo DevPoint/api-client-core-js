@@ -6,7 +6,6 @@ class DeleteTransactionDispatcher extends TransactionDispatcher {
 
     _createTransaction(action) {
     	const transaction = new Transaction(action.id, action.itemType, 'delete');
-    	transaction.setItemId(action.itemId);
     	return transaction;
     }
 
