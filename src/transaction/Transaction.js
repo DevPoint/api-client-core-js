@@ -69,15 +69,15 @@ class Transaction extends Observable {
     }
 
     get itemId() {
-        return this._itemsIds && this._itemsIds.length == 1 ? this._itemsIds[0] : null;
+        return this._itemsIds.length == 1 ? this._itemsIds[0] : null;
     }
 
     get firstId() {
-        return this._itemsIds && this._itemsIds.length ? this._itemsIds[0] : null;
+        return this._itemsIds.length ? this._itemsIds[0] : null;
     }
 
     get lastId() {
-        return this._itemsIds && this._itemsIds.length ? this._itemsIds[this._itemsIds.length-1] : null;
+        return this._itemsIds.length ? this._itemsIds[this._itemsIds.length-1] : null;
     }
 
     get hasErrors() {
