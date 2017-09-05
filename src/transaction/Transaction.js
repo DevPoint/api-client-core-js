@@ -1,6 +1,8 @@
 
 import { ObjectObserver, Observable } from '../observable';
 
+const assign = Object.assign;
+
 class Transaction extends Observable {
 
     constructor(transactionId, itemType, type) {
@@ -135,7 +137,50 @@ class Transaction extends Observable {
         this.markAsChanged();
         return this;
     }
-}
 
+    fill(data) {
+        for (let propsKey in data) {
+            switch (propsKey) {
+                case 'ready':
+                    this.setReady(data[propsKey]);
+                    break;
+                case 'processing':
+                    this.setProcessing(data[propsKey]);
+                    break;
+                case 'succeeded':
+                    this.setSucceeded(data[propsKey]);
+                    break;
+                case 'failed':
+                    this.setFailed(data[propsKey]);
+                    break;
+                case 'itemsIds':
+                    this.setItemsIds(data[propsKey].slice(0));
+                    break;
+                case 'errors':
+                    this.setErrors(data[propsKey].slice(0));
+                    break;
+                case 'validationErrors':
+                    this.setValidationErrors(assign({}, data[propsKey]));
+                    break;
+            }
+        }
+        return this;
+    }
+
+    toObject() {
+        return {
+            transactionId: this.transactionId,
+            itemType: this.itemType,
+            type: this.type,
+            ready: this.ready,
+            processing: this.processing,
+            succeeded: this.succeeded,
+            failed: this.failed,
+            itemsIds: this.itemsIds,
+            errors: this.errors,
+            validationErrors: this.validationErrors
+        };
+    }
+}
 
 export default Transaction;
