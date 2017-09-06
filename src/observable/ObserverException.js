@@ -4,4 +4,4 @@ function ObserverException(message) {
    this.name = 'ObserverException';
 }
 
-default export ObserverException;
+export default ObserverException;

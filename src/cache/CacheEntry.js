@@ -1,6 +1,6 @@
 
 import Observable from '../observable/Observable';
-import ObjectObserver from './observable/ObjectObserver';
+import ObjectObserver from '../observable/ObjectObserver';
 
 class CacheEntry extends Observable { 
 
@@ -34,4 +34,4 @@ class CacheEntry extends Observable {
     }
 }
 
-default export CacheEntry;
+export default CacheEntry;

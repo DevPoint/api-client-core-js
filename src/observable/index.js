@@ -8,4 +8,4 @@ export ObservableArray from './ObservableArray';
 export ObservableException from './ObservableException';
 export ObservableObject from './ObservableObject';
 export PropertyObserver from './PropertyObserver';
-export default Observable from './Observable';
+export default from './Observable';

@@ -164,7 +164,7 @@ class View extends Observable {
     }
 
     handleFailed(errors) {
-        this.setLoading(false);
+        this.setLoading(false)
             .setFailed(true)
             .updateLoadingMeta({
                 totalCount: 0,

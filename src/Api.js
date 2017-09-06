@@ -47,7 +47,7 @@ class Api {
     }
 
     _notify() {
-        const changedObservables = [];
+        let changedObservables = [];
         const cacheItemTypes = this.getCacheItemTypes();
         for (let itemType in this._caches) {
             const cacheMap = this.cache(itemType);
@@ -215,7 +215,7 @@ class Api {
     }
 
     setCacheEntries(itemType, data) {
-        return cacheActions.setCacheEntries[this.nameSpace, itemType, data);
+        return cacheActions.setCacheEntries(this.nameSpace, itemType, data);
     }
 
     updateCacheEntry(itemType, cacheId, data) {

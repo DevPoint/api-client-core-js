@@ -5,6 +5,7 @@ import ArrayObserver from './ArrayObserver';
 class ObservableArray extends Observable { 
 
     constructor(wrapped) {
+        super();
         this._wrapped = wrapped ? wrapped : [];
     }
 
@@ -93,7 +94,7 @@ class ObservableArray extends Observable {
     }
     
     map(callback, thisArg) {
-        return this._wrapped.map(arguments));
+        return this._wrapped.map(arguments);
     }
     
     pop() {
@@ -129,7 +130,7 @@ class ObservableArray extends Observable {
     }
     
     slice(begin, end) {
-        return this._wrapped.slice(arguments));
+        return this._wrapped.slice(arguments);
     }
     
     some(callback, thisArg) {
@@ -170,4 +171,4 @@ class ObservableArray extends Observable {
     }
 }
 
-default export ObservableArray;
+export default ObservableArray;

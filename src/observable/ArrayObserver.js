@@ -23,4 +23,4 @@ class ArrayObserver extends Observer {
     }
 }
 
-default export ArrayObserver;
+export default ArrayObserver;

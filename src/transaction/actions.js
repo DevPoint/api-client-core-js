@@ -5,16 +5,16 @@ export default {
      * Transaction INSERT actions
      */
 
-    insertStart(nameSpace, transactionId, itemType) {
+    insertStart: function(nameSpace, transactionId, itemType) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'SET_TRANSACTION_INSERT',
             id: transactionId,
             itemType: itemType
         };
-    }
+    },
 
-    insertSucceeded(nameSpace, transactionId, itemId) {
+    insertSucceeded: function(nameSpace, transactionId, itemId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_TRANSACTION_INSERT',
@@ -26,9 +26,9 @@ export default {
                 itemsIds: [itemId]
             }
         };
-    }
+    },
 
-    insertFailed(nameSpace, transactionId, errors, validationErrors) {
+    insertFailed: function(nameSpace, transactionId, errors, validationErrors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_TRANSACTION_INSERT',
@@ -41,13 +41,13 @@ export default {
                 validationErrors: validationErrors
             }
         };
-    }
+    },
 
     /*
      * Transaction UPDATE actions
      */
 
-    updateStart(nameSpace, transactionId, itemType, itemId) {
+    updateStart: function(nameSpace, transactionId, itemType, itemId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'SET_TRANSACTION_UPDATE',
@@ -57,9 +57,9 @@ export default {
                 itemsIds: [itemId]
             }
        };
-    }
+    },
 
-    updateSucceeded(nameSpace, transactionId) {
+    updateSucceeded: function(nameSpace, transactionId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_TRANSACTION_UPDATE',
@@ -70,9 +70,9 @@ export default {
                 succeeded: true
             }
         };
-    }
+    },
 
-    updateFailed(nameSpace, transactionId, errors, validationErrors) {
+    updateFailed: function(nameSpace, transactionId, errors, validationErrors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_TRANSACTION_UPDATE',
@@ -85,13 +85,13 @@ export default {
                 validationErrors: validationErrors
             }
         };
-    }
+    },
 
     /*
      * Transaction DELETE actions
      */
 
-    deleteStart(nameSpace, transactionId, itemType, itemId) {
+    deleteStart: function(nameSpace, transactionId, itemType, itemId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'SET_TRANSACTION_DELETE',
@@ -101,9 +101,9 @@ export default {
                 itemsIds: [itemId]
             }
         };
-    }
+    },
 
-    deleteSucceeded(nameSpace, transactionId) {
+    deleteSucceeded: function(nameSpace, transactionId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_TRANSACTION_DELETE',
@@ -114,9 +114,9 @@ export default {
                 succeeded: true
             }
         };
-    }
+    },
 
-    deleteFailed(nameSpace, transactionId, errors) {
+    deleteFailed: function(nameSpace, transactionId, errors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_TRANSACTION_DELETE',
@@ -128,22 +128,22 @@ export default {
                 errors: errors
             }
         };
-    }
+    },
 
     /*
      * Transaction LOGIN actions
      */
 
-    loginStart(nameSpace, transactionId) {
+    loginStart: function(nameSpace, transactionId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'SET_TRANSACTION_LOGIN',
             id: transactionId,
             itemType: 'user'
         };
-    }
+    },
 
-    loginSucceeded(nameSpace, transactionId, userId) {
+    loginSucceeded: function(nameSpace, transactionId, userId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_TRANSACTION_LOGIN',
@@ -155,9 +155,9 @@ export default {
                 itemsIds: [userId]
             }
         };
-    }
+    },
 
-    loginFailed(nameSpace, transactionId, errors, validationErrors) {
+    loginFailed: function(nameSpace, transactionId, errors, validationErrors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_TRANSACTION_LOGIN',
@@ -170,22 +170,22 @@ export default {
                 validationErrors: validationErrors
             }
         };
-    }
+    },
 
     /*
      * Transaction REGISTER actions
      */
 
-    registerStart(nameSpace, transactionId) {
+    registerStart: function(nameSpace, transactionId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'REGISTER_TRANSACTION_REGISTER',
             id: transactionId,
             itemType: 'user'
         };
-    }
+    },
 
-    registerSucceeded(nameSpace, transactionId, userId) {
+    registerSucceeded: function(nameSpace, transactionId, userId) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_TRANSACTION_REGISTER',
@@ -197,9 +197,9 @@ export default {
                 itemsIds: [userId]
             }
         };
-    }
+    },
 
-    registerFailed(nameSpace, transactionId, errors) {
+    registerFailed: function(nameSpace, transactionId, errors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_TRANSACTION_REGISTER',

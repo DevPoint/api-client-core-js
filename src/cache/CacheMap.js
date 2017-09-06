@@ -6,6 +6,7 @@ import CacheEntry from './CacheEntry';
 class CacheMap extends ObservableObject {
 
     constructor(cacheMapId) {
+        super();
         this._cacheMapId = cacheMapId;
         this._entries = {};
     }

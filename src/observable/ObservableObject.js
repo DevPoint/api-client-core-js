@@ -18,4 +18,4 @@ class ObservableObject extends Observable {
     }
 }
 
-default export ObservableObject;
+export default ObservableObject;

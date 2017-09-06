@@ -4,6 +4,7 @@ import { ObservableObject } from '../observable';
 class ViewMap extends ObservableObject {
 
     constructor() {
+        super();
         this._views = {};
     }
 
@@ -49,7 +50,7 @@ class ViewMap extends ObservableObject {
         for (let viewId in this._views) {
             const view = this._views[viewId];
             if (view.changed()) {
-                changedViews.push(view));
+                changedViews.push(view);
                 break;
             }
         }

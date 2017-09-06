@@ -4,6 +4,7 @@ import { ObservableObject } from '../observable';
 class TransactionMap extends ObservableObject {
 
     constructor() {
+        super();
         this._transactions = {};
     }
 
@@ -49,7 +50,7 @@ class TransactionMap extends ObservableObject {
         for (let transactionId in this._transactions) {
             const transaction = this._transactions[transactionId];
             if (transaction.changed()) {
-                changedTransactions.push(transaction));
+                changedTransactions.push(transaction);
                 break;
             }
         }

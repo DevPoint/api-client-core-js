@@ -67,4 +67,4 @@ class Observable {
     }
 }
 
-default export Observable;
+export default Observable;

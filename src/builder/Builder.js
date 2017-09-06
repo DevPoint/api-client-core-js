@@ -48,7 +48,7 @@ class Builder {
     }
 
     addFilter(filter) {
-        this._filters[] = filter;
+        this._filters.push(filter);
         return this;
     }
 
@@ -73,7 +73,7 @@ class Builder {
     }
 
     addSort(sort) {
-        this._sorts[] = sort;
+        this._sorts.push(sort);
         return this;
     }
 

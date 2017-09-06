@@ -45,4 +45,4 @@ class Observer {
     }
 }
 
-default export Observer;
+export default Observer;

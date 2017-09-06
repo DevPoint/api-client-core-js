@@ -1,5 +1,5 @@
 
-export default Api from './Api';
+export default from './Api';
 
 export ApiClient from './ApiClient';
 export ApiDispatcher from './ApiDispatcher';

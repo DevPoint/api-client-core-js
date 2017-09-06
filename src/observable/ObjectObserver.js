@@ -23,5 +23,5 @@ class ObjectObserver extends Observer {
     }
 }
 
-default export ObjectObserver;
+export default ObjectObserver;
 

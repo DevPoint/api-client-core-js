@@ -1,7 +1,7 @@
 
 export default {
 
-    loadingStart(nameSpace, viewId, itemType, loadingMeta) {
+    loadingStart: function(nameSpace, viewId, itemType, loadingMeta) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'SET_VIEW',
@@ -16,9 +16,9 @@ export default {
                 }
             }
         };
-    }
+    },
 
-    loadingSucceeded(nameSpace, viewId, itemsIds, loadingMeta) {
+    loadingSucceeded: function(nameSpace, viewId, itemsIds, loadingMeta) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_VIEW',
@@ -29,13 +29,13 @@ export default {
                 succeeded: true,
                 loadingMeta: {
                     totalCount: loadingMeta.totalCount
-                }
+                },
                 itemsIds: itemsIds
             }
         };
-    }
+    },
 
-    loadingFailed(nameSpace, viewId, errors) {
+    loadingFailed: function(nameSpace, viewId, errors) {
         const nameSpacePrefix = (nameSpace) ? '_' + nameSpace : '';
         return {
             type: nameSpacePrefix + 'UPDATE_VIEW',

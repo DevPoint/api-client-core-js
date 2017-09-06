@@ -4,4 +4,4 @@ function CacheMapException(message) {
    this.name = 'CacheMapException';
 }
 
-default export CacheMapException;
+export default CacheMapException;

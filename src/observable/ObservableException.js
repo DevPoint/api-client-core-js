@@ -4,4 +4,4 @@ function ObservableException(message) {
    this.name = 'ObservableException';
 }
 
-default export ObservableException;
+export default ObservableException;
